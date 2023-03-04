@@ -14,7 +14,7 @@ const port = 3000
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/resouces/views'));
 
 app.engine('hbs', hbs.engine({
   defaultLayout: 'main',

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title> {{title}} </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -12,57 +12,139 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=HK Grotesk Bold' rel='stylesheet'>
     <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="./javascripts/index.js">
 </head>
 
 
 <body>
+    {{!-- Header --}}
+    <header>
+        <nav class="navbar navbar-expand-sm sticky-top">
+        
+            <a class="navbar-brand ml-5" href="#">
+                <img src="./images/logo.png" alt="" style="width:180px;" >
+            </a>
 
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon">
+                    <i class="fa fa-bars"></i>
+                </span>
+            </button>
 
-    <nav class="navbar navbar-expand-sm sticky-top">
-    
-        <a class="navbar-brand ml-5" href="#">
-            <img src="./images/logo.png" alt="" style="width:180px;" >
-        </a>
-
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon">
-                <i class="fa fa-bars"></i>
-            </span>
-        </button>
-
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav ml-auto mr-5 ">
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="#">Trang chủ</a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="#">Về chung tôi</a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="#">Đặt phòng</a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="#">Liên hệ</a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link " href="#">Đăng nhập</a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link " href="#">Đăng ký</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto mr-5 ">
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">Về chung tôi</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">Đặt phòng</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">Liên hệ</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link " href="#">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link " href="#">Đăng ký</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    {{!-- end Head --}}
     <div class="container-fluid"><br>
         {{{body}}}
 
     </div>
-<footer>
-    <h1>It's footer</h1>
-</footer>
+    <footer class="bg-light py-4">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-4">
+            <h5>About Us</h5>
+            <p>We are a premier hotel booking online service that offers a wide range of hotels and accommodations for travelers of all kinds.</p>
+            <ul class="list-unstyled">
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h5>Rooms</h5>
+            <ul class="list-unstyled">
+            <li><a href="#">Standard Room</a></li>
+            <li><a href="#">Deluxe Room</a></li>
+            <li><a href="#">Suite Room</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <ul class="list-unstyled">
+            <li><a href="#">Address: 123 Main Street, Anytown USA 12345</a></li>
+            <li><a href="#">Phone: (555) 555-5555</a></li>
+            <li><a href="#">Email: info@hotelbookingonline.com</a></li>
+            <li>
+                <form class="d-flex">
+                <div class="form-group me-2">
+                    <input type="email" class="form-control" id="email" placeholder="Enter Your Email Address">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+            </li>
+            </ul>
+        </div>
+        <div class="col-md-12 text-center mt-3">
+            <p>&copy; 2023 Hotel Booking Online. All Rights Reserved.</p>
+        </div>
+        </div>
+    </div>
+    </footer>
+    {{!-- <footer class="section footer-section">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-3 mb-5">
+            <ul class="list-unstyled link">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Terms &amp; Conditions</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+             <li><a href="#">Rooms</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-5">
+            <ul class="list-unstyled link">
+              <li><a href="#">The Rooms &amp; Suites</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Restaurant</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-5 pr-md-5 contact-info">
+            <!-- <li>198 West 21th Street, <br> Suite 721 New York NY 10016</li> -->
+            <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> 198 West 21th Street, <br> Suite 721 New York NY 10016</span></p>
+            <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span> (+1) 435 3533</span></p>
+            <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> info@domain.com</span></p>
+          </div>
+          <div class="col-md-3 mb-5">
+            <p>Sign up for our newsletter</p>
+            <form action="#" class="footer-newsletter">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email...">
+                <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row pt-5">
+          <p class="col-md-6 text-right social">
+            
+          </p>
+        </div>
+      </div>
+    </footer> --}}
 </body>
 
 </html>

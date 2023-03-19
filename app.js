@@ -9,6 +9,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var detailRouter = require('./routes/detail');
 
 const port = 3000
 var app = express();
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/detail', detailRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,6 +48,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('500');
 });
+
+
 
 
 app.listen(port, () => console.log(

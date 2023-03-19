@@ -1,0 +1,31 @@
+<div class="home">
+    <div class="home_container">
+        <div class="text">
+            <h1>Welcome</h1>
+            <p>Introduction our hotel</p>
+            <button>More information</button>
+        </div>
+        <div class="image">
+            <img src="./images/home1.jpg" class="slide">
+        </div>
+        <div class="image_item">
+            <img src="./images/home5.jpg" alt="" class="slide active" onclick="img('./images/home5.jpg')">
+            <img src="./images/home6.jpg" alt="" class="slide" onclick="img('./images/home6.jpg')">
+            <img src="./images/home1.jpg" alt="" class="slide" onclick="img('./images/home1.jpg')">
+            <img src="./images/home7.jpg" alt="" class="slide" onclick="img('./images/home7.jpg')">
+        </div>
+    </div>
+</div>
+
+<script>
+    function img(anything) {
+        document.querySelector('.slide').src = anything;
+    }
+    function change(change) {
+        const line = document.querySelector('.image');
+        line.style.background = change;
+    }
+</script>
+
+
+

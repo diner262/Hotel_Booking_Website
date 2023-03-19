@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --inspect app.js",
-    "watch": "node-sass --watch resouces/scss/ --output public/stylesheets/"
+    "start": ""
   },
   "dependencies": {
     "bin": "^0.0.0",
@@ -14,7 +13,8 @@
     "express-handlebars": "^7.0.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "node-sass": "^8.0.0"
   },
   "main": "app.js",
   "repository": {
@@ -23,9 +23,5 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "node-sass": "^8.0.0",
-    "nodemon": "^2.0.21"
-  }
+  "description": ""
 }

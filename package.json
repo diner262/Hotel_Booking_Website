@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": ""
+    "start": "nodemon --inspect app.js",
+    "watch": "node-sass --watch resouces/scss/ --output public/stylesheets/"
   },
   "dependencies": {
     "bin": "^0.0.0",
@@ -22,5 +23,9 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "node-sass": "^8.0.0",
+    "nodemon": "^2.0.21"
+  }
 }

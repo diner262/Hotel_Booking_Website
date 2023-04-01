@@ -1,0 +1,49 @@
+{
+    "_id" : NumberInt(1),
+    "name" : "Deluxe Family",
+    "description" : "NULL",
+    "created_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(2),
+    "name" : "Deluxe Twin",
+    "description" : "NULL",
+    "created_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(3),
+    "name" : "Deluxe Triple",
+    "description" : "NULL",
+    "created_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(4),
+    "name" : "Deluxe King",
+    "description" : "NULL",
+    "created_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(5),
+    "name" : "Executive Suite",
+    "description" : "NULL",
+    "created_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(6),
+    "name" : "Superior Twin",
+    "description" : "NULL",
+    "created_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(7),
+    "name" : "Superior Triple",
+    "description" : "NULL",
+    "created_at" : null,
+    "update_at" : null
+}

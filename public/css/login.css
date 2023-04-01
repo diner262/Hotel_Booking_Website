@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=HK Grotesk Bold");
+@import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Slab', serif; }
+
+body {
+  opacity: 0.9;
+  background-size: cover;
+  background-image: radial-gradient(circle, indigo, crimson); }
+
+.row {
+  background-color: #2c2d2e;
+  border-radius: 30px;
+  box-shadow: 10px 10px 20px #d85717; }
+
+.img-fluid {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px; }
+
+.img-logo {
+  width: 14rem;
+  height: auto; }
+
+.btn {
+  background: #4651ce;
+  color: white;
+  font-weight: bold; }
+
+.form-control {
+  padding: 0.7rem 0.75rem;
+  border: 1px solid #4651ce; }
+
+.form-control::placeholder {
+  color: #4651ce; }
+
+.eye i {
+  cursor: pointer;
+  color: #727bd4;
+  position: absolute;
+  margin-top: -2rem;
+  right: 1rem; }
+
+.text {
+  color: aliceblue; }
+
+a {
+  color: #adb4fe; }

@@ -1,0 +1,63 @@
+{
+    "_id" : NumberInt(1),
+    "name" : "Dùng bữa ăn sáng tại khách sạn",
+    "price" : 159000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(2),
+    "name" : "Xe đưa đón tại sân bay",
+    "price" : 229000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(3),
+    "name" : "Sử dụng hồ bơi",
+    "price" : 115000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(4),
+    "name" : "Dịch vụ giặt ủi quần áo",
+    "price" : 52000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(5),
+    "name" : "cho thuê xe máy tự lái",
+    "price" : 49000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(6),
+    "name" : "Giặt ủi quần áo",
+    "price" : 52000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(7),
+    "name" : "Cho thuê xe máy tự lái",
+    "price" : 49000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(8),
+    "name" : "Dịch vụ karaoke",
+    "price" : 86000.0,
+    "create_at" : null,
+    "update_at" : null
+}
+{
+    "_id" : NumberInt(9),
+    "name" : "Phục vụ phòng 24/24",
+    "price" : 459000.0,
+    "create_at" : null,
+    "update_at" : null
+}

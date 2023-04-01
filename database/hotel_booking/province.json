@@ -1,0 +1,315 @@
+{
+    "_id" : NumberInt(1),
+    "name" : "An Giang",
+    "code" : "AG"
+}
+{
+    "_id" : NumberInt(2),
+    "name" : "Bà Rịa-Vũng tàu",
+    "code" : "BV"
+}
+{
+    "_id" : NumberInt(3),
+    "name" : "Bạc Liêu",
+    "code" : "BL"
+}
+{
+    "_id" : NumberInt(4),
+    "name" : "Bắc Kạn",
+    "code" : "BK"
+}
+{
+    "_id" : NumberInt(5),
+    "name" : "Bắc Giang",
+    "code" : "BG"
+}
+{
+    "_id" : NumberInt(6),
+    "name" : "Bắc Ninh\t",
+    "code" : "BN"
+}
+{
+    "_id" : NumberInt(7),
+    "name" : "Bến Tre",
+    "code" : "BT"
+}
+{
+    "_id" : NumberInt(8),
+    "name" : "Bình Dương",
+    "code" : "BD"
+}
+{
+    "_id" : NumberInt(9),
+    "name" : "Bình Định",
+    "code" : "BĐ"
+}
+{
+    "_id" : NumberInt(10),
+    "name" : "Bình Phước",
+    "code" : "BP"
+}
+{
+    "_id" : NumberInt(11),
+    "name" : "Bình Thuận",
+    "code" : "BTh"
+}
+{
+    "_id" : NumberInt(12),
+    "name" : "Cà Mau",
+    "code" : "CM"
+}
+{
+    "_id" : NumberInt(13),
+    "name" : "Cao Bằng",
+    "code" : "CB"
+}
+{
+    "_id" : NumberInt(14),
+    "name" : "Cần Thơ",
+    "code" : "CT"
+}
+{
+    "_id" : NumberInt(15),
+    "name" : "Đà Nẵng",
+    "code" : "ĐNa"
+}
+{
+    "_id" : NumberInt(16),
+    "name" : "Đắk Lắk",
+    "code" : "ĐL"
+}
+{
+    "_id" : NumberInt(17),
+    "name" : "Đắk Nông",
+    "code" : "ĐNo"
+}
+{
+    "_id" : NumberInt(18),
+    "name" : "Điện Biên",
+    "code" : "ĐB"
+}
+{
+    "_id" : NumberInt(19),
+    "name" : "Đồng Nai",
+    "code" : "ĐN"
+}
+{
+    "_id" : NumberInt(20),
+    "name" : "Đồng Tháp",
+    "code" : "ĐT"
+}
+{
+    "_id" : NumberInt(21),
+    "name" : "Gia Lai",
+    "code" : "GL"
+}
+{
+    "_id" : NumberInt(22),
+    "name" : "Hà Giang",
+    "code" : "HG"
+}
+{
+    "_id" : NumberInt(23),
+    "name" : "Hà Nam",
+    "code" : "HNA"
+}
+{
+    "_id" : NumberInt(24),
+    "name" : "Hà Nội",
+    "code" : "HAN"
+}
+{
+    "_id" : NumberInt(25),
+    "name" : "Hà Tĩnh",
+    "code" : "HT"
+}
+{
+    "_id" : NumberInt(26),
+    "name" : "Hải Dương",
+    "code" : "HD"
+}
+{
+    "_id" : NumberInt(27),
+    "name" : "Hải Phòng",
+    "code" : "HP\t"
+}
+{
+    "_id" : NumberInt(28),
+    "name" : "Hậu Giang",
+    "code" : "HG"
+}
+{
+    "_id" : NumberInt(29),
+    "name" : "Hòa Bình",
+    "code" : "HB"
+}
+{
+    "_id" : NumberInt(30),
+    "name" : "Thành phố HChí Minh",
+    "code" : "SG"
+}
+{
+    "_id" : NumberInt(31),
+    "name" : "Hưng Yên",
+    "code" : "HY"
+}
+{
+    "_id" : NumberInt(32),
+    "name" : "Khánh Hoà",
+    "code" : "KH"
+}
+{
+    "_id" : NumberInt(33),
+    "name" : "Kiên Giang",
+    "code" : "KG"
+}
+{
+    "_id" : NumberInt(34),
+    "name" : "Kon Tum",
+    "code" : "KT"
+}
+{
+    "_id" : NumberInt(35),
+    "name" : "Lai Châu",
+    "code" : "LC"
+}
+{
+    "_id" : NumberInt(36),
+    "name" : "Lạng Sơn",
+    "code" : "LS"
+}
+{
+    "_id" : NumberInt(37),
+    "name" : "Lào Cai",
+    "code" : "LCa"
+}
+{
+    "_id" : NumberInt(38),
+    "name" : "Lâm Đồng",
+    "code" : "LĐ"
+}
+{
+    "_id" : NumberInt(39),
+    "name" : "Long An",
+    "code" : "LA"
+}
+{
+    "_id" : NumberInt(40),
+    "name" : "Nam Định",
+    "code" : "NĐ"
+}
+{
+    "_id" : NumberInt(41),
+    "name" : "Nghệ An",
+    "code" : "NA"
+}
+{
+    "_id" : NumberInt(42),
+    "name" : "Ninh Bình",
+    "code" : "NB"
+}
+{
+    "_id" : NumberInt(43),
+    "name" : "Ninh Thuận",
+    "code" : "NT"
+}
+{
+    "_id" : NumberInt(44),
+    "name" : "Phú Thọ",
+    "code" : "PT"
+}
+{
+    "_id" : NumberInt(45),
+    "name" : "Phú Yên",
+    "code" : "PY"
+}
+{
+    "_id" : NumberInt(46),
+    "name" : "Quảng Bình",
+    "code" : "QB"
+}
+{
+    "_id" : NumberInt(47),
+    "name" : "Quảng Nam",
+    "code" : "QNa"
+}
+{
+    "_id" : NumberInt(48),
+    "name" : "Quảng Ngãi",
+    "code" : "QNg"
+}
+{
+    "_id" : NumberInt(49),
+    "name" : "Quảng Ninh",
+    "code" : "QN"
+}
+{
+    "_id" : NumberInt(50),
+    "name" : "Quảng Trị",
+    "code" : "QT"
+}
+{
+    "_id" : NumberInt(51),
+    "name" : "Sóc Trăng",
+    "code" : "ST"
+}
+{
+    "_id" : NumberInt(52),
+    "name" : "Sơn La",
+    "code" : "SL"
+}
+{
+    "_id" : NumberInt(53),
+    "name" : "Tây Ninh",
+    "code" : "TN"
+}
+{
+    "_id" : NumberInt(54),
+    "name" : "Thái Bình",
+    "code" : "TB"
+}
+{
+    "_id" : NumberInt(55),
+    "name" : "Thái Nguyên",
+    "code" : "TNg"
+}
+{
+    "_id" : NumberInt(56),
+    "name" : "Thanh Hoá",
+    "code" : "TH"
+}
+{
+    "_id" : NumberInt(57),
+    "name" : "Thừa Thiên-Huế",
+    "code" : "TTH"
+}
+{
+    "_id" : NumberInt(58),
+    "name" : "Tiền Giang",
+    "code" : "TG"
+}
+{
+    "_id" : NumberInt(59),
+    "name" : "Trà Vinh",
+    "code" : "TV"
+}
+{
+    "_id" : NumberInt(60),
+    "name" : "Tuyên Quang",
+    "code" : "TQ"
+}
+{
+    "_id" : NumberInt(61),
+    "name" : "Vĩnh Long",
+    "code" : "VL"
+}
+{
+    "_id" : NumberInt(62),
+    "name" : "Vĩnh Phúc",
+    "code" : "VP"
+}
+{
+    "_id" : NumberInt(63),
+    "name" : "Yên Bái",
+    "code" : "YB"
+}

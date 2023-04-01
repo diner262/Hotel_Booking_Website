@@ -7,9 +7,8 @@ body {
 
 .navbar {
   font-size: 18px; }
-
-.navbar a {
-  color: white; }
+  .navbar a {
+    color: white; }
 
 .fa {
   font-size: 30px; }
@@ -35,14 +34,6 @@ body {
   line-height: 30px;
   font-size: 17px; }
 
-button {
-  padding: 10px 20px;
-  background: none;
-  border: 2px solid white;
-  border-radius: 40px;
-  color: white;
-  margin-top: 20px; }
-
 .home .image_item {
   position: absolute;
   bottom: 20%;
@@ -50,9 +41,16 @@ button {
   display: flex;
   flex-direction: row;
   cursor: pointer; }
+  .home .image_item img {
+    width: 140px;
+    height: 94px;
+    margin: 10px;
+    border: 2px solid white; }
 
-.home .image_item img {
-  width: 140px;
-  height: 94px;
-  margin: 10px;
-  border: 2px solid white; }
+button {
+  padding: 10px 20px;
+  background: none;
+  border: 2px solid white;
+  border-radius: 40px;
+  color: white;
+  margin-top: 20px; }

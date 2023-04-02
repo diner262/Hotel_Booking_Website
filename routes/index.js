@@ -9,6 +9,9 @@ router.get('/', function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.render('login', { layout: false });
 });
+router.get('/signup', function(req, res, next) {
+  res.render('signup', { layout: false });
+});
 
 module.exports = router;
 

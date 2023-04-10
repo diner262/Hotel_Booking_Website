@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --inspect app.js",
+    "start": "nodemon --inspect server.js",
     "watch": "node-sass --watch resources/scss/ --output public/css/"
   },
   "dependencies": {
     "bin": "^0.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "express": "~4.16.1",
     "express-handlebars": "^7.0.1",
     "http-errors": "~1.6.3",
@@ -19,7 +20,7 @@
     "nodemon": "^2.0.21",
     "router": "^1.3.8"
   },
-  "main": "app.js",
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git+https://gitlab.duthu.net/S52000895/website-hotel-booking-online-n3.git"

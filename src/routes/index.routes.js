@@ -1,17 +1,14 @@
 var express = require('express');
-var router = express.Router();
+var homeRouter = require('./home.routes');
+var usersRouter = require('./users.routes');
+var detailRouter = require('./detail.routes');
+var adminRouter = require('./admin.routes');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('client/home', { title: 'Home' });
-});
+function route(app) {
+  app.use('/users', usersRouter);
+  app.use('/detail', detailRouter);
+  app.use('/admin', adminRouter);
+  app.use('/', homeRouter);
+}
 
-router.get('/login', function(req, res, next) {
-  res.render('client/login', { layout: false });
-});
-router.get('/signup', function(req, res, next) {
-  res.render('client/signup', { layout: false });
-});
-
-module.exports = router;
-
+module.exports = route;

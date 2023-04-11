@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 var adminController = require('../controllers/adminController');
 
-/* GET home page. */
 router.get('/login', adminController.login);
+router.get('/', adminController.index);
+
 
 module.exports = router;
 

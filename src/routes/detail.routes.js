@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-    res.render('profile', { title: 'Detail', layout: false });
-});
+router.get('/profile', function(req, res, next) {
+    res.render('profile', { layout: false ,title:"Profile"});
+  });
 
 router.get('/detail/:id', function(req, res, next) {
-    res.render('profile', { title: 'Detail', id: req.params.id });
+    res.render('detail', { title: 'Detail', id: req.params.id });
 });
 
 module.exports = router;

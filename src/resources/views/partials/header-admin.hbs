@@ -1,7 +1,7 @@
 <!--Main Navigation-->
-<head>
+<header>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="main-navbar">
+    <nav class="navbar navbar-expand-lg navbar-white bg-white fixed-top shadow-sm bg-body" id="main-navbar">
         <!-- Container wrapper -->
         <div class="container-fluid">
             <!-- Toggle button -->
@@ -12,12 +12,12 @@
 
             <!-- Brand -->
             <a class="navbar-brand" href="/home">
-                <img src="img/logo.png" class="img-fluid" style="max-height: 38px;" alt="Logo">
+                <img src="img/logo1.png" class="img-fluid" style="max-height: 48px;" alt="Logo">
             </a>
             <!-- Search form -->
             <form class="d-none d-md-flex input-group w-auto my-auto">
                 <input autocomplete="off" class="form-control" style="min-width: 225px;" type="search" />
-                <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
+                <button class="btn btn-secondary border-0"><i class="fas fa-search"></i></button>
             </form>
 
             <!-- Right links -->
@@ -25,7 +25,7 @@
                 <!-- Notification dropdown -->
                 <li class="nav-item">
                     <a aria-expanded="false" class="nav-link me-3 me-lg-0">
-                        <i class="fas fa-bell"></i>
+                        <i class="fas fa-bell text-muted"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">1</span>
                     </a>
                 </li>
@@ -33,30 +33,31 @@
                 <!-- Icon -->
                 <li class="nav-item">
                     <a class="nav-link me-3 me-lg-0" href="#">
-                        <i class="fas fa-fill-drip"></i>
+                        <i class="fas fa-fill-drip text-muted"></i>
                     </a>
                 </li>
                 <!-- Icon -->
                 <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" href="#">
-                        <i class="fab fa-github"></i>
+                        <i class="fab fa-github text-muted"></i>
                     </a>
                 </li>
 
                 <!-- Avatar -->
                 <li class="nav-item dropdown">
                     <a aria-expanded="false" class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
-                        data-bs-toggle="dropdown" href="#" id="navbarDropdownMenuLink2" role="button">
+                        data-bs-toggle="dropdown" href="#" id="avatarDropdown" role="button">
                         <img alt="Avatar" class="rounded-circle" height="22" loading="lazy"
                             src="https://i.pinimg.com/474x/60/b4/7e/60b47e2dfdbe3f0e2adf74129fbea3b0.jpg" />
                     </a>
-                    <ul aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-end">
+                    <ul aria-labelledby="avatarDropdown" class="dropdown-menu dropdown-menu-end">
                         <li>
                             <a class="dropdown-item" href="#">My profile</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Settings</a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item" href="#">Logout</a>
                         </li>
@@ -68,11 +69,11 @@
     </nav>
     <!-- Navbar -->
 
-</div>
+</header>
 <!--Main Navigation-->
 
 <!-- Sidebar -->
-    <nav class="collapse d-lg-block sidebar collapse bg-white" id="sidebarMenu">
+    <nav class="collapse d-lg-block sidebar collapse bg-white mt-3" id="sidebarMenu">
         <div class="position-sticky p-3 mb-4">
             <div class="list-group list-group-flush mb-3">
                 <a aria-current="true" class="list-group-item list-group-item-action py-2 ripple active" href="#">

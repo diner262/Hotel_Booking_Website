@@ -54,3 +54,8 @@ button {
   border-radius: 40px;
   color: white;
   margin-top: 20px; }
+  button a {
+    color: aliceblue; }
+
+.about {
+  margin-top: 25rem; }

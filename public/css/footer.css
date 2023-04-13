@@ -1,0 +1,12 @@
+.footer {
+  background-color: #080747;
+  color: #d3dce4; }
+
+.row .col-md-4 li {
+  margin-top: 5px; }
+
+.row .col-md-4 a {
+  color: #dddddd; }
+
+.row .col-md-4 a:hover {
+  color: #FAD246; }

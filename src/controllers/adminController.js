@@ -1,15 +1,28 @@
 
+var User = require('../models/user.model');
+
 
 class AdminController {
 
     login(req, res, next) {
-        res.render('admin/login', { layout: false });
+        res.render('admin/login', {
+            title: 'Login Dashboard',
+            layout: false
+        });
     }
 
-    home(req, res, next) {
+    logout(req, res, next) {
+        req.logout(function (err) {
+            if (err) { return next(err); }
+            res.redirect('./dashboard');
+        });
+    }
+
+    dashboard(req, res, next) {
         res.render('admin/dashboard', {
             title: 'Dashboard',
-            layout: 'admin-main'
+            layout: 'admin-main',
+            user: req.user
         });
     }
 

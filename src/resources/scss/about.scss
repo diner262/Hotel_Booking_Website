@@ -6,7 +6,8 @@
   margin-top: 5%;
 }
 
-.left, .right {
+.left,
+.right {
   width: 50%;
 }
 
@@ -74,9 +75,9 @@
 .btn1 {
   background: #958762;
   color: white;
-}  
+}
 
-.img{
+.img {
   width: 100%;
   height: auto;
 }
@@ -90,63 +91,37 @@
   float: right;
 }
 
-.row{
+.row {
 
-  .col-md-4{
+  .col-md-4 {
     padding: 0 10px;
-    .room-card{
+
+    .room-card {
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-      .img-fluid{
+
+      .img-fluid {
         height: 25rem;
       }
     }
   }
+
   .text {
     padding: 10px;
-    h3{
+
+    h3 {
       text-align: center;
     }
   }
 }
 
-.img-absolute img {
-  max-width: 250px;
-  border-radius: 50%;
-  border: 10px solid #f2f4fb;
-}
-img {
-overflow-clip-margin: content-box;
-overflow: clip;
-}
-.rounded {
-border-radius: 0.25rem!important;
-}
-.img-fluid {
-max-width: 100%;
-height: auto;
-}
-img {
-vertical-align: middle;
-border-style: none;
-}
-*, :after, :before {
--webkit-box-sizing: border-box;
-box-sizing: border-box;
-}
-user agent stylesheet
-img {
-overflow-clip-margin: content-box;
-overflow: clip;
-}
-
 .img-absolute {
-position: absolute;
-bottom: -100px;
-right: -100px;
+  position: absolute;
+  bottom: -10px;
+  right: -100px;
+
+  img {
+    max-width: 250px;
+    border-radius: 50%;
+    border: 5px solid #f2f4fb;
+  }
 }
-
-figure {
-margin: 0 0 1rem;
-}
-
-

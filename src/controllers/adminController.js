@@ -14,7 +14,8 @@ class AdminController {
     logout(req, res, next) {
         req.logout(function (err) {
             if (err) { return next(err); }
-            res.redirect('./dashboard');
+            req.flash('messageSuccess', 'Đăng xuất tài khoản thành công!');
+            res.redirect('./login');
         });
     }
 
@@ -22,6 +23,7 @@ class AdminController {
         res.render('admin/dashboard', {
             title: 'Dashboard',
             layout: 'admin-main',
+            messageSuccess: req.flash('messageSuccess'),
             user: req.user
         });
     }

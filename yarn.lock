@@ -572,6 +572,11 @@
   "resolved" "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
   "version" "0.0.1"
 
+"connect-flash@^0.1.1":
+  "integrity" "sha512-2rcfELQt/ZMP+SM/pG8PyhJRaLKp+6Hk2IUBNkEit09X+vwn3QsAL3ZbYtxUn7NVPzbMTSLRDhqe0B/eh30RYA=="
+  "resolved" "https://registry.npmjs.org/connect-flash/-/connect-flash-0.1.1.tgz"
+  "version" "0.1.1"
+
 "connect-mongo@^5.0.0":
   "integrity" "sha512-s93jiP6GkRApn5duComx6RLwtP23YrulPxShz+8peX7svd6Q+MS8nKLhKCCazbP92C13eTVaIOxgeLt0ezIiCg=="
   "resolved" "https://registry.npmjs.org/connect-mongo/-/connect-mongo-5.0.0.tgz"

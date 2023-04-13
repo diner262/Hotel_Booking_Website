@@ -12,9 +12,16 @@ function isAdmin(req, res, next) {
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect:'/admin/dashboard',
-        failureRedirect:'/admin/login?error', 
-        // failureFlash: true,
+        successRedirect: '/admin/dashboard',
+        failureRedirect: '/admin/login?error',
+        failureFlash: {
+            type: 'messageFailure',
+            message: 'Sai tên tài khoản hoặc mật khẩu.'
+        },
+        successFlash: {
+            type: 'messageSuccess',
+            message: 'Đăng nhập thành công!'
+        }
     })(req, res, next);
 });
 

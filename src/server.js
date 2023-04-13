@@ -9,6 +9,7 @@ require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require("body-parser");
+var flash = require('connect-flash');
 // var rateLimit = require('express-rate-limit')
 // var cors = require('cors')
 
@@ -40,15 +41,15 @@ app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static('public'));
 
-
-
 // session middleware
 app.use(session({
   secret: 'mysecret',
   cookie: { maxAge: 3 * 60 * 60 * 1000 },
-  resave: false,
+  resave: true,
   saveUninitialized: true,
 }));
+
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -56,6 +57,9 @@ app.use(passport.session());
 // Passport configuration
 var authorize = require('./middleware/authorizeAdmin');
 authorize(passport);
+
+var flashMessage = require('./middleware/flashMessageInviews');
+app.use(flashMessage);
 
 indexRouter(app)
 

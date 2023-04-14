@@ -1,5 +1,5 @@
 var mongodb = require('mongoose');
-var url = 'mongodb://0.0.0.0:27017/hotel-booking-system';
+var url = process.env.MONGO_URI;
 
 class Connection {
     async _connect() {

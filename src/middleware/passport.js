@@ -3,16 +3,20 @@ var User = require('../models/user.model');
 
 
 const authorizeAdmin = (passport) => {
-    passport.use(new LocalStrategy({usernameField:'username'}, async (username, password, done) => {
-        if (!username) return done(null, false, { message: 'Username is required.' });
-        if (!password) return done(null, false, { message: 'Password is required.' });
-        const user = await User.findOne({ username });
-        if (!user) return done(null, false, { message: 'The user entered is not with our records' });
+    passport.use(new LocalStrategy({
+            usernameField: 'username',
+            passwordField: 'password',
+        }, async (username, password, done) => {
+            if (!username) return done(null, false, { message: 'Bạn chưa nhập tên đăng nhập.' });
+            if (!password) return done(null, false, { message: 'Bạn chưa nhập mật khẩu.' });
+            
+            const user = await User.findOne({ username });
+            if (!user) return done(null, false, { message: 'Tên người dùng hoặc mật khẩu không chính xác.' });
 
-        const isMatch = user.password === password;
-        if (!isMatch) return done(null, null, { message: 'Incorrect password.' });
+            const isMatch = user.password === password;
+            if (!isMatch) return done(null, false, { message: 'Tên người dùng hoặc mật khẩu không chính xác.' });
 
-        return done(null, user);
+            return done(null, user);
     }));
 
     passport.serializeUser((user, done) => {

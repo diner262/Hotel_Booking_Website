@@ -53,12 +53,14 @@
           <form action="./login" method="post">
             <div class="form-row">
               <div class="col-lg-10 mx-auto mb-3">
-                <input id="username" type="text" name="username" class="form-control" placeholder="Tên đăng nhập" required>
+                <input id="username" type="text" name="username" class="form-control" placeholder="Tên đăng nhập" 
+                    value={{ username }}>
               </div>
             </div>
             <div class="form-row">
               <div class="col-lg-10 mx-auto mb-3">
-                <input id="password" type="password" name="password" class="form-control" placeholder="Mật khẩu" re>
+                <input id="password" type="password" name="password" class="form-control" placeholder="Mật khẩu" 
+                    value={{ password }}>
                 <span class="eye">
                   <i class="far fa-eye"></i>
                 </span>

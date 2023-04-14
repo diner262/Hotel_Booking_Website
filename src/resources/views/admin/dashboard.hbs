@@ -1,18 +1,18 @@
 <div class="container px-5 py-3">
     {{!-- Flash message --}}
-    {{!-- {{#if messageSuccess}} --}}
+    {{#if messageSuccess}}
     <div class="position-absolute top-0 end-0" style="z-index: 1000; margin: 85px 48px" id="success-alert">
         <div class="col-lg-10 mx-auto mb-3 w-auto">
             <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
                 <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:">
                     <use xlink:href="#check-circle-fill" />
                 </svg>
-                <div> {{ messageSuccess }} Dang nhap thanh cong</div>
+                <div> {{ messageSuccess }}</div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     </div>
-    {{!-- {{/if}} --}}
+    {{/if}}
 
     <div class="row">
         <div class="col">

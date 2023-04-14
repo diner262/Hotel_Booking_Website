@@ -1,4 +1,3 @@
-
 var passport = require('passport');
 var User = require('../models/user.model');
 
@@ -8,31 +7,27 @@ class AdminController {
     login(req, res, next) {
         res.render('admin/login', {
             title: 'Login Dashboard',
-            layout: false
+            layout: false,
+            username: '',
+            password: ''
         });
     }
 
-    login_post(req, res, next) {
+    authenticateLogin(req, res, next) {
         passport.authenticate('local', {
-            successRedirect: '/admin/dashboard',
+            // successRedirect: '/admin/dashboard',
             failureRedirect: '/admin/login?error',
             failureFlash: true,
-            // failureFlash: {
-            //     type: 'messageFailure',
-            //     message: 'Sai tên tài khoản hoặc mật khẩu.'
-            // }, 
-            successFlash: true,
-            successFlash: {
-                type: 'messageSuccess',
-                message: 'Đăng nhập tài khoản thành công!'
-            }
-        })(req, res, next);
+        })(req, res, next => {
+            req.flash('success', 'Đăng nhập tài khoản thành công!');
+            res.redirect('/admin/dashboard');
+        });
     }
 
     logout(req, res, next) {
         req.logout(function (err) {
             if (err) { return next(err); }
-            req.flash('messageSuccess', 'Đăng xuất tài khoản thành công!');
+            req.flash('success', 'Đăng xuất tài khoản thành công!');
             res.redirect('./login');
         });
     }

@@ -53,12 +53,12 @@
           <form action="./login" method="post">
             <div class="form-row">
               <div class="col-lg-10 mx-auto mb-3">
-                <input id="username" type="text" name="username" class="form-control" placeholder="Tên đăng nhập">
+                <input id="username" type="text" name="username" class="form-control" placeholder="Tên đăng nhập" required>
               </div>
             </div>
             <div class="form-row">
               <div class="col-lg-10 mx-auto mb-3">
-                <input id="password" type="password" name="password" class="form-control" placeholder="Mật khẩu">
+                <input id="password" type="password" name="password" class="form-control" placeholder="Mật khẩu" re>
                 <span class="eye">
                   <i class="far fa-eye"></i>
                 </span>
@@ -68,7 +68,7 @@
             {{!-- Flash message --}}
             {{#if messageFailure}}
             <div class="form-row" id="error-alert">
-              <div class="col-lg-10 mx-auto mb-3 w-auto">
+              <div class="col-lg-10 mx-auto mb-3">
                 <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
                   <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:">
                     <use xlink:href="#exclamation-triangle-fill" />

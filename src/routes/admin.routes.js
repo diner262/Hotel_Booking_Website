@@ -1,39 +1,26 @@
 var express = require('express');
-var passport = require('passport');
 var router = express.Router();
+var { ensureAuth, forwardAuth } = require('../middleware/authAdmin');
 var adminController = require('../controllers/adminController');
 
-function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.role === 'ADMIN_ROLE') {
-        return next();
-    }
-    res.redirect('/admin/login');
-}
+// function isAdmin(req, res, next) {
+//     if (req.isAuthenticated() && req.user.role === 'ADMIN_ROLE') {
+//         return next();
+//     }
+//     res.redirect('/admin/login');
+// }
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/admin/dashboard',
-        failureRedirect: '/admin/login?error',
-        failureFlash: {
-            type: 'messageFailure',
-            message: 'Sai tên tài khoản hoặc mật khẩu.'
-        },
-        successFlash: {
-            type: 'messageSuccess',
-            message: 'Đăng nhập thành công!'
-        }
-    })(req, res, next);
-});
+router.post('/login', adminController.login_post);
 
 router.get('/login', adminController.login);
 router.get('/logout', adminController.logout);
 
-router.get('/customer', isAdmin, adminController.customer_manage);
-router.get('/room', isAdmin, adminController.room_manage);
-router.get('/order', isAdmin, adminController.order_manage);
-router.get('/dashboard', isAdmin, adminController.dashboard);
+router.get('/customer', ensureAuth, adminController.customer_manage);
+router.get('/room', ensureAuth, adminController.room_manage);
+router.get('/order', ensureAuth, adminController.order_manage);
+router.get('/dashboard', ensureAuth, adminController.dashboard);
 
-router.get('/', (req, res) => {
+router.get('/', forwardAuth, (req, res) => {
     res.redirect('dashboard');
 });
 

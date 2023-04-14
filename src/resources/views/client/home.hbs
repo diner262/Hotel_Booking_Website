@@ -1,64 +1,64 @@
- <link rel="stylesheet" href="./css/home.css">
+<link rel="stylesheet" href="./css/home.css">
 <div class="home">
-    <div class="home_container">
-        <div class="text">
-            <h1>Welcome</h1>
-            <p>Introduction our hotel</p>
-            <button><a href="#welcome" class="nav-link">More information</a> </button>
-        </div>
-        <div class="image">
-            <img src="./img/home1.jpg" class="slide">
-        </div>
-        <div class="image_item">
-            <img src="./img/home5.jpg" alt="" class="slide active" onclick="img('./img/home5.jpg')">
-            <img src="./img/home6.jpg" alt="" class="slide" onclick="img('./img/home6.jpg')">
-            <img src="./img/home1.jpg" alt="" class="slide" onclick="img('./img/home1.jpg')">
-            <img src="./img/anh8.png" alt="" class="slide" onclick="img('./img/anh8.png')">
-        </div>
+  <div class="home_container">
+    <div class="text m-3">
+      <div class="ms-5">
+        <h1>Welcome</h1>
+        <p>Introduction our hotel</p>
+        <button><a href="#welcome" class="nav-link">More information</a> </button>
+      </div>
+
     </div>
+    <div class="image">
+      <img src="./img/home1.jpg" class="slide">
+    </div>
+    <div class="image_item">
+      <img src="./img/home5.jpg" alt="" class="slide active" onclick="img('./img/home5.jpg')">
+      <img src="./img/home6.jpg" alt="" class="slide" onclick="img('./img/home6.jpg')">
+      <img src="./img/home1.jpg" alt="" class="slide" onclick="img('./img/home1.jpg')">
+      <img src="./img/anh8.png" alt="" class="slide" onclick="img('./img/anh8.png')">
+    </div>
+  </div>
 </div>
 
 
-  <section class="book">
-    <div class="container flex">
-      <div class="input grid">
-        <div class="box">
-          <label>Check-in:</label>
-          <input type="date" placeholder="Check-in-Date">
-        </div>
-        <div class="box">
-          <label>Check-out:</label>
-          <input type="date" placeholder="Check-out-Date">
-        </div>
-        <div class="box">
-          <label>Người lớn:</label> <br>
-          <input type="number" placeholder="0">
-        </div>
-        <div class="box">
-          <label>Trẻ em:</label> <br>
-          <input type="number" placeholder="0">
-        </div>
+<section class="book">
+  <div class="container flex">
+    <div class="input grid">
+      <div class="box">
+        <label>Check-in:</label>
+        <input type="date" placeholder="Check-in-Date">
       </div>
-      <div class="search">
-        <input type="submit" value="SEARCH">
+      <div class="box">
+        <label>Check-out:</label>
+        <input type="date" placeholder="Check-out-Date">
+      </div>
+      <div class="box">
+        <label>Người lớn:</label> <br>
+        <input type="number" placeholder="0">
+      </div>
+      <div class="box">
+        <label>Trẻ em:</label> <br>
+        <input type="number" placeholder="0">
       </div>
     </div>
-  </section>
+    <div class="search">
+      <input type="submit" value="SEARCH">
+    </div>
+  </div>
+</section>
 
 
 <div class="about">
-     {{> about}}
+  {{> about}}
 </div>
 
 <script>
-    function img(anything) {
-        document.querySelector('.slide').src = anything;
-    }
-    function change(change) {
-        const line = document.querySelector('.image');
-        line.style.background = change;
-    }
+  function img(anything) {
+    document.querySelector('.slide').src = anything;
+  }
+  function change(change) {
+    const line = document.querySelector('.image');
+    line.style.background = change;
+  }
 </script>
-
-
-

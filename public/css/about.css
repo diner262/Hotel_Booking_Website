@@ -1,9 +1,6 @@
 .top {
   margin-top: 10%; }
 
-.mtop {
-  margin-top: 5%; }
-
 .left,
 .right {
   width: 50%; }
@@ -73,8 +70,8 @@
 
 .img-absolute {
   position: absolute;
-  bottom: -10px;
-  right: -100px; }
+  bottom: -50px;
+  right: -80px; }
   .img-absolute img {
     max-width: 250px;
     border-radius: 50%;

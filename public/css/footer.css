@@ -6,7 +6,8 @@
   margin-top: 5px; }
 
 .row .col-md-4 a {
-  color: #dddddd; }
+  color: #dddddd;
+  text-decoration: none; }
 
 .row .col-md-4 a:hover {
   color: #FAD246; }

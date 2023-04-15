@@ -4,7 +4,9 @@ var { validationResult, matchedData } = require('express-validator');
 let validateSignUp = () => {
     return [
         check('username', 'Email không được để trống').not().isEmpty(),
-        check('username', 'Email không hợp lệ').isEmail(),
+        check('username', 'Email không hợp lệ'),
+        check('email', 'Email không được để trống').not().isEmpty(),
+        check('email', 'Email không hợp lệ').isEmail(),
         check('password', 'Mật khẩu không được để trống').not().isEmpty(),
         check('password', 'Mật khẩu phải chứa ít nhất 6 ký tự').isLength({ min: 6 }),
         check('confirm_password', 'Mật khẩu xác nhận không được để trống').not().isEmpty(),

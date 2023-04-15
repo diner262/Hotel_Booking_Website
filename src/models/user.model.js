@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var userSchema = mongoose.Schema({
     username: {
@@ -12,8 +13,8 @@ var userSchema = mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['CLIENT_ROLE', 'ADMIN_ROLE'],
-        default: 'CLIENT_ROLE'
+        enum: ['client', 'admin'],
+        default: 'client'
     },
     email: {
         type: String,
@@ -59,7 +60,7 @@ var userSchema = mongoose.Schema({
 })
 
 userSchema.methods.comparePassword = function (password) {
-    return password === this.password;
+    return bcrypt.compareSync(password, this.password);
 };
 
 module.exports = mongoose.model('_user', userSchema, 'user');

@@ -1,15 +1,15 @@
 const ensureAuth = (req, res, next) => {
-    if (req.isAuthenticated() && req.user.role === 'ADMIN_ROLE') {
+    if (req.isAuthenticated() && req.user.role === 'admin') {
         return next();
     }
     res.redirect('/admin/login');
 }
 
 const forwardAuth = (req, res, next) => {
-    if (!req.isAuthenticated()) {
+    if (!req.isAuthenticated() || req.user.role !== 'client') {
         return next();
     }
-    res.redirect('/admin/');
+    res.redirect('/admin/dashboard');
 }
 
 module.exports = {

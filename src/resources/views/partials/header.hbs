@@ -32,7 +32,7 @@
                 <a class="nav-link" href="/login">Đăng nhập</a>
             </li>
             <li class="nav-item px-3">
-                <a class="nav-link" href="#">Đăng ký</a>
+                <a class="nav-link" href="/signup">Đăng ký</a>
             </li>
             {{/unless}}
             {{#if currentUser}}
@@ -40,17 +40,19 @@
                     <a aria-expanded="false" class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
                         data-bs-toggle="dropdown" href="#" id="currentUser" role="button">
                     </a>
-                    <ul aria-labelledby="currentUser" class="dropdown-menu dropdown-menu-end">
+                    <ul aria-labelledby="currentUser" class="dropdown-menu dropdown-menu-end" >
+                        <li id="dashboard" style="display: none;">
+                            <a href="/admin/dashboard" class="dropdown-item text-muted"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                        </li>
                         <li>
                             <a href="#" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item text-muted"><i class="fas fa-sliders-h me-2"></i> Cài đặt</a>
                         </li>
-
                         <li class="dropdown-divider"></li>
                         <li>
-                            <a href="./logout" class="dropdown-item text-muted"><i class="fas fa-sign-out-alt me-2"></i> Đăng xuất</a>
+                            <a href="/logout" class="dropdown-item text-muted"><i class="fas fa-sign-out-alt me-2"></i> Đăng xuất</a>
                         </li>
 
                     </ul>
@@ -68,6 +70,11 @@
         console.log(currentUser.username);
         const username = document.getElementById('currentUser');
         username.innerHTML = currentUser.username;
+
+        if (currentUser.role === 'admin') {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.style.display = 'block';
+        }
     {{/with}}
     });
 

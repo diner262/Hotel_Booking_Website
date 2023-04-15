@@ -1,5 +1,7 @@
 var passport = require('passport');
+var bcrypt = require('bcrypt');
 var User = require('../models/user.model');
+var { validationResult, matchedData } = require('express-validator');
 
 class HomeController {
     login(req, res, next) {
@@ -28,6 +30,63 @@ class HomeController {
             // username: '',
             // password: ''
         });
+    }
+
+    async regiterNewUser(req, res, next) {
+        let error = validationResult(req)
+        if (!error.isEmpty()) {
+            return res.status(422).json({
+                code: 1,
+                message: error.array()[0].msg
+            });
+        }
+
+        const username = req.body.username;
+        const email = req.body.email;
+        const password = req.body.password;
+
+        const existUsername = await User.findOne({ username: username }).exec();
+        if (existUsername) {
+            return res.status(409).json({
+                code: 1,
+                message: 'Tên người dùng đã tồn tại'
+            });
+        }
+
+        const existEmail = await User.findOne({ email: email }).exec();
+        if (existEmail) {
+            return res.status(409).json({
+                code: 1,
+                message: 'Email đã tồn tại'
+            });
+        }
+
+        // Encrypt password
+        const salt = await bcrypt.genSalt(10);
+        const encryptPassword = await bcrypt.hash(password, salt);
+
+        // Create new account
+        const user = new User({
+            username: username,
+            email: email,
+            password: encryptPassword,
+            role: 'client'
+        });
+
+        // Save account
+        try {
+            await user.save();
+            return res.status(200).json({
+                code: 0,
+                message: 'Đăng ký tài khoản thành công!',
+                user: user
+            });
+        } catch (err) {
+            return res.status(500).send({
+                code: 1,
+                message: err.message
+            });
+        }
     }
 
     logout(req, res, next) {

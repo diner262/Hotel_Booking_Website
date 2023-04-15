@@ -1,22 +1,29 @@
 var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt');
 var User = require('../models/user.model');
 
 
 module.exports = (passport) => {
     passport.use(new LocalStrategy({
-            usernameField: 'username',
-            passwordField: 'password',
-        }, async (username, password, done) => {
-            if (!username) return done(null, false, { message: 'Bạn chưa nhập tên đăng nhập.' });
-            if (!password) return done(null, false, { message: 'Bạn chưa nhập mật khẩu.' });
-            
-            const user = await User.findOne({ username });
-            if (!user) return done(null, false, { message: 'Tên đăng nhập hoặc mật khẩu không chính xác.' });
+        usernameField: 'username',
+        passwordField: 'password',
+    }, async (username, password, done) => {
+        if (!username) return done(null, false, { message: 'Bạn chưa nhập tên đăng nhập.' });
+        if (!password) return done(null, false, { message: 'Bạn chưa nhập mật khẩu.' });
 
-            const isMatch = user.password === password;
-            if (!isMatch) return done(null, false, { message: 'Tên đăng nhập hoặc mật khẩu không chính xác.' });
-
-            return done(null, user);
+        await User.findOne({ username }).exec()
+            .then(user => {
+                if (!user) return done(null, false, { message: 'Tên đăng nhập hoặc mật khẩu không chính xác.' });
+                bcrypt.compare(password, user.password, (err, isMatch) => {
+                    if (err) return done(null, false, { message: err.message });
+                    if (!isMatch) return done(null, false, { message: 'Tân đăng nhập hoặc mật khẩu không chính xác.' });
+                    
+                    return done(null, user);
+                });
+            })
+            .catch(err => {
+                return done(null, false, { message: err.message });
+            });
     }));
 
     passport.serializeUser((user, done) => {
@@ -24,7 +31,7 @@ module.exports = (passport) => {
     });
 
     passport.deserializeUser((id, done) => {
-        User.findById({_id: id}).then((user) => {
+        User.findById({ _id: id }).then((user) => {
             done(null, user);
         });
     });

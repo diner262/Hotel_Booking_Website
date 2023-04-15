@@ -1,5 +1,5 @@
 const ensureAuth = (req, res, next) => {
-    if (req.isAuthenticated() && req.user.role === 'CLIENT_ROLE') {
+    if (req.isAuthenticated() && req.user.role === 'client') {
         return next();
     }
     res.redirect('/login');

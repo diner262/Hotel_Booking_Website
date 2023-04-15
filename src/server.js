@@ -29,6 +29,14 @@ app.set('views', path.join(__dirname, '/resources/views'));
 app.engine('hbs', hbs.engine({
   defaultLayout: 'main',
   extname: '.hbs',
+  helpers: {
+    json: function (context) { 
+        return JSON.stringify(context);
+    },
+    ifeq: function (val1, val2) {
+        return (val1 === val2);
+    }
+}
 }))
 app.set('view engine', 'hbs');
 
@@ -45,8 +53,8 @@ app.use('/admin', express.static('public'));
 app.use(session({
   secret: 'mysecret',
   cookie: { maxAge: 3 * 60 * 60 * 1000 },
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
 }));
 
 app.use(flash());
@@ -57,7 +65,7 @@ app.use(passport.session());
 // Passport configuration
 require('./middlewares/passport')(passport);
 
-var flashMessage = require('./middlewares/flashMessageInviews');
+var flashMessage = require('./middlewares/flashMessage');
 app.use(flashMessage);
 
 indexRouter(app)

@@ -41,6 +41,7 @@ class HomeController {
     home(req, res, next) {
         res.render('client/home', {
             title: 'Home Page',
+            user: req.user
         });
     }
 

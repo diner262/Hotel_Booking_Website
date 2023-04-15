@@ -26,12 +26,50 @@
             <li class="nav-item px-3">
                 <a class="nav-link" href="#">Liên hệ</a>
             </li>
+            
+            {{#unless currentUser}}
             <li class="nav-item px-3">
                 <a class="nav-link" href="/login">Đăng nhập</a>
             </li>
             <li class="nav-item px-3">
                 <a class="nav-link" href="#">Đăng ký</a>
             </li>
+            {{/unless}}
+            {{#if currentUser}}
+            <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                        data-bs-toggle="dropdown" href="#" id="currentUser" role="button">
+                    </a>
+                    <ul aria-labelledby="currentUser" class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a href="#" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item text-muted"><i class="fas fa-sliders-h me-2"></i> Cài đặt</a>
+                        </li>
+
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a href="./logout" class="dropdown-item text-muted"><i class="fas fa-sign-out-alt me-2"></i> Đăng xuất</a>
+                        </li>
+
+                    </ul>
+                </li>
+            {{/if}}
         </ul>
     </div>
 </nav>
+
+<script>
+    
+    $(document).ready(function () {
+    {{#with currentUser}}
+        const currentUser = {{{json this }}};
+        console.log(currentUser.username);
+        const username = document.getElementById('currentUser');
+        username.innerHTML = currentUser.username;
+    {{/with}}
+    });
+
+</script>
+

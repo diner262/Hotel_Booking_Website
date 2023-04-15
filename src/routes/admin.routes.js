@@ -1,28 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var { validationResult, matchedData } = require('express-validator');
-var { ensureAuth, forwardAuth } = require('../middleware/authAdmin');
-var { validateLogin } = require('../middleware/validateForm');
+var { ensureAuth, forwardAuth } = require('../middlewares/authAdmin');
+var { validateLogin, handleLoginAdmin } = require('../middlewares/validateForm');
 var adminController = require('../controllers/adminController');
 
-validateForm = (req, res, next) => {
-    const data = matchedData(req);
-    let error = validationResult(req)
-    if (!error.isEmpty()) {
-        req.flash('error', error.array()[0].msg);
 
-        return res.render('admin/login', {
-            title: 'Login Dashboard',
-            layout: false,
-            username: data.username,
-            password: data.password,
-            messageFailure: req.flash('error'),
-        });
-    }
-    return next();
-}
-
-router.post('/login', validateLogin(), validateForm, adminController.authenticateLogin);
+router.post('/login', validateLogin(), handleLoginAdmin, adminController.authenticateLogin);
 
 router.get('/login', adminController.login);
 router.get('/logout', adminController.logout);

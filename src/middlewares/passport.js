@@ -2,7 +2,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user.model');
 
 
-const authorizeAdmin = (passport) => {
+module.exports = (passport) => {
     passport.use(new LocalStrategy({
             usernameField: 'username',
             passwordField: 'password',
@@ -11,10 +11,10 @@ const authorizeAdmin = (passport) => {
             if (!password) return done(null, false, { message: 'Bạn chưa nhập mật khẩu.' });
             
             const user = await User.findOne({ username });
-            if (!user) return done(null, false, { message: 'Tên người dùng hoặc mật khẩu không chính xác.' });
+            if (!user) return done(null, false, { message: 'Tên đăng nhập hoặc mật khẩu không chính xác.' });
 
             const isMatch = user.password === password;
-            if (!isMatch) return done(null, false, { message: 'Tên người dùng hoặc mật khẩu không chính xác.' });
+            if (!isMatch) return done(null, false, { message: 'Tên đăng nhập hoặc mật khẩu không chính xác.' });
 
             return done(null, user);
     }));
@@ -29,5 +29,3 @@ const authorizeAdmin = (passport) => {
         });
     });
 }
-
-module.exports = authorizeAdmin

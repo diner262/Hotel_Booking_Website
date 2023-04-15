@@ -1,5 +1,18 @@
 <link rel="stylesheet" href="./css/home.css">
 <div class="home">
+  {{#if messageSuccess}}
+  <div class="position-absolute top-0 end-0" style="z-index: 1000; margin: 100px 48px" id="success-alert">
+    <div class="col-lg-10 mx-auto mb-3 w-auto">
+      <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:">
+          <use xlink:href="#check-circle-fill" />
+        </svg>
+        <div> {{ messageSuccess }} </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+  {{/if}}
   <div class="home_container">
     <div class="text m-3">
       <div class="ms-5">
@@ -61,4 +74,12 @@
     const line = document.querySelector('.image');
     line.style.background = change;
   }
+
+  $('#success-alert').slideDown(function () {
+    $('#success-alert').fadeIn(300).delay(3000).fadeOut(400);
+  });
+
+  $('#error-alert').slideDown(function () {
+    $('#error-alert').fadeIn(300).delay(3000).fadeOut(400);
+  });
 </script>

@@ -55,10 +55,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Passport configuration
-var authorize = require('./middleware/passport');
-authorize(passport);
+require('./middlewares/passport')(passport);
 
-var flashMessage = require('./middleware/flashMessageInviews');
+var flashMessage = require('./middlewares/flashMessageInviews');
 app.use(flashMessage);
 
 indexRouter(app)

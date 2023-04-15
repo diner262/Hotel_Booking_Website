@@ -36,12 +36,19 @@ body {
 .form-control::placeholder {
   color: #227391; }
 
-.eye i {
+.eye-user i {
   cursor: pointer;
   color: #227391;
   position: absolute;
   margin-top: -2rem;
-  right: 1rem; }
+  margin-left: 23rem; }
+
+.eye-admin i {
+  cursor: pointer;
+  color: #227391;
+  position: absolute;
+  margin-top: -2rem;
+  margin-left: 25rem; }
 
 .text {
   color: aliceblue; }

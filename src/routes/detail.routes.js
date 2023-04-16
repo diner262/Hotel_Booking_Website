@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/profile', function(req, res, next) {
-    res.render('profile', { layout: false ,title:"Profile"});
+    res.render('client/profile', { layout: false ,title:"Profile"});
   });
 
 router.get('/detail/:id', function(req, res, next) {

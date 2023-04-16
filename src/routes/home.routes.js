@@ -16,6 +16,7 @@ router.get('/login', forwardAuth, homeController.login)
 router.get('/logout', homeController.logout)
 router.get('/signup', forwardAuth, homeController.signup)
 router.get('/home', homeController.home)
+router.get('/room', homeController.room)
 router.get('/', (req, res) => {
     res.redirect('home')
 });

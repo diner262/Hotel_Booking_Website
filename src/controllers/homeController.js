@@ -31,6 +31,12 @@ class HomeController {
             // password: ''
         });
     }
+    room(req, res, next) {
+        res.render('client/room', {
+            title: 'Room'
+        });
+    }
+    
 
     async regiterNewUser(req, res, next) {
         let error = validationResult(req)

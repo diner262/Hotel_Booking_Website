@@ -53,16 +53,33 @@ class AdminController {
         });
     }
 
-    customer_manage(req, res, next) {
-        res.render('admin/customer_manage', {
-            title: 'Manage Customer',
-            layout: 'admin-main'
-        });
+    async customer_manage(req, res, next) {
+        await User.find({ role: 'client' }).exec()
+            .then(customers => {
+                // console.log(customer);
+                res.render('admin/customer_manage', {
+                    title: 'Manage Customer',
+                    layout: 'admin-main',
+                    customers: customers
+                });
+            })
+            .catch(err => {
+                return next(err);
+            });
     }
-    profile(req, res, next) {
-        res.render('client/profile', {
-            title: 'Profile Admin',
-            layout: 'admin-main'
+
+    async customer_detail(req, res, next) {
+        const id = req.params.id;
+        console.log(id);
+        
+        await User.findById(id).exec()
+            .then(customer => {
+                // console.log(customer);
+                res.render('admin/customers/customer_detail', {
+                    title: 'Customer Detail',
+                    layout: 'admin-main',
+                    customer: customer
+            });
         });
     }
 }

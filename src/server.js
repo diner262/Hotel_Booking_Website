@@ -2,7 +2,9 @@ var createError = require('http-errors');
 var express = require('express');
 var session = require('express-session');
 var hbs = require('express-handlebars');
+var Handlebars = require('handlebars')
 var passport = require('passport');
+var {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 var path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './.env') });
@@ -27,6 +29,7 @@ var app = express();
 app.set('views', path.join(__dirname, '/resources/views'));
 
 app.engine('hbs', hbs.engine({
+  handlebars: allowInsecurePrototypeAccess(Handlebars),
   defaultLayout: 'main',
   extname: '.hbs',
   helpers: {
@@ -35,6 +38,9 @@ app.engine('hbs', hbs.engine({
     },
     ifeq: function (val1, val2) {
         return (val1 === val2);
+    },
+    no1: function (val) {
+        return val + 1;
     }
 }
 }))
@@ -48,6 +54,8 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static('public'));
+app.use('/admin/customer', express.static('public'));
+
 
 // session middleware
 app.use(session({

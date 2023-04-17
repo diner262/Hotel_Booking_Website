@@ -56,11 +56,10 @@ class AdminController {
     async customer_manage(req, res, next) {
         await User.find({ role: 'client' }).exec()
             .then(customers => {
-                // console.log(customer);
                 res.render('admin/customer_manage', {
                     title: 'Manage Customer',
                     layout: 'admin-main',
-                    customers: customers
+                    customers: customers,
                 });
             })
             .catch(err => {
@@ -69,18 +68,42 @@ class AdminController {
     }
 
     async customer_detail(req, res, next) {
-        const id = req.params.id;
-        console.log(id);
+        const username = req.params.username;
+        const filter = { username: username };
         
-        await User.findById(id).exec()
+        await User.findOne(filter).exec()
             .then(customer => {
-                // console.log(customer);
                 res.render('admin/customers/customer_detail', {
                     title: 'Customer Detail',
                     layout: 'admin-main',
                     customer: customer
             });
         });
+    }
+
+    async customer_edit(req, res, next) {
+        const username = req.params.username;
+        const filter = { username: username };
+        
+        await User.findOne(filter).exec()
+            .then(customer => {
+                res.render('admin/customers/customer_edit', {
+                    title: 'Edit Customer',
+                    layout: 'admin-main',
+                    customer: customer
+            });
+        });
+    }
+
+    async update_customer(req, res, next) {
+        const username = req.params.username;
+        const filter = { username: username };
+        
+        await User.findOneAndUpdate(filter, req.body, { new: true }).exec()
+            .then(customer => {
+                req.flash('success', 'Cập nhật thông tin thành công!');
+                res.redirect('/admin/customer');
+            });
     }
 }
 

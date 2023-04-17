@@ -1,0 +1,163 @@
+<div class="container-xl">
+    <div class="row">
+        <div class="col-sm-6 d-flex align-items-center">
+            <a class="btn shadow p-3 mb-4 bg-body rounded" href="#">
+                <img class="img-flud" style="max-height: 26px;" src="./img/icons8-user-64.png">
+            </a>
+            <div class="px-4">
+                <h5>Cập nhật thông tin khách hàng</h5>
+                <p class="text-muted">Update information</p>
+            </div>
+        </div>
+        <div class="col-sm-6 d-flex align-items-center justify-content-end">
+            <a href="../" class="btn btn-secondary d-flex align-items-center rounded mx-1">
+                <i class="fas fa-chevron-circle-left me-2"></i><span>Quay lại</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row gutters table-responsive bg-body shadow rounded pt-2 px-4">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"
+                                    class="img-fluid">
+                            </div>
+                            {{!-- <h5 class="user-name">{{ username }}</h5>
+                            <h6 class="user-email">{{ email }}</h6> --}}
+                        </div>
+                        {{!-- <div class="about">
+                            <h5>About</h5>
+                            <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human
+                                experiences.</p>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                {{#with customer}}
+                <div class="card-body">
+                    <form method="post" action="./{{ username }}">
+                        <div class="row gutters">
+                            <div class="col-12">
+                                <h6 class="mb-2 text-primary">Thông tin cơ bản</h6>
+                            </div>
+                            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="fullName">Họ và tên</label>
+                                    <input type="text" class="form-control" id="fullName" name="fullname" 
+                                    value="{{ fullname }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="username">Tên tài khoản</label>
+                                    <input type="text" class="form-control" id="username" name="username" disabled 
+                                    value="{{ username }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="eMail">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" disabled 
+                                    value="{{ email }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="gender">Giới tính</label>
+                                    <select class="form-select" id="gender" name="gender">
+                                        <option value="">None</option>
+                                        <option value="Nam"> Nam </option>
+                                        <option value="Nữ"> Nữ </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="datepicker">Ngày sinh</label>
+                                    <input type="text" class="form-control" id="datepicker" name="birthday" 
+                                    value="{{ birthday }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="phone">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" 
+                                    value="{{ phone }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="id_card">CMND/CCCD</label>
+                                    <input type="text" class="form-control" id="id_card" name="id_card" 
+                                    value="{{ id_card }}">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-12">
+                                <h6 class="mt-3 mb-2 text-primary">Thông tin liên lạc</h6>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="address">Địa chỉ</label>
+                                    <input type="name" class="form-control" id="address" name="address" 
+                                    value="{{ address }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="country">Quốc gia</label>
+                                    <input type="name" class="form-control" id="country" name="country" 
+                                    value="{{ country }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="city">Thành phố</label>
+                                    <input type="text" class="form-control" id="city" name="city" 
+                                    value="{{ city }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters mt-2">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-primary text-white" type="submit" id="submit" name="submit">
+                                        <i class="fas fa-user-edit me-2"></i><span>Cập nhật</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{/with}}   
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+
+        const gender = `{{ customer.gender }}`
+        console.log(gender);
+        $('#gender').children('option').each(function () {
+            if ($(this).val() === gender) {
+                $(this).attr('selected', true);
+            } else {
+                $(this).selected = false;
+            }
+        })
+        
+    });
+
+</script>

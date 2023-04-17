@@ -1,8 +1,8 @@
 <div class="container-xl">
     <div class="row">
         <div class="col-sm-6 d-flex align-items-center">
-            <a class="btn shadow p-3 mb-4 bg-body rounded" href="customer">
-                <img class="img-flud" style="max-height: 36px;" src="./img/icons8-user-64.png">
+            <a class="btn shadow p-3 mb-4 bg-body rounded" href="#">
+                <img class="img-flud" style="max-height: 26px;" src="./img/icons8-user-64.png">
             </a>
             <div class="px-4">
                 <h5>Quản lý thông tin khách hàng</h5>
@@ -57,9 +57,9 @@
                         <td>{{ phone }}</td>
                         <td>{{ gender }}</td>
                         <td>
-                            <a href="{{ id }}" class="view" title="View" data-toggle="tooltip"><i
+                            <a href="{{ username }}" class="view" title="View" data-toggle="tooltip"><i
                                     class="material-icons">&#xE417;</i></a>
-                            <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i
+                            <a href="edit/{{ username }}" class="edit" title="Edit" data-toggle="tooltip"><i
                                     class="material-icons">&#xE254;</i></a>
                             <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
                                     class="material-icons">&#xE872;</i></a>

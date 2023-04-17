@@ -1,10 +1,8 @@
 <div class="container-xl">
-    
-    {{#with customer}}
     <div class="row">
         <div class="col-sm-6 d-flex align-items-center">
-            <a class="btn shadow p-3 mb-4 bg-body rounded" href="customer">
-                <img class="img-flud" style="max-height: 36px;" src="./img/icons8-user-64.png">
+            <a class="btn shadow p-3 mb-4 bg-body rounded" href="#">
+                <img class="img-flud" style="max-height: 26px;" src="./img/icons8-user-64.png">
             </a>
             <div class="px-4">
                 <h5>Thông tin chi tiết khách hàng</h5>
@@ -15,127 +13,13 @@
             <a href="./" class="btn btn-secondary d-flex align-items-center rounded mx-1">
                 <i class="fas fa-chevron-circle-left me-2"></i><span>Quay lại</span>
             </a>
-            <a href="../edit/{{ id }}" class="btn btn-warning d-flex align-items-center rounded mx-1 text-white">
+            <a href="./edit/{{ customer.username }}" class="btn btn-warning d-flex align-items-center rounded mx-1 text-white">
                 <i class="fas fa-user-edit me-2"></i><span>Cập nhật</span>
             </a>
         </div>
     </div>
 
-
-    {{!-- <div class="row table-responsive bg-body shadow rounded p-5">
-        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="d-inline-block">Detail Product</h2>
-                </div>
-                <form th:object="${product}">
-                    <div class="row">
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                            <div class="form-group mb-3 col-sm-12">
-                                <label class="form-label" for="name">Product Name</label>
-                                <input class="form-control validate" disabled id="name" name="name" required
-                                    th:field="*{name}" type="text" />
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group mb-3 col-sm-7">
-                                    <label class="form-label" for="branch">Branch</label>
-                                    <select class="form-select" disabled id="branch" th:field="*{brand}">
-                                        <option selected value="">--Branch--</option>
-                                        <option th:value="'Apple'">Apple (Macbook)</option>
-                                        <option th:value="'Asus'">Asus</option>
-                                        <option th:value="'HP'">HP</option>
-                                        <option th:value="'Dell'">Dell</option>
-                                        <option th:value="'Lenovo'">Lenovo</option>
-                                        <option th:value="'MSI'">MSI</option>
-                                        <option th:value="'Acer'">Acer</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3 col-sm-5">
-                                    <label class="form-label" for="size">Screen Size</label>
-                                    <select class="form-select" disabled id="size" th:field="*{screenSize}">
-                                        <option selected th:value="0.0">--Screen Size--</option>
-                                        <option th:value="13.3">13.3 inch</option>
-                                        <option th:value="14">14 inch</option>
-                                        <option th:value="15.6">15.6 inch</option>
-                                        <option th:value="16.2">16.2 inch</option>
-                                        <option th:value="17">17 inch</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label class="form-label" for="ram">Ram</label>
-                                    <div class="input-group">
-                                        <input aria-describedby="basic-ram" class="form-control validate" disabled
-                                            id="ram" min="0" name="ram" required th:field="*{ram}" type="number" />
-                                        <span class="input-group-text" id="basic-ram">GB</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label class="form-label" for="rom">Rom</label>
-                                    <div class="input-group">
-                                        <input aria-describedby="basic-rom" class="form-control validate" disabled
-                                            id="rom" min="0" name="rom" required th:field="*{rom}" type="number" />
-                                        <span class="input-group-text" id="basic-rom">GB</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3 col-sm-12">
-                                <label class="form-label" for="cpu">Processor</label>
-                                <input class="form-control validate" disabled id="cpu" name="cpu" required
-                                    th:field="*{processor}" type="text" />
-                            </div>
-
-                            <div class="form-group col-sm-12">
-                                <label class="form-label" for="gpu">Graphic Card</label>
-                                <input class="form-control validate" disabled id="gpu" name="gpu" required
-                                    th:field="*{graphicCard}" type="text" />
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                            <div class="product-img-dummy mx-auto">
-                                <img alt="Image Preview" id="thumbnail" class=""
-                                    th:src="@{${'/img/products/' + product.id + '/' + product.image}}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group mb-3 col-xs-12 col-sm-4">
-                            <label class="form-label" for="weight">Weight</label>
-                            <div class="input-group">
-                                <input aria-describedby="basic-weight" class="form-control validate" disabled
-                                    id="weight" min="0" name="weight" required step="0.1" th:field="*{weight}"
-                                    type="number" />
-                                <span class="input-group-text" id="basic-weight">KG</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3 col-xs-12 col-sm-4">
-                            <label class="form-label" for="quantity">Quantity</label>
-                            <input class="form-control validate" disabled id="quantity" min="0" name="quantity" required
-                                th:field="*{quantity}" type="number" />
-                        </div>
-
-                        <div class="form-group mb-3 col-xs-12 col-sm-4">
-                            <label class="form-label" for="price">Price</label>
-                            <div class="input-group">
-                                <input aria-describedby="basic-price" class="form-control validate" disabled id="price"
-                                    min="0" name="price" required th:field="*{price}" type="number" />
-                                <span class="input-group-text" id="basic-price">VNĐ</span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-    <div class="row gutters table-responsive bg-body shadow rounded pt-3 px-4">
+    <div class="row gutters table-responsive bg-body shadow rounded pt-2 px-4">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
                 <div class="card-body">
@@ -147,17 +31,13 @@
                             {{!-- <h5 class="user-name">{{ username }}</h5>
                             <h6 class="user-email">{{ email }}</h6> --}}
                         </div>
-                        {{!-- <div class="about">
-                            <h5>About</h5>
-                            <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human
-                                experiences.</p>
-                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
+                {{#with customer}}
                 <div class="card-body">
                     <div class="row gutters">
                         <div class="col-12">
@@ -165,30 +45,29 @@
                         </div>
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12">
                             <div class="mb-3">
-                                <label class="form-label" for="fullName">Họ và tên</label>
-                                <input type="text" class="form-control" id="fullName" name="fullname" disabled
-                                    value={{ fullname }}>
+                                <label class="form-label" for="fullname">Họ và tên</label>
+                                <input type="text" class="form-control" id="fullname" name="fullname" disabled
+                                    value="{{ fullname }}">
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="username">Tên tài khoản</label>
                                 <input type="text" class="form-control" id="username" name="username" disabled
-                                    value={{ username }}>
+                                    value="{{ username }}">
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="eMail">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" disabled
-                                    value={{ email }}>
+                                    value="{{ email }}">
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="gender">Giới tính</label>
-                                <select class="form-select" id="gender" name="gender" disabled
-                                        value={{ gender }}>
+                                <select class="form-select" id="gender" name="gender" disabled>
                                     <option value="">None</option>
                                     <option value="Nam"> Nam </option>
                                     <option value="Nữ"> Nữ </option>
@@ -199,21 +78,21 @@
                             <div class="mb-3">
                                 <label class="form-label" for="birthday">Ngày sinh</label>
                                 <input type="url" class="form-control" id="birthday" name="birthday" disabled
-                                    value={{ birthday }}>
+                                    value="{{ birthday }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="phone">Số điện thoại</label>
                                 <input type="text" class="form-control" id="phone" name="phone" disabled
-                                    value={{ phone }}>
+                                    value="{{ phone }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="id_card">CMND/CCCD</label>
                                 <input type="text" class="form-control" id="id_card" name="id_card" disabled
-                                    value={{ id_card }}>
+                                    value="{{ id_card }}">
                             </div>
                         </div>
                         
@@ -226,42 +105,42 @@
                             <div class="mb-3">
                                 <label class="form-label" for="address">Địa chỉ</label>
                                 <input type="name" class="form-control" id="address" name="address" disabled
-                                    value={{ address }}>
+                                    value="{{ address }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="country">Quốc gia</label>
                                 <input type="name" class="form-control" id="country" name="country" disabled
-                                    value={{ country }}>
+                                    value="{{ country }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="city">Thành phố</label>
                                 <input type="text" class="form-control" id="city" name="city" disabled
-                                    value={{ city }}>
+                                    value="{{ city }}">
                             </div>
                         </div>
                     </div>
-                    {{!-- <div class="row gutters">
-                        <div class="col-12">
-                            <div class="text-right">
-                                <button type="button" id="submit" name="submit"
-                                    class="btn btn-secondary">Cancel</button>
-                                <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
+                {{/with}}
             </div>
         </div>
     </div>
-    {{/with}}
 </div>
 
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
+
+        const gender = `{{ customer.gender }}`
+        $('#gender').children('option').each(function () {
+            if ($(this).val() === gender) {
+                $(this).attr('selected', true);
+            } else {
+                $(this).selected = false;
+            }
+        })
     });
 </script>

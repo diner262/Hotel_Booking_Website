@@ -1,19 +1,4 @@
 <div class="container px-5 py-3">
-    {{!-- Flash message --}}
-    {{#if messageSuccess}}
-    <div class="position-absolute top-0 end-0" style="z-index: 1000; margin: 85px 48px" id="success-alert">
-        <div class="col-lg-10 mx-auto mb-3 w-auto">
-            <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:">
-                    <use xlink:href="#check-circle-fill" />
-                </svg>
-                <div> {{ messageSuccess }}</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-    {{/if}}
-
     <div class="row">
         <div class="col">
             <h4 class="mb-5 ">Welcome back, <b>{{ currentUser.username }}</b></h4>
@@ -335,9 +320,5 @@
                 updateBarChart();
             });
         })
-
-        $('#success-alert').slideDown(function () {
-            $('#success-alert').fadeIn( 300 ).delay( 3500 ).fadeOut( 400 );
-        });
     </script>
 </div>

@@ -13,7 +13,11 @@ router.get('/login', forwardAuth, adminController.login);
 router.get('/logout', adminController.logout);
 
 router.get('/customer', ensureAuth, adminController.customer_manage);
-router.get('/customer/:id', ensureAuth, adminController.customer_detail);
+router.get('/customer/:username', ensureAuth, adminController.customer_detail);
+router.get('/customer/edit/:username', ensureAuth, adminController.customer_edit);
+router.post('/customer/edit/:username', ensureAuth, adminController.update_customer);
+
+
 router.get('/room', ensureAuth, adminController.room_manage);
 router.get('/order', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);

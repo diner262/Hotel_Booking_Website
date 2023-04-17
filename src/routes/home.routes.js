@@ -1,16 +1,27 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('client/home', { title: 'Home' });
+var { 
+    validateSignUp, 
+    validateLogin, 
+    handleLoginClient,
+    handleSignUp
+} = require('../middlewares/validateForm');
+var homeController = require('../controllers/homeController');
+var { forwardAuth } = require('../middlewares/authClient');
+
+router.post('/login', forwardAuth, validateLogin(), handleLoginClient, homeController.authenticateLogin);
+router.post('/signup', forwardAuth, validateSignUp(), handleSignUp, homeController.regiterNewUser);
+
+router.get('/login', forwardAuth, homeController.login)
+router.get('/logout', homeController.logout)
+router.get('/signup', forwardAuth, homeController.signup)
+router.get('/home', homeController.home)
+router.get('/room', homeController.room)
+router.get('/', (req, res) => {
+    res.redirect('home')
 });
 
-router.get('/login', function(req, res, next) {
-  res.render('client/login', { layout: false });
-});
-router.get('/signup', function(req, res, next) {
-  res.render('client/signup', { layout: false });
-});
+
 
 module.exports = router;

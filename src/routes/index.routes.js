@@ -5,10 +5,15 @@ var detailRouter = require('./detail.routes');
 var adminRouter = require('./admin.routes');
 
 function route(app) {
-  app.use('/users', usersRouter);
-  app.use('/detail', detailRouter);
-  app.use('/admin', adminRouter);
-  app.use('/', homeRouter);
+    app.get('/profile', function(req, res, next) {
+        res.render('client/profile', { layout: false ,title:"Profile"});
+      });
+    
+    app.use('/users', usersRouter);
+    app.use('/detail', detailRouter);
+    app.use('/admin', adminRouter);
+    app.use('/', homeRouter);
+    
 }
 
 module.exports = route;

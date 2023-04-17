@@ -5,7 +5,7 @@ var { validateLogin, handleLoginAdmin } = require('../middlewares/validateForm')
 var adminController = require('../controllers/adminController');
 
 
-router.get('/profile', adminController.profile);
+router.get('/profile/:id',adminController.profile);
 
 router.post('/login', validateLogin(), handleLoginAdmin, adminController.authenticateLogin);
 

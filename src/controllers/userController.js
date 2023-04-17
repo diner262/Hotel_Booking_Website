@@ -4,17 +4,17 @@ const generateToken = require("../config/generateToken")
 
 
 const registerUser = asyncHandler(async (req, res) => {
-    const {name, email, password, avatar} = req.body
+    const { name, email, password, avatar } = req.body
 
-    if( !name || !email || !password) {
+    if (!name || !email || !password) {
         res.status(400)
         throw new Error("Please Enter all the Feilds")
     }
 
     // Email ton tai
-    const userExists = await User.findOne({email})
+    const userExists = await User.findOne({ email })
 
-    if(userExists) {
+    if (userExists) {
         res.status(400)
         throw new Error("User already exists")
     }
@@ -27,7 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
         avatar,
     })
 
-    if(user) {
+    if (user) {
         res.status(201).json({
             _id: user._id,
             name: user.name,
@@ -43,10 +43,10 @@ const registerUser = asyncHandler(async (req, res) => {
 
 })
 
-const LoginUser = asyncHandler(async(req, res) =>{ 
-    const {email,password} = req.body
+const LoginUser = asyncHandler(async (req, res) => {
+    const { email, password } = req.body
 
-    const user = await User.findOne({email})
+    const user = await User.findOne({ email })
 
     if (user && (await user.matchPassword(password))) {
         res.json({
@@ -55,7 +55,7 @@ const LoginUser = asyncHandler(async(req, res) =>{
             email: user.email,
             password: user.password,
             avatar: user.avatar,
-            token: generateToken(user._id), 
+            token: generateToken(user._id),
         })
     } else {
         res.status(401)
@@ -67,17 +67,23 @@ const LoginUser = asyncHandler(async(req, res) =>{
 
 // searching User
 const allUser = asyncHandler(async (req, res) => {
-    const keyword = req.query.search 
-    ? {
-        $or: [
-            {name: {$regex: req.query.search, $options: "i"}},
-            {email: {$regex: req.query.search, $options: "i"}},
-        ],
-    }
-    : {}
+    const keyword = req.query.search
+        ? {
+            $or: [
+                { name: { $regex: req.query.search, $options: "i" } },
+                { email: { $regex: req.query.search, $options: "i" } },
+            ],
+        }
+        : {}
 
-    const users = await User.find(keyword).find({_id: {$ne: req.user._id }})
+    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } })
     res.send(users)
 })
+class userController {
+    profile(req, res, next) {
+        res.render('client/profile', { layout: "main", title: "Profile User" });
+    }
 
-module.exports = {registerUser, LoginUser, allUser}
+}
+module.exports = new userController;
+module.exports = { registerUser, LoginUser, allUser }

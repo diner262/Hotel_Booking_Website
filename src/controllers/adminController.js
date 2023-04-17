@@ -12,6 +12,12 @@ class AdminController {
             layout: 'admin-main'
         });
     }
+    profile(req, res, next) {
+        res.render('client/profile', {
+            title: 'Profile Admin',
+            layout: 'admin-main'
+        });
+    }
 }
 
 module.exports = new AdminController;

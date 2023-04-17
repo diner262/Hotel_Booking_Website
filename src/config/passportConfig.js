@@ -8,8 +8,8 @@ module.exports = (passport) => {
         usernameField: 'username',
         passwordField: 'password',
     }, async (username, password, done) => {
-        if (!username) return done(null, false, { message: 'Bạn chưa nhập tên đăng nhập.' });
-        if (!password) return done(null, false, { message: 'Bạn chưa nhập mật khẩu.' });
+        if (username == null) return done(null, false, { message: 'Bạn chưa nhập tên đăng nhập.' });
+        if (password == null) return done(null, false, { message: 'Bạn chưa nhập mật khẩu.' });
 
         await User.findOne({ username }).exec()
             .then(user => {

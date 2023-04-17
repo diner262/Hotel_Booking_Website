@@ -15,7 +15,6 @@ class AdminController {
 
     authenticateLogin(req, res, next) {
         passport.authenticate('local', {
-            // successRedirect: '/admin/dashboard',
             failureRedirect: '/admin/login?error',
             failureFlash: true,
         })(req, res, next => {

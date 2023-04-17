@@ -17,7 +17,7 @@ var indexRouter = require('./routes/index.routes');
 
 
 // connect mongoose db
-var mongodb = require('./config/connection');
+var mongodb = require('./config/connectionConfig');
 mongodb._connect();
 
 var port = process.env.PORT || 3000;
@@ -63,7 +63,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Passport configuration
-require('./middlewares/passport')(passport);
+require('./config/passportConfig')(passport);
 
 var flashMessage = require('./middlewares/flashMessage');
 app.use(flashMessage);

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title> {{title}} </title>
+  <title> {{ title }} </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
@@ -48,46 +48,47 @@
       <div class="p-5">
         <div class="row">
           <div class="col-lg-6 px-5 pt-4">
-            <img src="./img/logo.png" class="img-logo mb-5 d-flex justify-content-center mx-auto">
+            <a href="/">
+              <img src="./img/logo.png" class="img-logo mb-5 d-flex justify-content-center mx-auto">
+            </a>
             <form method="post" action="login">
-              <div class="form-row">
-                <div class="col-lg-10 mx-auto mb-3">
+              <div class="col-lg-10 mx-auto mb-3">
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-user"><i class="fas fa-user"></i></span>
                   <input id="username" type="text" name="username" class="form-control" placeholder="Tên đăng nhập"
-                    value={{ username }}>
+                    aria-describedby="basic-user" value={{ username }}>
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-lg-10 mx-auto mb-3">
+
+              <div class="col-lg-10 mx-auto mb-3">
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-password"><i class="fas fa-key"></i></span>
                   <input id="password" type="password" name="password" class="form-control" placeholder="Mật khẩu"
-                    value={{ password }}>
-                  <div class="eye eye-user">
-                    <i class="far fa-eye"></i>
-                  </div>
+                    aria-describedby="basic-password" value={{ password }}>
+                  <span class="eye eye-user input-group-text"><i class="far fa-eye"></i></span>
                 </div>
               </div>
 
               {{!-- Flash message --}}
               {{#if messageFailure}}
-              <div class="form-row" id="error-alert">
-                <div class="col-lg-10 mx-auto mb-3">
-                  <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
-                    <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:">
-                      <use xlink:href="#exclamation-triangle-fill" />
-                    </svg>
-                    <div> {{ messageFailure }} </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
+              <div class="col-lg-10 mx-auto mb-3" id="error-alert">
+                <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
+                  <svg class="bi flex-shrink-0 me-2 mr-3" width="20" height="20" role="img" aria-label="Warning:">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                  </svg>
+                  <div> {{ messageFailure }} </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
               </div>
               {{/if}}
 
-              <div class="form-row ">
-                <div class="col-lg-10 mx-auto mt-3">
-                  <button class="btn btn btn-block w-100" type="submit">Đăng nhập</button>
+              <div class="col-lg-10 mx-auto mt-3">
+                <div class="input-group">
+                  <button class="btn btn-block w-100 p-2" type="submit">Đăng nhập</button>
                 </div>
               </div>
               <p class="text-end me-5 mt-3"><a href="#">Quên mật khẩu?</a></p>
-              <p class="text text-center mt-2">Bạn chưa có tài khoản? <a href="/signup">Đăng ký ngay</a></p>
+              <p class="text text-center mt-2 question">Bạn chưa có tài khoản? <a href="/signup">Đăng ký ngay</a></p>
             </form>
           </div>
           <div class="col-lg-6 p-0">
@@ -106,9 +107,9 @@
         $(this).toggleClass('open');
         $(this).children('i').toggleClass('fa-eye-slash fa-eye');
         if ($(this).hasClass('open')) {
-          $(this).prev().attr('type', 'text');
+          $('#password').attr('type', 'text');
         } else {
-          $(this).prev().attr('type', 'password');
+          $('#password').attr('type', 'password');
         }
       });
 

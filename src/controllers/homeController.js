@@ -8,8 +8,6 @@ class HomeController {
         res.render('client/login', {
             title: 'Login',
             layout: false,
-            username: '',
-            password: ''
         });
     }
 
@@ -27,8 +25,6 @@ class HomeController {
         res.render('client/signup', {
             title: 'Signup',
             layout: false,
-            // username: '',
-            // password: ''
         });
     }
     room(req, res, next) {
@@ -39,31 +35,36 @@ class HomeController {
     
 
     async regiterNewUser(req, res, next) {
-        let error = validationResult(req)
-        if (!error.isEmpty()) {
-            return res.status(422).json({
-                code: 1,
-                message: error.array()[0].msg
-            });
-        }
-
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
+        const confirm_password = req.body.confirm_password;
 
         const existUsername = await User.findOne({ username: username }).exec();
         if (existUsername) {
-            return res.status(409).json({
-                code: 1,
-                message: 'Tên người dùng đã tồn tại'
+            req.flash('error', 'Tên đăng nhập đã tồn tại.');
+            return res.render('client/signup', {
+                title: 'Signup',
+                layout: false,
+                username: username,
+                email: email,
+                password: password,
+                confirm_password: confirm_password,
+                messageFailure: req.flash('error')
             });
         }
 
         const existEmail = await User.findOne({ email: email }).exec();
         if (existEmail) {
-            return res.status(409).json({
-                code: 1,
-                message: 'Email đã tồn tại'
+            req.flash('error', 'Email đã tồn tại.');
+            return res.render('client/signup', {
+                title: 'Signup',
+                layout: false,
+                username: username,
+                email: email,
+                password: password,
+                confirm_password: confirm_password,
+                messageFailure: req.flash('error')
             });
         }
 
@@ -82,16 +83,11 @@ class HomeController {
         // Save account
         try {
             await user.save();
-            return res.status(200).json({
-                code: 0,
-                message: 'Đăng ký tài khoản thành công!',
-                user: user
-            });
+            req.flash('success', 'Đăng ký tài khoản thành công!');
+            res.redirect('./login');
         } catch (err) {
-            return res.status(500).send({
-                code: 1,
-                message: err.message
-            });
+            req.flash('error', err.message);
+            res.redirect('./signup');
         }
     }
 
@@ -109,7 +105,6 @@ class HomeController {
             user: req.user
         });
     }
-
 
 }
 

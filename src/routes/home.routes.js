@@ -4,13 +4,14 @@ var router = express.Router();
 var { 
     validateSignUp, 
     validateLogin, 
-    handleLoginClient 
+    handleLoginClient,
+    handleSignUp
 } = require('../middlewares/validateForm');
 var homeController = require('../controllers/homeController');
 var { forwardAuth } = require('../middlewares/authClient');
 
 router.post('/login', forwardAuth, validateLogin(), handleLoginClient, homeController.authenticateLogin);
-router.post('/signup', validateSignUp(), homeController.regiterNewUser);
+router.post('/signup', forwardAuth, validateSignUp(), handleSignUp, homeController.regiterNewUser);
 
 router.get('/login', forwardAuth, homeController.login)
 router.get('/logout', homeController.logout)

@@ -1,6 +1,36 @@
 var passport = require('passport');
+var multer = require('multer');
+var dir_name = './public/uploads/avatar';
 var User = require('../models/user.model');
 
+//Configuration for Multer
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, dir_name);
+    },
+    filename: (req, file, cb) => {
+        cb(null, 'avatar-' + req.params.username + '.' + file.originalname.split('.').pop());
+    },
+});
+
+// Multer Filter
+const multerFilter = (req, file, cb) => {
+    let extension = file.originalname.split('.').pop();
+    console.log(extension);
+    // Get only file image
+    if (extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
+        cb(null, true);
+    } else {
+        cb(new Error('File type not allowed'), false);
+    }
+};
+
+// Upload file
+const upload = multer({
+    storage: multerStorage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // save maximum size 5MB
+    fileFilter: multerFilter
+});
 
 class AdminController {
 
@@ -81,6 +111,13 @@ class AdminController {
         });
     }
 
+    customer_create(req, res, next) {
+        res.render('admin/customers/customer_create', {
+            title: 'Create New Customer',
+            layout: 'admin-main'
+        });
+    }
+
     async customer_edit(req, res, next) {
         const username = req.params.username;
         const filter = { username: username };
@@ -91,21 +128,39 @@ class AdminController {
                     title: 'Edit Customer',
                     layout: 'admin-main',
                     customer: customer
-            });
+            })
         });
     }
 
     async update_customer(req, res, next) {
         const username = req.params.username;
         const filter = { username: username };
-        req.body.updated_at = new Date();
+
+        upload.single('file_upload')(req, res, async (err) => {
+            if (err) {
+                if (err.message === 'File too large') {
+                    req.flash('error', 'File upload không được lớn hơn 5MB!');
+                    res.redirect('/admin/customer/update/' + username);
+                } else if (err.message === 'File type not allowed') {
+                    req.flash('error', 'File upload không đúng định dạng!');
+                    res.redirect('/admin/customer/update/' + username);
+                }
+            }
+    
+            if (req.file !== undefined) {
+                let image = 'avatar-' + username + '.' + req.file.filename.split('.').pop();
+                req.body.avatar = image;
+            }
+            
+            req.body.updated_at = new Date();
+    
+            await User.findOneAndUpdate(filter, req.body, { new: true }).exec()
+                .then(customer => {
+                    req.flash('success', 'Cập nhật thông tin thành công!');
+                    res.redirect('/admin/customer');
+                });
+        })
         
-        
-        await User.findOneAndUpdate(filter, req.body, { new: true }).exec()
-            .then(customer => {
-                req.flash('success', 'Cập nhật thông tin thành công!');
-                res.redirect('/admin/customer');
-            });
     }
 }
 

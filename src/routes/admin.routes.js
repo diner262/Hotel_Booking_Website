@@ -4,7 +4,6 @@ var { ensureAuth, forwardAuth } = require('../middlewares/authAdmin');
 var { validateLogin, handleLoginAdmin } = require('../middlewares/validateForm');
 var adminController = require('../controllers/adminController');
 
-
 // router.get('/profile/:id',adminController.profile);
 
 router.post('/login', validateLogin(), handleLoginAdmin, adminController.authenticateLogin);
@@ -14,9 +13,8 @@ router.get('/logout', adminController.logout);
 
 router.get('/customer', ensureAuth, adminController.customer_manage);
 router.get('/customer/:username', ensureAuth, adminController.customer_detail);
-router.get('/customer/edit/:username', ensureAuth, adminController.customer_edit);
-router.post('/customer/edit/:username', ensureAuth, adminController.update_customer);
-
+router.get('/customer/update/:username', ensureAuth, adminController.customer_edit);
+router.post('/customer/update/:username', ensureAuth, adminController.update_customer);
 
 router.get('/room', ensureAuth, adminController.room_manage);
 router.get('/order', ensureAuth, adminController.order_manage);

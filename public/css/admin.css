@@ -690,7 +690,7 @@ table.table td i {
 
 /* Customer Form */
 .account-settings .user-profile {
-    margin: 0 0 0 0;
+    margin: 0 0 1rem 0;
     text-align: center;
 }
 
@@ -701,13 +701,29 @@ table.table td i {
 .account-settings .user-avatar .image-area {
     position: relative;
     cursor: pointer;
-    width: 180px;
-    height: 180px;
-    max-width: 180px;
-    max-height: 180px;
+    width: 220px;
+    height: 220px;
+}
+
+.account-settings .user-avatar .image-thumnail {
+    position: relative;
+    cursor: pointer;
+    width: 220px;
+    height: 220px;
+    background-color: #e7e7e7;
 }
 
 .account-settings .user-avatar .image-area img {
+    position: absolute;
+    min-height: 220px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.account-settings .user-avatar .image-thumnail img {
     position: absolute;
     top: 50%;
     left: 50%;

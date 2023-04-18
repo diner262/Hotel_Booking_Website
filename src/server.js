@@ -48,14 +48,15 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static('public'));
 app.use('/admin/customer', express.static('public'));
-app.use('/admin/customer/edit', express.static('public'));
+app.use('/admin/customer/update', express.static('public'));
+
 
 
 // session middleware

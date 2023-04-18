@@ -10,10 +10,12 @@
             </div>
         </div>
         <div class="col-sm-6 d-flex align-items-center justify-content-end">
-            <a href="./" class="btn btn-secondary d-flex align-items-center rounded mx-1">
+            <a href="./" class="btn btn-secondary d-flex align-items-center rounded mx-1"
+                data-toggle="tooltip" title="Quay về trang quản lý">
                 <i class="fas fa-chevron-circle-left me-2"></i><span>Quay lại</span>
             </a>
-            <a href="./edit/{{ customer.username }}" class="btn btn-warning d-flex align-items-center rounded mx-1 text-white">
+            <a href="./update/{{ customer.username }}" class="btn btn-warning d-flex align-items-center rounded mx-1 text-white"
+                data-toggle="tooltip" title="Cập nhật thông tin">
                 <i class="fas fa-user-edit me-2"></i><span>Cập nhật</span>
             </a>
         </div>
@@ -27,7 +29,7 @@
                         <div class="user-profile">
                             <div class="user-avatar">
                                 <div class="image-area rounded-circle mx-auto" id="image-area">
-                                    <img id="imageResult" src="/img/avatar/default-user.jpg" alt=""
+                                    <img id="imageResult" src="uploads/avatar/{{ customer.avatar }}" alt=""
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -55,7 +57,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="gender">Giới tính</label>
                                 <select class="form-select" id="gender" name="gender" disabled>
-                                    <option value="">None</option>
+                                    <option value=""></option>
                                     <option value="Nam"> Nam </option>
                                     <option value="Nữ"> Nữ </option>
                                 </select>
@@ -79,21 +81,21 @@
                             <label class="form-label" for="datepicker">Ngày sinh</label>
                             <div class="input-group">
                                 <span class="eye eye-user input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                <input type="text" class="form-control" id="datepicker" name="birthday" disabled
+                                <input type="text" class="form-control" id="datepicker" name="birthday" placeholder="dd/mm/yyyy" disabled
                                     value="{{ birthday }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="phone">Số điện thoại</label>
-                                <input type="text" class="form-control" id="phone" name="phone" disabled
+                                <input type="number" class="form-control" id="phone" name="phone" disabled
                                     value="{{ phone }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="mb-3">
                                 <label class="form-label" for="id_card">CMND/CCCD</label>
-                                <input type="text" class="form-control" id="id_card" name="id_card" disabled
+                                <input type="number" class="form-control" id="id_card" name="id_card" disabled
                                     value="{{ id_card }}">
                             </div>
                         </div>
@@ -113,6 +115,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="country">Quốc gia</label>
                                 <select class="form-select" id="country" name="country" disabled>
+                                    <option selected></option>
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Åland Islands">Åland Islands</option>
                                     <option value="Albania">Albania</option>

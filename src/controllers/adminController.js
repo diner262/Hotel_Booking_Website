@@ -98,6 +98,8 @@ class AdminController {
     async update_customer(req, res, next) {
         const username = req.params.username;
         const filter = { username: username };
+        req.body.updated_at = new Date();
+        
         
         await User.findOneAndUpdate(filter, req.body, { new: true }).exec()
             .then(customer => {

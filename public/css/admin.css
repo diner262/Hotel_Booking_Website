@@ -690,45 +690,53 @@ table.table td i {
 
 /* Customer Form */
 .account-settings .user-profile {
-    margin: 0 0 1rem 0;
-    padding-bottom: 1rem;
+    margin: 0 0 0 0;
     text-align: center;
 }
 
-/* .account-settings .user-profile .user-avatar {
+.account-settings .user-profile .user-avatar {
     margin: 0 0 1rem 0;
 }
 
-.account-settings .user-profile .user-avatar img {
-    width: 90px;
-    height: 90px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-} */
+.account-settings .user-avatar .image-area {
+    position: relative;
+    cursor: pointer;
+    width: 180px;
+    height: 180px;
+    max-width: 180px;
+    max-height: 180px;
+}
 
-.account-settings .user-profile h5.user-name {
+.account-settings .user-avatar .image-area img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.account-settings .user-profile h5 {
     margin: 0 0 0.5rem 0;
 }
 
-.account-settings .user-profile h6.user-email {
+.account-settings .user-profile h6 {
     margin: 0;
     font-size: 0.8rem;
     font-weight: 400;
     color: #9fa8b9;
 }
 
-.account-settings .about {
+.account-settings {
     margin: 2rem 0 0 0;
     text-align: center;
 }
 
-.account-settings .about h5 {
+.account-settings h5 {
     margin: 0 0 15px 0;
     color: #007ae1;
 }
 
-.account-settings .about p {
+.account-settings p {
     font-size: 0.825rem;
 }
 
@@ -750,3 +758,22 @@ table.table td i {
     border: 0;
     margin-bottom: 1rem;
 }
+
+/* Upload image */
+#upload {
+    opacity: 0;
+}
+
+
+/* .image-area::before {
+    content: 'Uploaded image result';
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+} */

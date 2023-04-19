@@ -15,6 +15,7 @@ router.get('/customer', ensureAuth, adminController.customer_manage);
 router.get('/customer/:username', ensureAuth, adminController.customer_detail);
 router.get('/customer/update/:username', ensureAuth, adminController.customer_edit);
 router.post('/customer/update/:username', ensureAuth, adminController.update_customer);
+router.delete('/customer/delete/:id', ensureAuth, adminController.delete_customer);
 
 router.get('/room', ensureAuth, adminController.room_manage);
 router.get('/order', ensureAuth, adminController.order_manage);

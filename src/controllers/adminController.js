@@ -34,6 +34,7 @@ const upload = multer({
 
 class AdminController {
 
+    // Đăng nhập, đăng xuất tài khoản
     login(req, res, next) {
         res.render('admin/login', {
             title: 'Login Dashboard',
@@ -61,6 +62,7 @@ class AdminController {
         });
     }
 
+    // Trang điều khiển
     dashboard(req, res, next) {
         res.render('admin/dashboard', {
             title: 'Dashboard',
@@ -69,6 +71,7 @@ class AdminController {
         });
     }
 
+    // Trang quản lý phòng
     room_manage(req, res, next) {
         res.render('admin/room_manage', {
             title: 'Manage Room',
@@ -76,6 +79,7 @@ class AdminController {
         });
     }
 
+    // Trang quản lý đơn hàng
     order_manage(req, res, next) {
         res.render('admin/order_manage', {
             title: 'Manage Order',
@@ -83,6 +87,7 @@ class AdminController {
         });
     }
 
+    // Trang quản lý thông tin khách hàng
     async customer_manage(req, res, next) {
         await User.find({ role: 'client' }).exec()
             .then(customers => {
@@ -91,9 +96,6 @@ class AdminController {
                     layout: 'admin-main',
                     customers: customers,
                 });
-            })
-            .catch(err => {
-                return next(err);
             });
     }
 
@@ -111,13 +113,6 @@ class AdminController {
         });
     }
 
-    customer_create(req, res, next) {
-        res.render('admin/customers/customer_create', {
-            title: 'Create New Customer',
-            layout: 'admin-main'
-        });
-    }
-
     async customer_edit(req, res, next) {
         const username = req.params.username;
         const filter = { username: username };
@@ -128,7 +123,7 @@ class AdminController {
                     title: 'Edit Customer',
                     layout: 'admin-main',
                     customer: customer
-            })
+            });
         });
     }
 
@@ -156,11 +151,29 @@ class AdminController {
     
             await User.findOneAndUpdate(filter, req.body, { new: true }).exec()
                 .then(customer => {
-                    req.flash('success', 'Cập nhật thông tin thành công!');
+                    req.flash('success', 'Cập nhật thông tin khách hàng thành công!');
+                    res.redirect('/admin/customer');
+                })
+                .catch(err => {
+                    req.flash('error', 'Cập nhật thông tin khách hàng thất bại!');
                     res.redirect('/admin/customer');
                 });
         })
-        
+    }
+
+    async delete_customer(req, res, next) {
+        const id = req.params.id;
+        const filter = { _id: id };
+
+        await User.findOneAndDelete(filter).exec()
+            .then(() => {
+                req.flash('success', 'Xóa thông tin khách hàng thành công!');
+                res.sendStatus(200);
+            })
+            .catch(err => {
+                req.flash('error', 'Xóa thông tin khách hàng thất bại!');
+                res.sendStatus(500);
+            })
     }
 }
 

@@ -24,7 +24,7 @@
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <!-- Notification -->
                 <li class="nav-item mx-1">
-                    <a aria-expanded="false" class="nav-link notifications me-3 me-lg-0 ">
+                    <a aria-expanded="false" class="nav-link notifications me-3 me-lg-0" href="#">
                         <i class="fas fa-bell text-muted"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">1</span>
                     </a>
@@ -32,7 +32,7 @@
 
                 <!-- Message -->
                 <li class="nav-item mx-1">
-                    <a aria-expanded="false" class="nav-link messages me-3 me-lg-0 ">
+                    <a aria-expanded="false" class="nav-link messages me-3 me-lg-0" href="#">
                         <i class="fas fa-envelope text-muted"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">1</span>
                     </a>
@@ -73,7 +73,7 @@
 
                         <li class="dropdown-divider"></li>
                         <li>
-                            <a href="./logout" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+                            <a href="/admin/logout" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
                         </li>
 
                     </ul>
@@ -92,13 +92,13 @@
     <div class="position-sticky p-3 mb-4">
         <div class="list-group list-group-flush mb-3">
             <a aria-current="true" class="list-group-item list-group-item-action py-2 ripple active" id="dashboard"
-                href="dashboard">
+                href="/admin/dashboard">
                 <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Trang điều khiển</span></a>
         </div>
 
         <h6 class="text-uppercase mb-3">Quản lý tài khoản</h6>
         <div class="list-group list-group-flush mb-3">
-            <a class="list-group-item list-group-item-action py-2 ripple" id="customer" href="customer">
+            <a class="list-group-item list-group-item-action py-2 ripple" id="customers" href="/admin/customers">
                 <i class="fas fa-users fa-fw me-3"></i><span>Khách hàng</span></a>
 
             <a class="list-group-item list-group-item-action py-2 ripple" id="role" href="#">
@@ -110,7 +110,7 @@
             <a class="list-group-item list-group-item-action py-2 ripple" id="room_type" href="#">
                 <i class="fas fa-tags fa-fw me-3"></i><span>Loại phòng</span></a>
 
-            <a class="list-group-item list-group-item-action py-2 ripple" id="room" href="room">
+            <a class="list-group-item list-group-item-action py-2 ripple" id="rooms" href="/admin/rooms">
                 <i class="fas fa-hotel fa-fw me-3"></i><span>Phòng</span></a>
 
             <a class="list-group-item list-group-item-action py-2 ripple" id="service" href="#">
@@ -119,7 +119,7 @@
 
         <h6 class="text-uppercase mb-3">Quản lý đơn phòng</h6>
         <div class="list-group list-group-flush mb-3">
-            <a class="list-group-item list-group-item-action py-2 ripple" id="order" href="order">
+            <a class="list-group-item list-group-item-action py-2 ripple" id="orders" href="/admin/orders">
                 <i class="fas fa-tasks fa-fw me-3"></i><span>Quản lý đặt phòng</span></a>
         </div>
 
@@ -132,7 +132,7 @@
                 <i class="fas fa-lock fa-fw me-3"></i><span>Mật khẩu</span></a>
 
             <a class="list-group-item list-group-item-action py-2 ripple" id="cal" href="#">
-                <i class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a>
+                <i class="fas fa-calendar fa-fw me-3"></i><span>Lịch</span></a>
         </div>
     </div>
 </nav>
@@ -141,10 +141,17 @@
 <script>
     function setActiveMenu() {
         const currentPage = window.location.pathname.split('/').pop().split('.')[0];
+        const customerPage =  window.location.pathname.split('/').indexOf('customers') > -1;
+        const roomPage =  window.location.pathname.split('/').indexOf('rooms') > -1;
+
         const menuItems = document.querySelectorAll('.sidebar a');
 
         for (const item of menuItems) {
             if (item.id === currentPage) {
+                item.classList.add('active');
+            } else if (item.id === 'customers' && customerPage) {
+                item.classList.add('active');
+            } else if (item.id === 'rooms' && roomPage) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');

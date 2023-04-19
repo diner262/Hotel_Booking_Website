@@ -25,6 +25,10 @@ var userSchema = mongoose.Schema({
         type: Boolean,
         require: false
     },
+    fullname: {
+        type: String,
+        require: false
+    },
     phone: {
         type: String,
         require: false
@@ -42,6 +46,14 @@ var userSchema = mongoose.Schema({
         require: false
     },
     id_card: {
+        type: String,
+        require: false
+    },
+    country: {
+        type: String,
+        require: false
+    },
+    city: {
         type: String,
         require: false
     },

@@ -6,7 +6,7 @@ const ensureAuth = (req, res, next) => {
 }
 
 const forwardAuth = (req, res, next) => {
-    if (!req.isAuthenticated() || req.user.role !== 'client') {
+    if (!req.isAuthenticated() || req.user.role !== 'admin') {
         return next();
     }
     res.redirect('/admin/dashboard');

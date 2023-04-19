@@ -1,8 +1,12 @@
 var createError = require('http-errors');
 var express = require('express');
 var session = require('express-session');
-var hbs  = require('express-handlebars');
+
+var hbs = require('express-handlebars');
+var Handlebars = require('handlebars')
+
 var passport = require('passport');
+var {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 var path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './.env') });
@@ -26,15 +30,13 @@ var app = express();
 app.set('views', path.join(__dirname, '/resources/views'));
 
 app.engine('hbs', hbs.engine({
+  handlebars: allowInsecurePrototypeAccess(Handlebars),
   defaultLayout: 'main',
   extname: '.hbs',
   helpers: {
     json: function (context) { 
         return JSON.stringify(context);
     },
-    ifeq: function (val1, val2) {
-        return (val1 === val2);
-    }, 
     eq: function (a, b, options) {
       if (a === b) {
         return options.fn(this);
@@ -49,19 +51,31 @@ app.engine('hbs', hbs.engine({
         return 'Quản trị viên';
       }
       return role;
-    }
+    },
+    ifeq: function(arg1, arg2, options) {
+      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    },
+    no1: function (val) {
+        return val + 1;
+    },
 }
 }))
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static('public'));
+app.use('/admin/customers', express.static('public'));
+app.use('/admin/customers/update', express.static('public'));
+app.use('/admin/rooms/create', express.static('public'));
+
+
+
 
 // session middleware
 app.use(session({

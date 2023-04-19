@@ -4,17 +4,25 @@ var { ensureAuth, forwardAuth } = require('../middlewares/authAdmin');
 var { validateLogin, handleLoginAdmin } = require('../middlewares/validateForm');
 var adminController = require('../controllers/adminController');
 
-
-router.get('/profile/:id',adminController.profile);
+// router.get('/profile/:id',adminController.profile);
 
 router.post('/login', validateLogin(), handleLoginAdmin, adminController.authenticateLogin);
 
 router.get('/login', forwardAuth, adminController.login);
 router.get('/logout', adminController.logout);
 
-router.get('/customer', ensureAuth, adminController.customer_manage);
-router.get('/room', ensureAuth, adminController.room_manage);
-router.get('/order', ensureAuth, adminController.order_manage);
+router.get('/customers', ensureAuth, adminController.customer_manage);
+router.get('/customers/:username', ensureAuth, adminController.customer_detail);
+router.get('/customers/update/:username', ensureAuth, adminController.customer_edit);
+router.post('/customers/update/:username', ensureAuth, adminController.update_customer);
+router.delete('/customers/delete/:id', ensureAuth, adminController.delete_customer);
+
+router.get('/rooms', ensureAuth, adminController.room_manage);
+router.get('/rooms/create', ensureAuth, adminController.room_create);
+router.post('/rooms/create', ensureAuth, adminController.create_room);
+
+
+router.get('/orders', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);
 
 router.get('/', (req, res) => {

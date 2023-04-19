@@ -1,29 +1,50 @@
-<h1>Manage Room</h1>
+
 <div class="container-xl">
-    <div class="table-responsive">
+    <div class="row">
+        <div class="col-sm-6 d-flex align-items-center">
+            <div class="btn shadow p-3 mb-4 bg-body rounded">
+                <img class="img-flud" style="max-height: 36px;" src="img/icons/icons8-room-64.png">
+            </div>
+            <div class="px-4">
+                <h5>Quản lý phòng khách sạn</h5>
+                <p class="text-muted">View, create, update, delete and manage</p>
+            </div>
+        </div>
+        <div class="col-sm-6 d-flex align-items-center justify-content-end">
+            <a href="#" class="btn btn-primary d-flex align-items-center rounded mx-1">
+                <i class="material-icons me-2">&#xE24D;</i><span>Xuất file Excel</span>
+            </a>
+            <a href="rooms/create" class="btn btn-primary d-flex align-items-center rounded mx-1">
+                <i class="material-icons me-2">&#xE147;</i><span>Thêm mới</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="table-responsive shadow rounded">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-5">
-                        <h2>Room <b>Management</b></h2>
+                    <div class="col-sm-8">
+                        <h2>Danh sách <b>phòng khách sạn</b></h2>
                     </div>
-                    <div class="col-sm-7">
-                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New
-                                User</span></a>
-                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to
-                                Excel</span></a>
+                    <div class="col-sm-4">
+                        <div class="search-box">
+                            <i class="material-icons">&#xE8B6;</i>
+                            <input type="text" class="form-control" id="searchInput" onkeyup="searchBox()"
+                                placeholder="Search&hellip;">
+                        </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="myTable">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Date Created</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th onclick="sortBy(0)">No.<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(1)">Tên phòng<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(2)">Loại phòng<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(3)">Giá<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(4)">Tình trạng<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(5)">Hành động<i class="fa fa-sort"></i></th>
                     </tr>
                 </thead>
                 <tbody>

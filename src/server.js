@@ -54,8 +54,10 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', express.static('public'));
-app.use('/admin/customer', express.static('public'));
-app.use('/admin/customer/update', express.static('public'));
+app.use('/admin/customers', express.static('public'));
+app.use('/admin/customers/update', express.static('public'));
+app.use('/admin/rooms/create', express.static('public'));
+
 
 
 

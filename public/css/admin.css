@@ -614,6 +614,10 @@ table.table-striped.table-hover tbody tr:hover {
     background: #f5f5f5;
 }
 
+table.table th{
+    cursor:pointer;
+}
+
 table.table th i {
     font-size: 13px;
     margin: 0 5px;
@@ -728,17 +732,6 @@ table.table td i {
     left: 50%;
     transform: translate(-50%, -50%);
     object-fit: cover;
-}
-
-.account-settings .user-profile h5 {
-    margin: 0 0 0.5rem 0;
-}
-
-.account-settings .user-profile h6 {
-    margin: 0;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: #9fa8b9;
 }
 
 .account-settings {
@@ -885,4 +878,47 @@ table.table td i {
 .modal-confirm .btn-danger:hover,
 .modal-confirm .btn-danger:focus {
     background: #ee3535;
+}
+
+
+/* Room Form */
+.room-settings .room-profile {
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.room-settings .room-profile .room-avatar {
+    margin: 0 0 1rem 0;
+}
+
+.room-settings .room-avatar .image-area {
+    position: relative;
+    cursor: pointer;
+    width: 420px;
+    height: 220px;
+}
+
+.room-settings .room-avatar .image-thumnail {
+    position: relative;
+    cursor: pointer;
+    width: 420px;
+    height: 220px;
+    background-color: #e7e7e7;
+}
+
+.room-settings .room-avatar .image-area img {
+    position: absolute;
+    max-height: 220px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.room-settings .room-avatar .image-thumnail img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
 }

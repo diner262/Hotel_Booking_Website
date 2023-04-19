@@ -98,7 +98,7 @@
 
         <h6 class="text-uppercase mb-3">Quản lý tài khoản</h6>
         <div class="list-group list-group-flush mb-3">
-            <a class="list-group-item list-group-item-action py-2 ripple" id="customer" href="/admin/customer">
+            <a class="list-group-item list-group-item-action py-2 ripple" id="customers" href="/admin/customers">
                 <i class="fas fa-users fa-fw me-3"></i><span>Khách hàng</span></a>
 
             <a class="list-group-item list-group-item-action py-2 ripple" id="role" href="#">
@@ -110,7 +110,7 @@
             <a class="list-group-item list-group-item-action py-2 ripple" id="room_type" href="#">
                 <i class="fas fa-tags fa-fw me-3"></i><span>Loại phòng</span></a>
 
-            <a class="list-group-item list-group-item-action py-2 ripple" id="room" href="/admin/room">
+            <a class="list-group-item list-group-item-action py-2 ripple" id="rooms" href="/admin/rooms">
                 <i class="fas fa-hotel fa-fw me-3"></i><span>Phòng</span></a>
 
             <a class="list-group-item list-group-item-action py-2 ripple" id="service" href="#">
@@ -119,7 +119,7 @@
 
         <h6 class="text-uppercase mb-3">Quản lý đơn phòng</h6>
         <div class="list-group list-group-flush mb-3">
-            <a class="list-group-item list-group-item-action py-2 ripple" id="order" href="/admin/order">
+            <a class="list-group-item list-group-item-action py-2 ripple" id="orders" href="/admin/orders">
                 <i class="fas fa-tasks fa-fw me-3"></i><span>Quản lý đặt phòng</span></a>
         </div>
 
@@ -141,15 +141,19 @@
 <script>
     function setActiveMenu() {
         const currentPage = window.location.pathname.split('/').pop().split('.')[0];
-        const customerPage =  window.location.pathname.split('/').indexOf('customer') > -1;
+        const customerPage =  window.location.pathname.split('/').indexOf('customers') > -1;
+        const roomPage =  window.location.pathname.split('/').indexOf('rooms') > -1;
+
         const menuItems = document.querySelectorAll('.sidebar a');
 
         for (const item of menuItems) {
             if (item.id === currentPage) {
                 item.classList.add('active');
-            } else if (item.id === 'customer' && customerPage) {
+            } else if (item.id === 'customers' && customerPage) {
                 item.classList.add('active');
-            }else {
+            } else if (item.id === 'rooms' && roomPage) {
+                item.classList.add('active');
+            } else {
                 item.classList.remove('active');
             }
         }

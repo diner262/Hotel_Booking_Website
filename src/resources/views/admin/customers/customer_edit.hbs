@@ -44,11 +44,11 @@
                                     
                                         <div class="image-thumnail rounded-circle mx-auto" id="thumnail-area"
                                             onclick="document.getElementById('upload').click();">
-                                            <img src="img/photo.png" width="64px" height="64px" id="thumnail" alt="" class="img-fluid">
+                                            <img src="img/icons/photo.png" width="64px" height="64px" id="thumnail" alt="" class="img-fluid">
                                         </div>
                                     {{/if}}
                                 </div>
-                                <h6>Click on the image to changed</p>
+                                <h6>Click vào để thay đổi ảnh</p>
                             </div>
 
                             <!-- Uploaded image area-->
@@ -66,14 +66,14 @@
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="fullName">Họ và tên</label>
+                                    <label class="form-label" for="fullName">Họ và Tên</label>
                                     <input type="text" class="form-control" id="fullName" name="fullname" 
                                         value="{{ fullname }}">
                                 </div>
                             </div>
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="gender">Giới tính</label>
+                                    <label class="form-label" for="gender">Giới Tính</label>
                                     <select class="form-select" id="gender" name="gender">
                                         <option selected></option>
                                         <option value="Nam"> Nam </option>
@@ -83,29 +83,29 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="username">Tên tài khoản</label>
-                                    <input type="text" class="form-control" id="username" name="username" disabled 
+                                    <label class="form-label" for="username">Tên Tài Khoản</label>
+                                    <input type="text" class="form-control" id="username" name="username" disabled readonly 
                                         value="{{ username }}">
                                 </div>
                             </div>
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                                 <div class="mb-3">
                                     <label class="form-label" for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" disabled 
+                                    <input type="email" class="form-control" id="email" name="email" disabled readonly 
                                         value="{{ email }}">
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 mb-3">
-                                <label class="form-label" for="datepicker">Ngày sinh</label>
+                                <label class="form-label" for="datepicker">Ngày Sinh</label>
                                 <div class="input-group">
-                                    <span class="eye eye-user input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                     <input type="text" class="form-control" id="datepicker" name="birthday" placeholder="dd/mm/yyyy"
                                         value="{{ birthday }}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="phone">Số điện thoại</label>
+                                    <label class="form-label" for="phone">Số Điện Thoại</label>
                                     <input type="number" class="form-control" id="phone" name="phone" 
                                         value="{{ phone }}">
                                 </div>
@@ -125,14 +125,14 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="address">Địa chỉ</label>
+                                    <label class="form-label" for="address">Địa Chỉ</label>
                                     <input type="name" class="form-control" id="address" name="address" 
                                         value="{{ address }}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="country">Quốc gia</label>
+                                    <label class="form-label" for="country">Quốc Gia</label>
                                     <select class="form-select" id="country" name="country">
                                         <option selected></option>
                                         <option value="Afghanistan">Afghanistan</option>
@@ -384,7 +384,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="city">Thành phố</label>
+                                    <label class="form-label" for="city">Thành Phố</label>
                                     <input type="text" class="form-control" id="city" name="city" 
                                         value="{{ city }}">
                                 </div>

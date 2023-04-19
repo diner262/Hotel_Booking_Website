@@ -28,20 +28,20 @@
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
                             <input type="text" class="form-control" id="searchInput" onkeyup="searchBox()"
-                                placeholder="Tìm kiếm&hellip;">
+                                placeholder="Search&hellip;">
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-hover table-bordered" id="myTable">
+            <table class="table table-striped table-hover table-bordered" id="myTable">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Tài khoản<i class="fa fa-sort"></i></th>
-                        <th>Họ và tên <i class="fa fa-sort"></i></th>
-                        <th>Địa chỉ</th>
-                        <th>Số điện thoại<i class="fa fa-sort"></i></th>
-                        <th>Giới tính </th>
+                        <th onclick="sortBy(0)">No.<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(1)">Tài khoản<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(2)">Họ và tên<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(3)">Địa chỉ<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(4)">Số điện thoại<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(5)">Giới tính<i class="fa fa-sort"></i></th>
                         <th>Actions</th>
                     </tr>
                 </thead>

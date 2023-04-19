@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-6 d-flex align-items-center">
             <a class="btn shadow p-3 mb-4 bg-body rounded" href="#">
-                <img class="img-flud" style="max-height: 26px;" src="./img/icons8-user-64.png">
+                <img class="img-flud" style="max-height: 26px;" src="img/icons/icons8-user-64.png">
             </a>
             <div class="px-4">
                 <h5>Thông tin chi tiết khách hàng</h5>
@@ -27,12 +27,21 @@
                 <div class="card-body">
                     <div class="account-settings">
                         <div class="user-profile">
+                            {{#if customer.avatar}}
                             <div class="user-avatar">
                                 <div class="image-area rounded-circle mx-auto" id="image-area">
-                                    <img id="imageResult" src="uploads/avatar/{{ customer.avatar }}" alt=""
+                                    <img id="imageResult" src="uploads/avatar/{{#ifeq customer.avatar ""}} default-user.jpg {{/ifeq}}{{customer.avatar}}"
+                                        alt="Avatar Customer" class="img-fluid">
+                                </div>
+                            </div>
+                            {{else}}
+                            <div class="user-avatar">
+                                <div class="image-area rounded-circle mx-auto" id="image-area">
+                                    <img id="imageResult" src="uploads/avatar/default-user.jpg" alt="Avatar Customer"
                                         class="img-fluid">
                                 </div>
                             </div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>

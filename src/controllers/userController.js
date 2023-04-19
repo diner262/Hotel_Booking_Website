@@ -1,7 +1,6 @@
 const asyncHandler = require('express-async-handler')
-const User = require('../models/userModel')
-const generateToken = require("../config/generateToken")
-
+const User = require('../models/user.model')
+//const generateToken = require("../config/generateToken")
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, avatar } = req.body
@@ -79,11 +78,71 @@ const allUser = asyncHandler(async (req, res) => {
     const users = await User.find(keyword).find({ _id: { $ne: req.user._id } })
     res.send(users)
 })
+
 class userController {
     profile(req, res, next) {
-        res.render('client/profile', { layout: "main", title: "Profile User" });
+        allUser.findOne({ _id: req.params.id }).then((user) => {
+        }).catch((err) => {
+            console.log(err);
+        });
+        res.render('client/profile', {
+            title: 'Profile User',
+            layout: 'main'
+        });
+    }
+    async updateUser(req, res) {
+        try {
+            const username = req.params.username;
+            const { phone, birthday, gender, address } = req.body;
+            const user = await User.findOneAndUpdate({ username: username }, { phone, birthday, gender, address }, { new: true });
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            } else {
+                // res.redirect('/profile/' + username);
+                // // res.send(user); // commented out to avoid sending multiple responses
+                res.json({message: "Update success"} );
+            }
+        } catch (error) {
+            console.log("Error:", error);
+            res.status(500).json({ error: "Server error" });
+        }
+    }
+
+
+    async getUserByUN(req, res) {
+        try {
+            const username = req.params.username;
+            const user = await User.findOne({ username: username });
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            }
+            // console.log("Thong tin user: "+user);
+            else {
+                res.render('client/profile', {
+                    title: 'Profile User',
+                    layout: 'main',
+                    username: user.username,
+                    birthday: user.birthday,
+                    address: user.address,
+                    gender: user.gender,
+                    email: user.email,
+                    phone: user.phone,
+                    role: user.role,
+                    password: user.password,
+                });
+            }
+            // res.json(user); 
+        } catch (error) {
+            console.log("Error:", error);
+            res.status(500).json({ error: "Server error" });
+        }
     }
 
 }
-module.exports = new userController;
-module.exports = { registerUser, LoginUser, allUser }
+
+module.exports = {
+    registerUser,
+    LoginUser,
+    allUser,
+    userController: new userController(),
+};

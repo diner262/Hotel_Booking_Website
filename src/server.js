@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var session = require('express-session');
-var hbs = require('express-handlebars');
+var hbs  = require('express-handlebars');
 var passport = require('passport');
 
 var path = require('path');
@@ -14,7 +14,6 @@ var flash = require('connect-flash');
 // var cors = require('cors')
 
 var indexRouter = require('./routes/index.routes');
-
 
 // connect mongoose db
 var mongodb = require('./config/connectionConfig');
@@ -35,6 +34,21 @@ app.engine('hbs', hbs.engine({
     },
     ifeq: function (val1, val2) {
         return (val1 === val2);
+    }, 
+    eq: function (a, b, options) {
+      if (a === b) {
+        return options.fn(this);
+      }
+      return options.inverse(this);
+    },
+    roleLabel: function (role) {
+      if (role === 'client') {
+        return 'Khách hàng';
+      }
+      else if (role === 'admin') {
+        return 'Quản trị viên';
+      }
+      return role;
     }
 }
 }))

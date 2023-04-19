@@ -1,14 +1,11 @@
 var express = require('express');
-const adminController = require('../controllers/adminController');
-
+const { userController } = require('../controllers/userController');
 var router = express.Router();
 
-router.get('/:id', function (req, res, next) {
-  res.render('client/profile', { layout: "main", title: "Profile User" });
-});
 
-// router.get('/:id', function (req, res, next) {
-//   res.render('detail', { title: 'Detail', id: req.params.id });
-// });
+router.get('/:username', userController.getUserByUN);
+
+router.post('/update/:username', userController.updateUser);
+router.get('/update/:username', userController.updateUser);
 
 module.exports = router;

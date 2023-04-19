@@ -60,3 +60,4 @@ var userSchema = mongoose.Schema({
 })
 
 module.exports = mongoose.model('_user', userSchema, 'user');
+// module.exports = mongoose.model('User', userSchema);

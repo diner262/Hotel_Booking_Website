@@ -45,7 +45,7 @@
                             <a href="/admin/dashboard" class="dropdown-item text-muted"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
+                            <a href="" id="profileHref" data-username="{{currentUser.username}}" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item text-muted"><i class="fas fa-sliders-h me-2"></i> Cài đặt</a>
@@ -67,10 +67,15 @@
     $(document).ready(function () {
     {{#with currentUser}}
         const currentUser = {{{json this }}};
+        const profileLink = document.getElementById('profileHref');
+        profileLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = `/profile/${currentUser.username}`;
+        });
         console.log(currentUser.username);
         const username = document.getElementById('currentUser');
         username.innerHTML = currentUser.username;
-
+        
         if (currentUser.role === 'admin') {
             const dashboard = document.getElementById('dashboard');
             dashboard.style.display = 'block';

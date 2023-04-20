@@ -22,7 +22,7 @@ router.get('/rooms/create', ensureAuth, adminController.room_create);
 router.post('/rooms/create', ensureAuth, adminController.create_room);
 router.get('/rooms/update/:room_code', ensureAuth, adminController.room_edit);
 router.post('/rooms/update/:room_code', ensureAuth, adminController.update_room);
-
+router.delete('/rooms/delete/:id', ensureAuth, adminController.delete_room);
 
 router.get('/orders', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);

@@ -173,10 +173,12 @@ class AdminController {
 
     async delete_customer(req, res, next) {
         const id = req.params.id;
-        const filter = { _id: id };
 
-        await User.findOneAndDelete(filter).exec()
-            .then(() => {
+        await User.findByIdAndDelete(id).exec()
+            .then((user) => {
+                if (user.avatar !== undefined) {
+                    fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/avatar/') + '/' + user.avatar);
+                }
                 req.flash('success', 'Xóa thông tin khách hàng thành công!');
                 res.sendStatus(200);
             })
@@ -341,23 +343,22 @@ class AdminController {
             }
         })
     }
-}
 
-function getRoomCode(roomFloor) {
-    const roomCodeExists = new Array();
-    const rooms = Room.find().exec();
-
-    for (let i = 0; i < rooms.length; i++) {
-        if (rooms[i].floor == roomFloor) {
-            roomCodeExists.push(rooms[i].room_code);
-        }
-    }
-    
-    const len = roomCodeExists.length;
-    if (roomCodeExists.length > 0) {
-        return Number(roomCodeExists[len - 1]) + 1;
-    } else {
-        return roomFloor + 0 + 1;
+    async delete_room(req, res, next) {
+        const id = req.params.id;
+        await Room.findByIdAndDelete(id).exec()
+            .then((room) => {
+                if (room.thumbnail !== undefined) {
+                    fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '/' + room.thumbnail);
+                }
+                req.flash('success', 'Xóa thông tin phòng thành công!');
+                res.sendStatus(200);
+            })
+            .catch(err => {
+                req.flash('error', 'Xóa thông tin phòng thất bại!');
+                res.sendStatus(500);
+            })
+            
     }
 }
 

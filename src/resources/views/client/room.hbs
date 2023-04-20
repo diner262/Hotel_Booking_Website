@@ -45,7 +45,7 @@
                                 class="pt-2px">Xem
                                 chi tiết</span></button></a>
 
-                    <a href="#"><button class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                    <a href="/bookroom"><button class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
                                 class="pt-2px">Đặt ngay</span></button></a>
                 </div>
 
@@ -97,7 +97,7 @@
                                 class="pt-2px">Xem
                                 chi tiết</span></button></a>
 
-                    <a href="#"><button class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                    <a href="bookroom"><button class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
                                 class="pt-2px">Đặt ngay</span></button></a>
                 </div>
             </div>
@@ -441,5 +441,17 @@
         </div>
     </div>
 </div>
-
 </div>
+
+<script>
+    $(document).ready(function() {
+  $('#dat-ngay-button').click(function() {
+    $.ajax({
+      url: 'form.html', // Đường dẫn đến file chứa form
+      success: function(response) {
+        $('#form-container').html(response); // Hiển thị form trên trang web
+      }
+    });
+  });
+});
+</script>

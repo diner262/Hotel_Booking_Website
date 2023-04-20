@@ -32,6 +32,11 @@ class HomeController {
             title: 'Room'
         });
     }
+    bookroom(req, res, next) {
+        res.render('client/bookroom', {
+            title: 'Book now'
+        });
+    }
     
 
     async regiterNewUser(req, res, next) {

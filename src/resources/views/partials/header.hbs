@@ -18,7 +18,7 @@
                 <a class="nav-link" href="/">Trang chủ</a>
             </li>
             <li class="nav-item px-3">
-                <a class="nav-link" href="#about">Giới thiệu</a>
+                <a class="nav-link" href="/home#welcome">Giới thiệu</a>
             </li>
             <li class="nav-item px-3">
                 <a class="nav-link" href="room">Đặt phòng</a>
@@ -44,7 +44,7 @@
                             <a href="/admin/dashboard" class="dropdown-item text-muted"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="" id="profileHref" data-username="{{currentUser.username}}" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
+                            <a href="/profile/{{currentUser.username}}" id="profile" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item text-muted"><i class="fas fa-sliders-h me-2"></i> Cài đặt</a>
@@ -64,17 +64,12 @@
 <script>
     
     $(document).ready(function () {
-    {{#with currentUser}}
-        const currentUser = {{{json this }}};
-        const username = document.getElementById('currentUser');
-        const profileHref = document.getElementById('profileHref');
-        profileHref.href = `/profile/${currentUser.username}`;
-        username.innerHTML = currentUser.username;
-        if (currentUser.role === 'admin') {
-            const dashboard = document.getElementById('dashboard');
-            dashboard.style.display = 'block';
-        }
-    {{/with}}
+        {{#if currentUser}}
+            {{#ifeq currentUser.role 'admin'}}
+                const dashboard = document.getElementById('dashboard');
+                dashboard.style.display = 'block';
+            {{/ifeq}}
+        {{/if}}
     });
 
 </script>

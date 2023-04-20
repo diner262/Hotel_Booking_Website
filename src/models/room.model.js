@@ -13,6 +13,10 @@ var roomSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    floor: {
+        type: Number,
+        require: true
+    },
     price: {
         type: Number,
         require: true

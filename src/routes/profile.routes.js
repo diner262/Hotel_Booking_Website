@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.get('/:username', ensureAuth,userController.getUserByUN);
+router.get('/:username', ensureAuth, userController.getUserByUN);
 
 // router.post('/update/:username', function (req, res) {
 //     const username = req.params.username;

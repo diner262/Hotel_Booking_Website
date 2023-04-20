@@ -1,5 +1,7 @@
 var passport = require('passport');
 var multer = require('multer');
+var fs = require('fs');
+var path = require('path');
 var User = require('../models/user.model');
 var Room = require('../models/room.model');
 
@@ -19,7 +21,7 @@ const multerStorageRoom = multer.diskStorage({
         cb(null, './public/uploads/room');
     },
     filename: (req, file, cb) => {
-        cb(null, 'room-' + req.params.room_name + '.' + file.originalname.split('.').pop());
+        cb(null, file.originalname);
     },
 });
 
@@ -27,7 +29,6 @@ const multerStorageRoom = multer.diskStorage({
 // Multer Filter
 const multerFilter = (req, file, cb) => {
     let extension = file.originalname.split('.').pop();
-    console.log(extension);
     // Get only file image
     if (extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
         cb(null, true);
@@ -172,10 +173,12 @@ class AdminController {
 
     async delete_customer(req, res, next) {
         const id = req.params.id;
-        const filter = { _id: id };
 
-        await User.findOneAndDelete(filter).exec()
-            .then(() => {
+        await User.findByIdAndDelete(id).exec()
+            .then((user) => {
+                if (user.avatar !== undefined) {
+                    fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/avatar/') + '/' + user.avatar);
+                }
                 req.flash('success', 'Xóa thông tin khách hàng thành công!');
                 res.sendStatus(200);
             })
@@ -187,11 +190,15 @@ class AdminController {
 
 
     // Trang quản lý phòng
-    room_manage(req, res, next) {
-        res.render('admin/room_manage', {
-            title: 'Manage Room',
-            layout: 'admin-main'
-        });
+    async room_manage(req, res, next) {
+        await Room.find().exec()
+            .then(rooms => {
+                res.render('admin/room_manage', {
+                    title: 'Manage Room',
+                    layout: 'admin-main',
+                    rooms: rooms,
+                });
+            })
     }
 
     room_create(req, res, next) {
@@ -212,19 +219,146 @@ class AdminController {
                     res.redirect('/admin/rooms/create');
                 }
             }
-            if (req.file !== undefined) {
-                let image = 'room-' + req.params.room_name + '.' + req.file.filename.split('.').pop();
-                req.body.thumbnail = image;
-            }
-    
-            req.body.created_at = new Date();
 
-            const newRoom = new Room(req.body);
-            await newRoom.save().then(() => {
-                req.flash('success', 'Tạo phòng thành công!');
-                res.redirect('/admin/rooms');
-            })
+            const roomFloor = req.body.floor;
+            const roomCodeExists = new Array();
+            const rooms = await Room.find().exec();
+
+            for (let i = 0; i < rooms.length; i++) {
+                if (rooms[i].floor == roomFloor) {
+                    roomCodeExists.push(rooms[i].room_code);
+                }
+            }
+            
+            const len = roomCodeExists.length;
+            if (roomCodeExists.length > 0) {
+                req.body.room_code = Number(roomCodeExists[len - 1]) + 1;
+            } else {
+                req.body.room_code = roomFloor + 0 + 1;
+            }
+            
+            if (req.file !== undefined) {
+                let image = 'room-' + req.body.room_code + '.' + req.file.filename.split('.').pop();
+                req.body.thumbnail = image;
+                req.body.created_at = new Date();
+
+                const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + req.file.filename;
+                const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + image;
+                fs.rename(oldPath, newPath, async(err) => {
+                    if (err) throw err
+                    
+                    const newRoom = new Room(req.body);
+                    await newRoom.save().then(() => {
+                        req.flash('success', 'Tạo phòng thành công!');
+                        res.redirect('/admin/rooms');
+                    })
+                });
+            } else {
+                req.body.created_at = new Date();
+                const newRoom = new Room(req.body);
+                await newRoom.save().then(() => {
+                    req.flash('success', 'Tạo phòng thành công!');
+                    res.redirect('/admin/rooms');
+                })
+            }
         });
+    }
+
+    room_edit(req, res, next) {
+        const room_code = req.params.room_code;
+        const filter = { room_code: room_code };
+
+        Room.findOne(filter).exec()
+            .then(room => {
+                res.render('admin/rooms/room_edit', {
+                    title: 'Edit Room',
+                    layout: 'admin-main',
+                    room: room
+                });
+            })
+    }
+
+    update_room(req, res, next) {
+        const room_code = req.params.room_code;
+        const filter = { room_code: room_code };
+
+        uploadRoom.single('file_upload')(req, res, async (err) => {
+            if (err) {
+                if (err.message === 'File too large') {
+                    req.flash('error', 'File upload không được lớn hơn 5MB!');
+                    res.redirect('/admin/rooms/update/' + room_code);
+                } else if (err.message === 'File type not allowed') {
+                    req.flash('error', 'File upload không đúng định dạng!');
+                    res.redirect('/admin/rooms/update/' + room_code);
+                }
+            }
+
+            const roomFloor = req.body.floor;
+            if (roomFloor != String(room_code)[0]) {
+                const roomCodeExists = new Array();
+                const rooms = await Room.find().exec();
+
+                for (let i = 0; i < rooms.length; i++) {
+                    if (rooms[i].floor == roomFloor) {
+                        roomCodeExists.push(rooms[i].room_code);
+                    }
+                }
+                
+                const len = roomCodeExists.length;
+                if (roomCodeExists.length > 0) {
+                    req.body.room_code = Number(roomCodeExists[len - 1]) + 1;
+                } else {
+                    req.body.room_code = roomFloor + 0 + 1;
+                } 
+            } else {
+                req.body.room_code = room_code;
+            }
+
+            if (req.file !== undefined) {
+                let oldImage = 'room-' + room_code + '.' + req.file.filename.split('.').pop();
+                fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '/' + oldImage);
+                
+                let image = 'room-' + req.body.room_code + '.' + req.file.filename.split('.').pop();
+                req.body.thumbnail = image;
+                req.body.updated_at = new Date();
+
+                const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + req.file.filename;
+                const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + image;
+                fs.rename(oldPath, newPath, async(err) => {
+                    if (err) throw err
+                    
+                    await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
+                        .then(() => {
+                            req.flash('success', 'Cập nhật thông tin phòng thành công!');
+                            res.redirect('/admin/rooms');
+                        })
+                });
+            } else {
+                req.body.created_at = new Date();
+                await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
+                    .then(() => {
+                        req.flash('success', 'Cập nhật thông tin phòng thành công!');
+                        res.redirect('/admin/rooms');
+                    })
+            }
+        })
+    }
+
+    async delete_room(req, res, next) {
+        const id = req.params.id;
+        await Room.findByIdAndDelete(id).exec()
+            .then((room) => {
+                if (room.thumbnail !== undefined) {
+                    fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '/' + room.thumbnail);
+                }
+                req.flash('success', 'Xóa thông tin phòng thành công!');
+                res.sendStatus(200);
+            })
+            .catch(err => {
+                req.flash('error', 'Xóa thông tin phòng thất bại!');
+                res.sendStatus(500);
+            })
+            
     }
 }
 

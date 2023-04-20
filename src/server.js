@@ -76,6 +76,7 @@ app.use('/admin', express.static('public'));
 app.use('/admin/customers', express.static('public'));
 app.use('/admin/customers/update', express.static('public'));
 app.use('/admin/rooms/create', express.static('public'));
+app.use('/admin/rooms/update', express.static('public'));
 
 
 

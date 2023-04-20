@@ -704,7 +704,6 @@ table.table td i {
 .account-settings .user-avatar .image-area {
     position: relative;
     cursor: pointer;
-    width: 220px;
     height: 220px;
 }
 
@@ -883,7 +882,7 @@ table.table td i {
 
 /* Room Form */
 .room-settings .room-profile {
-    margin: 0 0 1rem 0;
+    margin: 0 0 2rem 0;
     text-align: center;
 }
 
@@ -894,14 +893,13 @@ table.table td i {
 .room-settings .room-avatar .image-area {
     position: relative;
     cursor: pointer;
-    width: 420px;
     height: 220px;
 }
 
 .room-settings .room-avatar .image-thumnail {
     position: relative;
     cursor: pointer;
-    width: 420px;
+    width: 320px;
     height: 220px;
     background-color: #e7e7e7;
 }
@@ -921,4 +919,9 @@ table.table td i {
     left: 50%;
     transform: translate(-50%, -50%);
     object-fit: cover;
+}
+
+.room-settings .title-change {
+    max-width: 320px;
+    margin-left: 0px;
 }

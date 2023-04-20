@@ -37,7 +37,11 @@ class HomeController {
             title: 'Book now'
         });
     }
-    
+    detail(req, res, next) {
+        res.render('client/detailroom', {
+            title: 'Detail'
+        });
+    }
 
     async regiterNewUser(req, res, next) {
         const username = req.body.username;

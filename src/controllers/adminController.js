@@ -251,10 +251,113 @@ class AdminController {
                         res.redirect('/admin/rooms');
                     })
                 });
+            } else {
+                req.body.created_at = new Date();
+                const newRoom = new Room(req.body);
+                await newRoom.save().then(() => {
+                    req.flash('success', 'Tạo phòng thành công!');
+                    res.redirect('/admin/rooms');
+                })
             }
-            
-            
         });
+    }
+
+    room_edit(req, res, next) {
+        const room_code = req.params.room_code;
+        const filter = { room_code: room_code };
+
+        Room.findOne(filter).exec()
+            .then(room => {
+                res.render('admin/rooms/room_edit', {
+                    title: 'Edit Room',
+                    layout: 'admin-main',
+                    room: room
+                });
+            })
+    }
+
+    update_room(req, res, next) {
+        const room_code = req.params.room_code;
+        const filter = { room_code: room_code };
+
+        uploadRoom.single('file_upload')(req, res, async (err) => {
+            if (err) {
+                if (err.message === 'File too large') {
+                    req.flash('error', 'File upload không được lớn hơn 5MB!');
+                    res.redirect('/admin/rooms/update/' + room_code);
+                } else if (err.message === 'File type not allowed') {
+                    req.flash('error', 'File upload không đúng định dạng!');
+                    res.redirect('/admin/rooms/update/' + room_code);
+                }
+            }
+
+            const roomFloor = req.body.floor;
+            if (roomFloor != String(room_code)[0]) {
+                const roomCodeExists = new Array();
+                const rooms = await Room.find().exec();
+
+                for (let i = 0; i < rooms.length; i++) {
+                    if (rooms[i].floor == roomFloor) {
+                        roomCodeExists.push(rooms[i].room_code);
+                    }
+                }
+                
+                const len = roomCodeExists.length;
+                if (roomCodeExists.length > 0) {
+                    req.body.room_code = Number(roomCodeExists[len - 1]) + 1;
+                } else {
+                    req.body.room_code = roomFloor + 0 + 1;
+                } 
+            } else {
+                req.body.room_code = room_code;
+            }
+
+            if (req.file !== undefined) {
+                let oldImage = 'room-' + room_code + '.' + req.file.filename.split('.').pop();
+                fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '/' + oldImage);
+                
+                let image = 'room-' + req.body.room_code + '.' + req.file.filename.split('.').pop();
+                req.body.thumbnail = image;
+                req.body.updated_at = new Date();
+
+                const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + req.file.filename;
+                const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + image;
+                fs.rename(oldPath, newPath, async(err) => {
+                    if (err) throw err
+                    
+                    await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
+                        .then(() => {
+                            req.flash('success', 'Cập nhật thông tin phòng thành công!');
+                            res.redirect('/admin/rooms');
+                        })
+                });
+            } else {
+                req.body.created_at = new Date();
+                await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
+                    .then(() => {
+                        req.flash('success', 'Cập nhật thông tin phòng thành công!');
+                        res.redirect('/admin/rooms');
+                    })
+            }
+        })
+    }
+}
+
+function getRoomCode(roomFloor) {
+    const roomCodeExists = new Array();
+    const rooms = Room.find().exec();
+
+    for (let i = 0; i < rooms.length; i++) {
+        if (rooms[i].floor == roomFloor) {
+            roomCodeExists.push(rooms[i].room_code);
+        }
+    }
+    
+    const len = roomCodeExists.length;
+    if (roomCodeExists.length > 0) {
+        return Number(roomCodeExists[len - 1]) + 1;
+    } else {
+        return roomFloor + 0 + 1;
     }
 }
 

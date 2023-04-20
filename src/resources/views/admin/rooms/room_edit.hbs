@@ -99,7 +99,7 @@
                                         value="{{ acreage }}">
                                 </div>
                             </div>
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
+                            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12 mb-3">
                                 <label class="form-label" for="tag">Nhãn</label>
                                 <select class="form-select" multiple id="tag" name="tag[]">
                                     <option value="1">Phòng đơn</option>
@@ -110,6 +110,14 @@
                                     <option value="6">Thiết bị tiện nghi</option>
                                 </select>
                             </div>
+                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12 mb-2 row mt-2">
+                                <label class="col-sm-5 col-form-label">Mã phòng</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" value={{ room_code }} readonly disabled>
+                                </div>
+                                
+                                <h6 id="updated_at"></h6>
+                            </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
                                 <label for="description" class="form-label">Mô tả</label>
                                 <textarea class="form-control" id="description" rows="3" name="description">{{ description }}</textarea>
@@ -118,7 +126,7 @@
                         <div class="row gutters mt-2">
                             <div class="col-12">
                                 <div class="d-flex justify-content-start">
-                                    <button class="btn btn-warning text-white mx-2" type="submit">
+                                    <button class="btn btn-warning text-white" type="submit">
                                         <i class="fas fa-save me-2"></i><span>Cập nhật</span>
                                     </button>
                                 </div>
@@ -223,6 +231,13 @@
                 $(this).selected = false;
             }
         })
+
+        const time = document.getElementById('updated_at');
+        const d =  new Date(`{{ room.updated_at }}`);
+        console.log(d)
+        const datestring = d.getHours() + ":" + d.getMinutes() + " " + 
+                        d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+        time.innerHTML = "Thời gian cập nhật lần cuối: " + datestring;
     });
 
     function readURL(input) {

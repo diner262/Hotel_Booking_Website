@@ -27,7 +27,8 @@ var userSchema = mongoose.Schema({
     },
     fullname: {
         type: String,
-        require: false
+        require: false,
+        default: 'No name'
     },
     phone: {
         type: String,

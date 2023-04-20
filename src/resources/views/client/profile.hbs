@@ -19,7 +19,21 @@
         }
     </style>
 </head>
+
 <section style="background-color: #eee;">
+    {{#if messageSuccess}}
+    <div class="position-absolute top-0 end-0" style="z-index: 1000; margin: 100px 48px" id="success-alert">
+        <div class="col-lg-10 mx-auto mb-3 w-auto">
+            <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:">
+                    <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div> {{ messageSuccess }} </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {{/if}}
     <div class="container py-5">
         <div class="row">
             <div class="col">
@@ -62,7 +76,7 @@
                                 <p class="mb-0">Full Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{username}}</p>
+                                <p class="text-muted mb-0">{{fullname}}</p>
                             </div>
                         </div>
                         <hr>
@@ -140,26 +154,34 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Full name</label>
-                            <input type="text" class="form-control" id="fullname" value={{username}}>
+                            <input type="text" class="form-control" id="fullname" name="fullname" value="{{fullname}}">
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="tel" class="form-control" id="phone" value={{phone}}>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{phone}}">
                         </div>
                         <div class="mb-3">
                             <label for="birthday" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" id="birthday" value={{birthday}}>
+                            <input type="date" class="form-control" id="birthday" name="birthday" value="{{birthday}}">
                         </div>
                         <label for="gender" class="form-label">Gender</label>
-                        <select class="form-select" id="gender" aria-label="Default select example">
-                            <option value="male">Male</option>
+                        <select class="form-select" id="gender" name="gender" aria-label="Default select example">
+                            {{#if (equal gender "male")}}
+                            <option value="male" selected>Male</option>
                             <option value="female">Female</option>
+                            {{else}}
+                            <option value="male">Male</option>
+                            <option value="female" selected>Female</option>
+                            {{/if}}
                         </select>
                         <div class="mb-3">
                             <label for="Address" class="form-label">Address</label>
-                            <textarea class="form-control" id="Address" rows="3"></textarea>
+                            <textarea class="form-control" id="address" name="address" rows="3">{{address}}</textarea>
                         </div>
-
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Verify Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -178,7 +200,13 @@
 
     const updateForm = document.querySelector('#updateForm');
     updateForm.addEventListener('submit', () => {
+        if (!updateForm.password.value) {
+            alert('Please enter your password to verify');
+            event.preventDefault();
+        }
         const username = updateForm.getAttribute('data-username');
-        updateForm.setAttribute('action', `/update/${username}`);
+        updateForm.setAttribute('action', `/profile/update/${username}`);
     });
+
+
 </script>

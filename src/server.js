@@ -43,6 +43,9 @@ app.engine('hbs', hbs.engine({
       }
       return options.inverse(this);
     },
+    equal: function (a, b) {
+      return a === b;
+    },
     roleLabel: function (role) {
       if (role === 'client') {
         return 'Khách hàng';

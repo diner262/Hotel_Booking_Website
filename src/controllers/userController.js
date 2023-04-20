@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const User = require('../models/user.model')
 //const generateToken = require("../config/generateToken")
+var bcrypt = require('bcrypt');
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, avatar } = req.body
@@ -80,34 +81,55 @@ const allUser = asyncHandler(async (req, res) => {
 })
 
 class userController {
-    profile(req, res, next) {
-        allUser.findOne({ _id: req.params.id }).then((user) => {
-        }).catch((err) => {
-            console.log(err);
-        });
-        res.render('client/profile', {
-            title: 'Profile User',
-            layout: 'main'
-        });
-    }
+
+    // async updateUser(req, res) {
+    //     try {
+    //         const username = req.params.username;
+    //         const { fullname, phone, birthday, gender, address, password } = req.body;
+            // const user = await User.findOneAndUpdate({ username: username }, { fullname, phone, birthday, gender, address }, { new: true });
+            // if (!user) {
+            //     return res.status(404).json({ error: "User not found" });
+            // } else {
+            //     req.flash('success', 'Cập nhật thông tin thành công!');
+            //     res.redirect('/profile/' + username);
+            // }
+
+    //     } catch (error) {
+    //         console.log("Error:", error);
+    //         res.status(500).json({ error: "Server error" });
+    //     }
+
+    // }
+
     async updateUser(req, res) {
         try {
             const username = req.params.username;
-            const { phone, birthday, gender, address } = req.body;
-            const user = await User.findOneAndUpdate({ username: username }, { phone, birthday, gender, address }, { new: true });
+            const { fullname, phone, birthday, gender, address, password } = req.body;
+            const user = await User.findOne({ username: username });
+    
             if (!user) {
                 return res.status(404).json({ error: "User not found" });
             } else {
-                // res.redirect('/profile/' + username);
-                // // res.send(user); // commented out to avoid sending multiple responses
-                res.json({message: "Update success"} );
+                const passwordMatch = await bcrypt.compare(password, user.password);
+                if (!passwordMatch) {
+                    return res.status(401).json({ error: "Incorrect password" });
+                }
+                else{
+                    const userUpdate = await User.findOneAndUpdate({ username: username }, { fullname, phone, birthday, gender, address }, { new: true });
+                    if (!userUpdate) {
+                        return res.status(404).json({ error: "User not found" });
+                    } else {
+                        req.flash('success', 'Cập nhật thông tin thành công!');
+                        res.redirect('/profile/' + username);
+                    }
+                }
             }
         } catch (error) {
             console.log("Error:", error);
             res.status(500).json({ error: "Server error" });
         }
     }
-
+    
 
     async getUserByUN(req, res) {
         try {
@@ -122,6 +144,7 @@ class userController {
                     title: 'Profile User',
                     layout: 'main',
                     username: user.username,
+                    fullname: user.fullname,
                     birthday: user.birthday,
                     address: user.address,
                     gender: user.gender,

@@ -36,25 +36,36 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover" id="myTable">
+            <table class="table table-striped table-hover table-bordered" id="myTable">
                 <thead>
                     <tr>
-                        <th onclick="sortBy(0)">No.<i class="fa fa-sort"></i></th>
-                        <th onclick="sortBy(1)">Tên phòng<i class="fa fa-sort"></i></th>
-                        <th onclick="sortBy(2)">Loại phòng<i class="fa fa-sort"></i></th>
-                        <th onclick="sortBy(3)">Giá<i class="fa fa-sort"></i></th>
-                        <th onclick="sortBy(4)">Tình trạng<i class="fa fa-sort"></i></th>
-                        <th onclick="sortBy(5)">Hành động<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(0)" style="width:72px">No.<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(1)" style="width:116px">Mã phòng<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(2)">Tên phòng<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(3)">Loại phòng<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(4)">Giá<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(5)">Hiện trạng<i class="fa fa-sort"></i></th>
+                        <th >Hành động<i class="fa fa-sort"></i></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each rooms}}
                     <tr>
-                        <td>1</td>
-                        <td><img src="/img/avatar/user-1.jpg" class="avatar img-fluid me-2 " alt="Avatar"> Michael
-                                Holz</td>
-                        <td>04/10/2013</td>
-                        <td>Admin</td>
-                        <td><span class="status text-success">&bull;</span> Active</td>
+                        <td>{{no1 @index }}</td>
+                        <td>{{room_code}}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="uploads/room/{{ thumbnail }}" alt="Avatar" class="avatar-sm rounded- me-3">
+                            {{ room_name }}
+                            </div>
+                        </td>
+                        <td>{{ room_type }}</td>
+                        <td class="price">{{ price }}</td>
+                        <td>
+                            {{#ifeq status "avaliable"}} Còn trống {{/ifeq}}
+                            {{#ifeq status "unavaliable"}} Đang sửa chữa {{/ifeq}}
+                            {{#ifeq status "reserved"}} Đã được sử dụng {{/ifeq}}
+                        </td>
                         <td>
                             <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i
                                     class="material-icons">&#xE8B8;</i></a>
@@ -62,63 +73,7 @@
                                     class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><img src="/img/avatar/user-2.jpg" class="avatar img-fluid me-2" alt="Avatar"> Paula
-                                Wilson</td>
-                        <td>05/08/2014</td>
-                        <td>Publisher</td>
-                        <td><span class="status text-success">&bull;</span> Active</td>
-                        <td>
-                            <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE8B8;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><img src="/img/avatar/user-3.jpg" class="avatar img-fluid me-2" alt="Avatar"> Antonio
-                                Moreno</td>
-                        <td>11/05/2015</td>
-                        <td>Publisher</td>
-                        <td><span class="status text-danger">&bull;</span> Suspended</td>
-                        <td>
-                            <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE8B8;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><img src="/img/avatar/user-4.jpg" class="avatar img-fluid me-2" alt="Avatar"> Mary
-                                Saveley</td>
-                        <td>06/09/2016</td>
-                        <td>Reviewer</td>
-                        <td><span class="status text-success">&bull;</span> Active</td>
-                        <td>
-                            <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE8B8;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><img src="/img/avatar/user-5.jpg" class="avatar img-fluid me-2" alt="Avatar"> Martin
-                            Sommer
-                        </td>
-                        <td>12/08/2017</td>
-                        <td>Moderator</td>
-                        <td><span class="status text-warning">&bull;</span> Inactive</td>
-                        <td>
-                            <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE8B8;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
+                    {{/each}}
                 </tbody>
             </table>
             <div class="clearfix">
@@ -136,3 +91,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        let x = document.querySelectorAll(".price");
+        for (let i = 0; i < x.length; i++) {
+            let num = Number(x[i].innerHTML)
+                    .toLocaleString('en');
+            x[i].innerHTML = num + ' VNĐ';
+        }
+    })
+</script>

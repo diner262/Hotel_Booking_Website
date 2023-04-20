@@ -1,5 +1,7 @@
 var passport = require('passport');
 var multer = require('multer');
+var fs = require('fs');
+var path = require('path');
 var User = require('../models/user.model');
 var Room = require('../models/room.model');
 
@@ -19,7 +21,7 @@ const multerStorageRoom = multer.diskStorage({
         cb(null, './public/uploads/room');
     },
     filename: (req, file, cb) => {
-        cb(null, 'room-' + req.params.room_name + '.' + file.originalname.split('.').pop());
+        cb(null, file.originalname);
     },
 });
 
@@ -27,7 +29,6 @@ const multerStorageRoom = multer.diskStorage({
 // Multer Filter
 const multerFilter = (req, file, cb) => {
     let extension = file.originalname.split('.').pop();
-    console.log(extension);
     // Get only file image
     if (extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
         cb(null, true);
@@ -187,11 +188,15 @@ class AdminController {
 
 
     // Trang quản lý phòng
-    room_manage(req, res, next) {
-        res.render('admin/room_manage', {
-            title: 'Manage Room',
-            layout: 'admin-main'
-        });
+    async room_manage(req, res, next) {
+        await Room.find().exec()
+            .then(rooms => {
+                res.render('admin/room_manage', {
+                    title: 'Manage Room',
+                    layout: 'admin-main',
+                    rooms: rooms,
+                });
+            })
     }
 
     room_create(req, res, next) {
@@ -212,18 +217,43 @@ class AdminController {
                     res.redirect('/admin/rooms/create');
                 }
             }
-            if (req.file !== undefined) {
-                let image = 'room-' + req.params.room_name + '.' + req.file.filename.split('.').pop();
-                req.body.thumbnail = image;
-            }
-    
-            req.body.created_at = new Date();
 
-            const newRoom = new Room(req.body);
-            await newRoom.save().then(() => {
-                req.flash('success', 'Tạo phòng thành công!');
-                res.redirect('/admin/rooms');
-            })
+            const roomFloor = req.body.floor;
+            const roomCodeExists = new Array();
+            const rooms = await Room.find().exec();
+
+            for (let i = 0; i < rooms.length; i++) {
+                if (rooms[i].floor == roomFloor) {
+                    roomCodeExists.push(rooms[i].room_code);
+                }
+            }
+            
+            const len = roomCodeExists.length;
+            if (roomCodeExists.length > 0) {
+                req.body.room_code = Number(roomCodeExists[len - 1]) + 1;
+            } else {
+                req.body.room_code = roomFloor + 0 + 1;
+            }
+            
+            if (req.file !== undefined) {
+                let image = 'room-' + req.body.room_code + '.' + req.file.filename.split('.').pop();
+                req.body.thumbnail = image;
+                req.body.created_at = new Date();
+
+                const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + req.file.filename;
+                const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + image;
+                fs.rename(oldPath, newPath, async(err) => {
+                    if (err) throw err
+                    
+                    const newRoom = new Room(req.body);
+                    await newRoom.save().then(() => {
+                        req.flash('success', 'Tạo phòng thành công!');
+                        res.redirect('/admin/rooms');
+                    })
+                });
+            }
+            
+            
         });
     }
 }

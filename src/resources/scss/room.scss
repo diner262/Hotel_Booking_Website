@@ -107,6 +107,14 @@ img {
     background: #2D9CDB
 }
 
+.rooms .carousel-control-next-icon {
+    background-size: auto;
+    background-image: url("/img/next.png")
+} 
+.rooms .carousel-control-prev-icon {
+    background-size: auto;
+    background-image: url("/img/previous.png")
+}
 // .text-blue {
 //     color: #5FB8EA
 // }

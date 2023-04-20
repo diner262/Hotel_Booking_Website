@@ -82,25 +82,6 @@ const allUser = asyncHandler(async (req, res) => {
 
 class userController {
 
-    // async updateUser(req, res) {
-    //     try {
-    //         const username = req.params.username;
-    //         const { fullname, phone, birthday, gender, address, password } = req.body;
-            // const user = await User.findOneAndUpdate({ username: username }, { fullname, phone, birthday, gender, address }, { new: true });
-            // if (!user) {
-            //     return res.status(404).json({ error: "User not found" });
-            // } else {
-            //     req.flash('success', 'Cập nhật thông tin thành công!');
-            //     res.redirect('/profile/' + username);
-            // }
-
-    //     } catch (error) {
-    //         console.log("Error:", error);
-    //         res.status(500).json({ error: "Server error" });
-    //     }
-
-    // }
-
     async updateUser(req, res) {
         try {
             const username = req.params.username;

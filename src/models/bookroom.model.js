@@ -4,7 +4,7 @@ var bookRoomSchema = new mongoose.Schema({
     book_id:{
         type: String,
         require: true,
-        default: 'BR' + Date.now()
+        default: 'BR' + Date.now() 
     },
     room_code: {
         type: String,

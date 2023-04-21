@@ -52,6 +52,7 @@ class HomeController {
                 roomid: roomid,
                 status: room.status,
                 room_type: room.room_type,
+                price: room.price,
                 room: room
             });
         } catch (err) {
@@ -63,9 +64,24 @@ class HomeController {
     async bookroomSucess(req, res, next) {
         try {
             const id = req.params.id;
-            const {checkin, checkout, adults, children,fullname,email,phone,note,status,room_type} = req.body;
-            
-
+            const {checkin, checkout, adults, children,fullname,email,phone,note,status,room_type,price} = req.body;
+            const newBooking = new BookRoom({
+                room_code: id,
+                room_type: room_type,
+                price: price,
+                status: status,
+                adult: adults,
+                children: children,
+                checkin: new Date(checkin),
+                checkout: new Date(checkout),
+                fullname: fullname,
+                email: email,
+                phone: phone,
+                note: note
+            });
+            await newBooking.save();
+            w
+            res.json({ message: "Đặt phòng thành công!" });
         } catch (error) {
             console.log("Error:", error);
             res.status(500).json({ error: "Server error" });

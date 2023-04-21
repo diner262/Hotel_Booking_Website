@@ -1,11 +1,12 @@
 <link rel="stylesheet" href="./css/bookroom.css">
+{{#with room}}
 <div class="room-infor px-5 m-5">
     <div class="p-5">
         <h3 class="text-center mb-3">Thông tin đặt phòng</h3>
-        <form action="" method="post" id="roomForm" data-roomid="{{roomid}}">
+        <form action="" method="post" id="roomForm" data-room_code="{{room_code}}">
             <div class="row mb-4">
                 <div class="col-md-4 col-sm-12">
-                    <label for="checkin" class="form-label">Ngày check-in:</label>
+                    <label for="checkin" class="form-label">Ngày check-in:</label>  
                     <input type="date" class="form-control" id="checkin" name="checkin" required>
                 </div>
                 <div class="col-md-4 col-sm-12">
@@ -14,12 +15,12 @@
                 </div>
                 <div class="col-md-2 col-sm-12">
                     <label for="adults" class="form-label">Người lớn:</label>
-                    <input type="number" class="form-control" id="adults" name="adults" min="1" max="10" value="1"
+                    <input type="number" class="form-control" id="adults" name="adults" min="0" max="10" value="{{adult}}"
                         required>
                 </div>
                 <div class="col-md-2 col-sm-12">
                     <label for="children" class="form-label">Trẻ em:</label>
-                    <input type="number" class="form-control" id="children" name="children" min="0" max="10" value="0"
+                    <input type="number" class="form-control" id="children" name="children" min="0" max="10" value="{{children}}"
                         required>
                 </div>
             </div>
@@ -35,16 +36,16 @@
                 <div class="col-md-4">
                     <label for="roomtype" class="form-label">Hạng phòng:</label>
                     <br>
-                    <label id="{{room_type}}">{{room_type}}</label>
+                    <label class="types" id="{{room_type}}">{{room_type}}</label>
                     <input type="hidden" id="room_type" name="room_type" value="{{room_type}}">
                     <input type="hidden" id="price" name="price" value="{{price}}">
 
 
                 </div>
                 <div class="col-md-4">
-                    <label for="{{roomid}}" class="form-label">Mã số phòng: </label>
+                    <label for="{{room_code}}" class="form-label">Mã số phòng: </label>
                     <br>
-                    <label id="{{roomid}}">{{roomid}}</label>
+                    <label id="{{room_code}}">{{room_code}}</label>
 
                 </div>
             </div>
@@ -54,7 +55,7 @@
 <div class="user-infor px-5 m-5">
     <div class="p-5">
         <h3 class="text-center mb-3">Thông tin cá nhân</h3>
-        <form action="" method="post" id="yourselfForm" data-roomid="{{roomid}}">
+        <form action="" method="post" id="yourselfForm" data-room_code="{{room_code}}">
             <div class="row form-row">
                 <div class="col-md-6 mb-3">
                     <label for="fullname">Họ và tên:</label>
@@ -93,6 +94,8 @@
     </div>
 </div>
 
+{{/with}}
+
 <script>
     const roomFrom = document.getElementById('roomForm');
     const yourselfForm = document.getElementById('yourselfForm');
@@ -117,11 +120,23 @@
     });
 
     roomFrom.addEventListener('submit', function (event) {
-        const roomId = updateForm.getAttribute('data-roomid');
-        roomFrom.setAttribute('action', `/bookroom/${roomId}`);
-        yourselfForm.setAttribute('action', `/bookroom/${roomId}`);
+        const room_code = updateForm.getAttribute('data-room_code');
+        roomFrom.setAttribute('action', `/bookroom/${room_code}`);
+        yourselfForm.setAttribute('action', `/bookroom/${room_code}`);
     })
 
+
+    let x = document.querySelectorAll(".types");
+    let room_types = JSON.parse(`{{{json room_types }}}`);
+
+    for (let i = 0; i < x.length; i++) {
+        {{!-- console.log(room_types[i].id); --}}
+        for (let j = 0; j < room_types.length; j++) {
+            if (room_types[j].id === x[i].innerHTML) {
+                x[i].innerHTML = room_types[j].name;
+            }
+        }
+    }
 
 
 </script>

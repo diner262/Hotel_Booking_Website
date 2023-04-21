@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt');
 var User = require('../models/user.model');
 var Room = require('../models/room.model');
 var BookRoom = require('../models/bookroom.model');
+var RoomType = require('../models/room_type.model');
 
 class HomeController {
     login(req, res, next) {
@@ -40,15 +41,21 @@ class HomeController {
     }
     async bookroom(req, res, next) {
         const roomid = req.params.id;
+
+        const room_types = await RoomType.find().exec();
+        const types = room_types.map(room_type => {
+            return {
+                id: room_type._id,
+                name: room_type.name
+            }
+        });
+
         try {
             const room = await Room.findOne({ room_code: roomid });;
             res.render('client/bookroom', {
                 title: 'Book now',
-                roomid: roomid,
-                status: room.status,
-                room_type: room.room_type,
-                price: room.price,
-                room: room
+                room: room,
+                room_types: types
             });
         } catch (err) {
             console.log("Error:", err);

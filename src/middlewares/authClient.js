@@ -1,8 +1,18 @@
 const ensureAuth = (req, res, next) => {
-    if (req.isAuthenticated() && req.user.role === 'client') {
+    if (!req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/login');
+    
+    if (req.isAuthenticated() && req.user.role === 'client') {
+        return next();
+    } else if (req.isAuthenticated() && req.user.role !== 'client') {
+        req.logout(function (err) {
+            if (err) { return next(err); }
+            res.redirect('/home');
+        });
+    } else {
+        res.redirect('/login');
+    }
 }
 
 const forwardAuth = (req, res, next) => {

@@ -196,7 +196,6 @@ class AdminController {
                 name: room_type.name
             }
         })
-        console.log(types);
         
         await Room.find().exec()
             .then(rooms => {

@@ -6,7 +6,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h2>Lịch sử <b>đặt phòng</b></h2>
+                        <h2>Lịch sử đặt phòng: {{username}}</h2>
                     </div>
                     <div class="col-sm-4">
                         <div class="search-box">
@@ -22,7 +22,7 @@
                     <tr>
                         <th onclick="sortBy(0)" style="width:72px">No.<i class="fa fa-sort"></i></th>
                         <th onclick="sortBy(1)">Mã hóa đơn<i class="fa fa-sort"></i></th>
-                        <th onclick="sortBy(2)">Loại phòng<i class="fa fa-sort"></i></th>
+                        <th onclick="sortBy(2)">Tên phòng<i class="fa fa-sort"></i></th>
                         <th onclick="sortBy(3)">Ngày đặt<i class="fa fa-sort"></i></th>
                         <th onclick="sortBy(4)">Giá tiền<i class="fa fa-sort"></i></th>
                         <th>Xem chi tiết</th>
@@ -30,33 +30,30 @@
                 </thead>
                 <tbody>
                     {{!-- {{#each customers}} --}}
+                    {{#each bookrooms}}
                     <tr>
-                        <td>1</td>
-                        <td>HFJSJSHSH</td>
-                        <td>P4nthers 1 Room</td>
-                        <td>2023-04-10</td>
-                        <td>$600</td>
+                        <td>{{@index}}</td>
+                        <td>{{book_id}}</td>
+                        <td>P4tern Room</td>
+                        <td>{{created_at}}</td>
+                        <td>${{price}}</td>
                         <td>
-                            <a href="#" class="view text-center" title="View" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE417;</i></a>
+                            <a href="/history/{{username}}/{{book_id}}" onclick="historydetail({{book_id}})" class="view text-center" title="View"
+                                data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
                         </td>
                     </tr>
+                    {{/each}}
                     {{!-- {{/each}} --}}
                 </tbody>
             </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>
+<script>
+    function historydetail(id) {
+        const currentUrl = window.location.href; // Lấy URL hiện tại
+        const newUrl = currentUrl + '/' + id; // Thêm id vào URL hiện tại
+        window.location.href = newUrl; // Chuyển hướng đến URL mới
+    }
+
+</script>

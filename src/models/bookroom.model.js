@@ -22,11 +22,6 @@ var bookRoomSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
-    status: {
-        type: String,
-        enum: ['avaliable', 'unavaliable', 'reserved'],
-        default: 'avaliable'
-    },
     adult:{
         type: Number,
         require: true

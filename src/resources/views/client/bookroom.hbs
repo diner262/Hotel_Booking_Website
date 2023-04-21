@@ -46,12 +46,14 @@
                     <label class="types" id="{{room_type}}">{{room_type}}</label>
                     <input type="hidden" id="room_type" name="room_type" value="{{room_type}}">
                     <input type="hidden" id="price" name="price" value="{{price}}">
-
+                    <input type="hidden" id="totalPrice" name="totalPrice">
                 </div>
                 <div class="col-md-4">
                     <label for="{{room_code}}" class="form-label">Mã số phòng: </label>
-                    <br>
                     <label id="{{room_code}}">{{room_code}}</label>
+                    <label class="form-label">Tổng tiền phòng: <p id="totalPrice" name="totalPrice">$</p> </label>
+
+
 
                 </div>
             </div>
@@ -62,7 +64,6 @@
     <div class="p-5">
         <h3 class="text-center mb-3">Thông tin cá nhân</h3>
         <form action="" method="post" id="yourselfForm" data-room_code="{{room_code}}">
-            <input type="hidden" id="username" name="username" value="Warring">
 
             <div class="row form-row">
                 <div class="col-md-6 mb-3">
@@ -109,9 +110,6 @@
     const yourselfForm = document.getElementById('yourselfForm');
 
     document.getElementById('submit-btn').addEventListener('click', function (event) {
-        const username = localStorage.getItem("username");
-        document.getElementById("username").value = username;
-
         const checkin = document.getElementById('checkin').value;
         const checkout = document.getElementById('checkout').value;
         const adults = document.getElementById('adults').value;

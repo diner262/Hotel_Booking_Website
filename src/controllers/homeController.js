@@ -53,11 +53,11 @@ class HomeController {
         });
 
         try {
-            const room = await Room.findOne({ room_code: roomid });;
+            const room = await Room.findOne({ room_code: roomid });
             res.render('client/bookroom', {
                 title: 'Book now',
                 room: room,
-                room_types: types
+                room_types: types.name
             });
         } catch (err) {
             console.log("Error:", err);
@@ -65,6 +65,8 @@ class HomeController {
         }
 
     }
+
+
     async bookroomSucess(req, res, next) {
         const room_types = await RoomType.find().exec();
         const types = room_types.map(room_type => {
@@ -77,12 +79,11 @@ class HomeController {
         try {
             const username = req.cookies.username;
             const id = req.params.id;
-            const {checkin, checkout, adults, children,fullname,email,phone,note,status,room_type,price} = req.body;
+            const { checkin, checkout, adults, children, fullname, email, phone, note, room_type, price } = req.body;
             const newBooking = new BookRoom({
                 room_code: id,
                 room_type: room_type,
                 price: price,
-                status: status,
                 adult: adults,
                 children: children,
                 checkin: new Date(checkin),
@@ -95,6 +96,7 @@ class HomeController {
             });
             await newBooking.save();
             
+            Room.findOneAndUpdate({room_code: id}, {status: "unavaliable"}).exec();
             res.render('client/bill', {
                 title: 'Bill',
                 nameBill: "Đặt phòng thành công",
@@ -106,7 +108,7 @@ class HomeController {
                 email: email,
                 phone: phone,
                 room_type: room_type,
-                roomid : id,
+                roomid: id,
                 adults: adults,
                 children: children,
                 note: note,
@@ -131,11 +133,49 @@ class HomeController {
         });
     }
     history(req, res, next) {
-        res.render('client/history', {
-            title: 'Lịch sử đặt'
-        });
+        const username = req.params.username;
+        BookRoom.find({ username: username })
+            .then((bookrooms) => {
+
+                res.render("client/history", {
+                    title: "Lịch sử đặt",
+                    bookrooms: bookrooms,
+                });
+            })
+            .catch((err) => {
+                console.log("Error:", err);
+                next(err);
+            });
     }
 
+    historyDetail(req, res, next) {
+        const username = req.params.username;
+        const book_id = req.params.id;
+        BookRoom.findOne({ book_id: book_id })
+            .then((bookrooms) => {
+                res.render('client/bill', {
+                    title: 'Bill',
+                    nameBill: "Xem hóa đơn",
+                    username: username,
+                    billId: bookrooms.book_id,
+                    checkin: bookrooms.checkin,
+                    checkout: bookrooms.checkout,
+                    name: bookrooms.fullname,
+                    email: bookrooms.email,
+                    phone: bookrooms.phone,
+                    room_type: bookrooms.room_type,
+                    roomid: bookrooms.room_code,
+                    adults: bookrooms.adult,
+                    children: bookrooms.children,
+                    note: bookrooms.note,
+                    price: bookrooms.price,
+                });
+            })
+            .catch((err) => {
+                console.log("Error:", err);
+                next(err);
+            });
+    }
     async regiterNewUser(req, res, next) {
         const username = req.body.username;
         const email = req.body.email;

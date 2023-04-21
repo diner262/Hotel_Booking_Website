@@ -48,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-4 fw-bold mb-1">Loại phòng:</div>
-                        <div class="col-8 mb-0">{{room_type}}</div>
+                        <div class="col-8 mb-0 types">{{room_type}}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -97,3 +97,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    let x = document.querySelectorAll(".types");
+    let room_types = JSON.parse(`{{{json room_types }}}`);
+
+    for (let i = 0; i < x.length; i++) {
+        {{!-- console.log(room_types[i].id); --}}
+        for (let j = 0; j < room_types.length; j++) {
+            if (room_types[j].id === x[i].innerHTML) {
+                x[i].innerHTML = room_types[j].name;
+            }
+        }
+    }
+</script>

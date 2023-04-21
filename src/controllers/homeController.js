@@ -66,6 +66,14 @@ class HomeController {
 
     }
     async bookroomSucess(req, res, next) {
+        const room_types = await RoomType.find().exec();
+        const types = room_types.map(room_type => {
+            return {
+                id: room_type._id,
+                name: room_type.name
+            }
+        });
+
         try {
             const username = req.cookies.username;
             const id = req.params.id;
@@ -102,7 +110,8 @@ class HomeController {
                 adults: adults,
                 children: children,
                 note: note,
-                price: price
+                price: price,
+                room_types: types
             });
         } catch (error) {
             console.log("Error:", error);
@@ -119,6 +128,11 @@ class HomeController {
     bill(req, res, next) {
         res.render('client/bill', {
             title: 'Bill'
+        });
+    }
+    history(req, res, next) {
+        res.render('client/history', {
+            title: 'Lịch sử đặt'
         });
     }
 

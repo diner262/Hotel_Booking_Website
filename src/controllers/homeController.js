@@ -125,6 +125,11 @@ class HomeController {
             title: 'Bill'
         });
     }
+    history(req, res, next) {
+        res.render('client/history', {
+            title: 'Lịch sử đặt'
+        });
+    }
 
     async regiterNewUser(req, res, next) {
         const username = req.body.username;

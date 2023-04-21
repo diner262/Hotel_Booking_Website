@@ -85,15 +85,12 @@ app.use('/admin/customers', express.static('public'));
 app.use('/admin/customers/update', express.static('public'));
 app.use('/admin/rooms/create', express.static('public'));
 app.use('/admin/rooms/update', express.static('public'));
-<<<<<<< HEAD
+
 app.use('/history', express.static('public'));
 app.use('/profile', express.static('public'));
 app.use('/bookroom', express.static('public'));
 app.use('/history/:username', express.static('public'));
 
-=======
-app.use('/bookroom', express.static('public'));
->>>>>>> 4f3ae08824a9dbe99a7256365c65e8fee1d936ce
 
 // session middleware
 app.use(session({

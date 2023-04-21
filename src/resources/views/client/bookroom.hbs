@@ -2,72 +2,72 @@
 <div class="room-infor px-5 m-5">
     <div class="p-5">
         <h3 class="text-center mb-3">Thông tin đặt phòng</h3>
-        <form action="">
+        <form action="" method="post" id="roomForm" data-roomid="{{roomid}}">
             <div class="row mb-4">
                 <div class="col-md-4 col-sm-12">
                     <label for="checkin" class="form-label">Ngày check-in:</label>
-                    <input type="date" class="form-control" id="checkin" required>
+                    <input type="date" class="form-control" id="checkin" name="checkin" required>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <label for="checkout" class="form-label">Ngày check-out:</label>
-                    <input type="date" class="form-control" id="checkout" required>
+                    <input type="date" class="form-control" id="checkout" name="checkout" required>
                 </div>
                 <div class="col-md-2 col-sm-12">
                     <label for="adults" class="form-label">Người lớn:</label>
-                    <input type="number" class="form-control" id="adults" min="1" max="10" value="1" required>
+                    <input type="number" class="form-control" id="adults" name="adults" min="1" max="10" value="1"
+                        required>
                 </div>
                 <div class="col-md-2 col-sm-12">
                     <label for="children" class="form-label">Trẻ em:</label>
-                    <input type="number" class="form-control" id="children" min="0" max="10" value="0" required>
+                    <input type="number" class="form-control" id="children" name="children" min="0" max="10" value="0"
+                        required>
                 </div>
             </div>
             <div class="row mb-4">
                 <div class="col-md-4">
-                    <label for="room-number" class="form-label">Số lượng phòng:</label>
-                    <input type="number" class="form-control" id="room-number" min="1" max="10" value="1" required>
+                    <label for="room-number" class="form-label">Trạng thái phòng:</label>
+                    <br>
+                    <label id="{{status}}">{{status}}</label>
+                    <input type="hidden" id="status" name="status" value="{{status}}">
+
+
                 </div>
                 <div class="col-md-4">
                     <label for="roomtype" class="form-label">Hạng phòng:</label>
-                    <select class="form-select" id="roomtype" required>
-                        <option value="">Chọn hạng phòng</option>
-                        <option value="standard">Standard</option>
-                        <option value="deluxe">Deluxe</option>
-                        <option value="suite">Suite</option>
-                    </select>
+                    <br>
+                    <label id="{{room_type}}">{{room_type}}</label>
+                    <input type="hidden" id="room_type" name="room_type" value="{{room_type}}">
+
+
                 </div>
                 <div class="col-md-4">
-                    <label for="room-id" class="form-label">Mã số phòng:</label>
-                    <select class="form-select" id="room-id" required></select>
+                    <label for="{{roomid}}" class="form-label">Mã số phòng: </label>
+                    <br>
+                    <label id="{{roomid}}">{{roomid}}</label>
+
                 </div>
             </div>
-        </form>
-
     </div>
-
 </div>
 
 <div class="user-infor px-5 m-5">
     <div class="p-5">
         <h3 class="text-center mb-3">Thông tin cá nhân</h3>
-        <form action="">
+        <form action="" method="post" id="yourselfForm" data-roomid="{{roomid}}">
             <div class="row form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="firstname">Tên:</label>
-                    <input type="text" class="form-control" id="firstname" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="lastname">Họ:</label>
-                    <input type="text" class="form-control" id="lastname" required>
+                    <label for="fullname">Họ và tên:</label>
+                    <input type="text" class="form-control" id="fullname" name="fullname" required>
                 </div>
             </div>
             <div class=" row form-row">
                 <div class="col-md-6 mb-3">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" required>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="phone">Số điện thoại:</label>
-                    <input type="tel" class="form-control" id="phone" required>
+                    <input type="tel" class="form-control" id="phone" name="phone" required>
                 </div>
             </div>
             <div class="form-row">
@@ -76,16 +76,51 @@
                     <select class="form-control" id="payment" required>
                         <option value="">Chọn phương thức thanh toán</option>
                         <option value="credit-card">Thẻ tín dụng</option>
+                        <option value="face-to-face">Thanh toán trực tiếp</option>
+
                         <option value="bank-transfer">Chuyển khoản ngân hàng</option>
                         <option value="paypal">Paypal</option>
                     </select>
                 </div>
             </div>
             <div class="form-group mb-4">
-                <label for="comment">Chú thích:</label>
-                <textarea class="form-control" id="comment"></textarea>
+                <label for="note">Chú thích:</label>
+                <textarea class="form-control" id="note" name="note"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Đặt phòng</button>
+            <button type="submit" id="submit-btn" class="btn btn-primary">Đặt phòng</button>
         </form>
     </div>
 </div>
+
+<script>
+    const roomFrom = document.getElementById('roomForm');
+    const yourselfForm = document.getElementById('yourselfForm');
+    document.getElementById('submit-btn').addEventListener('click', function (event) {
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const adults = document.getElementById('adults').value;
+        const children = document.getElementById('children').value;
+        const fullname = document.getElementById('fullname').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const payment = document.getElementById('payment').value;
+
+        if (checkin == '' || checkout == '' || adults == '' || children == '' || fullname == '' || email == '' || phone == '' || payment == '') {
+            alert('Vui lòng nhập đầy đủ thông tin');
+            event.preventDefault();
+        }
+        else {
+            roomFrom.submit();
+            yourselfForm.submit();
+        }
+    });
+
+    roomFrom.addEventListener('submit', function (event) {
+        const roomId = updateForm.getAttribute('data-roomid');
+        roomFrom.setAttribute('action', `/bookroom/${roomId}`);
+        yourselfForm.setAttribute('action', `/bookroom/${roomId}`);
+    })
+
+
+
+</script>

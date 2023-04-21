@@ -61,6 +61,14 @@ app.engine('hbs', hbs.engine({
     no1: function (val) {
         return val + 1;
     },
+    even: function(val){
+      if (val % 2 == 0){
+        return 'even'
+      }
+      else {
+        return 'odd'
+      }
+    }
 }
 }))
 app.set('view engine', 'hbs');

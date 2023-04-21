@@ -8,7 +8,7 @@ var {
     handleSignUp
 } = require('../middlewares/validateForm');
 var homeController = require('../controllers/homeController');
-var { forwardAuth } = require('../middlewares/authClient');
+var { ensureAuth,forwardAuth } = require('../middlewares/authClient');
 
 router.post('/login', forwardAuth, validateLogin(), handleLoginClient, homeController.authenticateLogin);
 router.post('/signup', forwardAuth, validateSignUp(), handleSignUp, homeController.regiterNewUser);
@@ -18,7 +18,9 @@ router.get('/logout', homeController.logout)
 router.get('/signup', forwardAuth, homeController.signup)
 router.get('/home', homeController.home)
 router.get('/room', homeController.room)
-router.get('/bookroom', homeController.bookroom)
+router.get('/bookroom/:id',ensureAuth, homeController.bookroom)
+router.post('/bookroom/:id', ensureAuth,homeController.bookroomSucess)
+
 router.get('/detail', homeController.detail)
 router.get('/', (req, res) => {
     res.redirect('home')

@@ -1,6 +1,9 @@
 var passport = require('passport');
 var bcrypt = require('bcrypt');
 var User = require('../models/user.model');
+var Room = require('../models/room.model');
+var BookRoom = require('../models/bookroom.model');
+
 var { validationResult, matchedData } = require('express-validator');
 
 class HomeController {
@@ -27,15 +30,47 @@ class HomeController {
             layout: false,
         });
     }
-    room(req, res, next) {
-        res.render('client/room', {
-            title: 'Room'
-        });
+    async room(req, res, next) {
+        try {
+            const room = await Room.find();
+            res.render('client/room', {
+                title: 'Room',
+                rooms: room
+            });
+        } catch (err) {
+            console.log("Error:", err);
+            next(err);
+        }
+
     }
-    bookroom(req, res, next) {
-        res.render('client/bookroom', {
-            title: 'Book now'
-        });
+    async bookroom(req, res, next) {
+        const roomid = req.params.id;
+        try {
+            const room = await Room.findOne({ room_code: roomid });;
+            res.render('client/bookroom', {
+                title: 'Book now',
+                roomid: roomid,
+                status: room.status,
+                room_type: room.room_type,
+                room: room
+            });
+        } catch (err) {
+            console.log("Error:", err);
+            next(err);
+        }
+
+    }
+    async bookroomSucess(req, res, next) {
+        try {
+            const id = req.params.id;
+            const {checkin, checkout, adults, children,fullname,email,phone,note,status,room_type} = req.body;
+            
+
+        } catch (error) {
+            console.log("Error:", error);
+            res.status(500).json({ error: "Server error" });
+        }
+
     }
     detail(req, res, next) {
         res.render('client/detailroom', {

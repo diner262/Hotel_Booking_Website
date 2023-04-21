@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var User = require('../models/user.model');
 var Room = require('../models/room.model');
+var RoomType = require('../models/room_type.model');
 
 
 //Configuration for Multer
@@ -83,7 +84,7 @@ class AdminController {
     // Trang điều khiển
     dashboard(req, res, next) {
         res.render('admin/dashboard', {
-            title: 'Dashboard',
+            title: 'Trang điều khiển',
             layout: 'admin-main',
             user: req.user
         });
@@ -92,7 +93,7 @@ class AdminController {
     // Trang quản lý đơn hàng
     order_manage(req, res, next) {
         res.render('admin/order_manage', {
-            title: 'Manage Order',
+            title: 'Quản lý đơn đặt phòng',
             layout: 'admin-main'
         });
     }
@@ -102,7 +103,7 @@ class AdminController {
         await User.find({ role: 'client' }).exec()
             .then(customers => {
                 res.render('admin/customer_manage', {
-                    title: 'Manage Customer',
+                    title: 'Quản lý Khách hàng',
                     layout: 'admin-main',
                     customers: customers,
                 });
@@ -116,7 +117,7 @@ class AdminController {
         await User.findOne(filter).exec()
             .then(customer => {
                 res.render('admin/customers/customer_detail', {
-                    title: 'Customer Detail',
+                    title: 'Thông tin chi tiết khách hàng',
                     layout: 'admin-main',
                     customer: customer
             });
@@ -130,7 +131,7 @@ class AdminController {
         await User.findOne(filter).exec()
             .then(customer => {
                 res.render('admin/customers/customer_edit', {
-                    title: 'Edit Customer',
+                    title: 'Cập nhật thông tin khách hàng',
                     layout: 'admin-main',
                     customer: customer
             });
@@ -191,20 +192,39 @@ class AdminController {
 
     // Trang quản lý phòng
     async room_manage(req, res, next) {
+        const room_types = await RoomType.find().exec();
+        const types = room_types.map(room_type => {
+            return {
+                id: room_type._id,
+                name: room_type.name
+            }
+        })
+        console.log(types);
+        
         await Room.find().exec()
             .then(rooms => {
                 res.render('admin/room_manage', {
-                    title: 'Manage Room',
+                    title: 'Quản lý Phòng',
                     layout: 'admin-main',
                     rooms: rooms,
+                    room_types: types
                 });
             })
     }
 
-    room_create(req, res, next) {
+    async room_create(req, res, next) {
+        const room_types = await RoomType.find().exec();
+        const types = room_types.map(room_type => {
+            return {
+                id: room_type._id,
+                name: room_type.name
+            }
+        })
+
         res.render('admin/rooms/room_create', {
-            title: 'Create Room',
-            layout: 'admin-main'
+            title: 'Thêm mới Phòng',
+            layout: 'admin-main',
+            room_types: types
         });
     }
 
@@ -249,7 +269,7 @@ class AdminController {
                     
                     const newRoom = new Room(req.body);
                     await newRoom.save().then(() => {
-                        req.flash('success', 'Tạo phòng thành công!');
+                        req.flash('success', 'Thêm mới phòng thành công!');
                         res.redirect('/admin/rooms');
                     })
                 });
@@ -257,23 +277,32 @@ class AdminController {
                 req.body.created_at = new Date();
                 const newRoom = new Room(req.body);
                 await newRoom.save().then(() => {
-                    req.flash('success', 'Tạo phòng thành công!');
+                    req.flash('success', 'Thêm mới phòng thành công!');
                     res.redirect('/admin/rooms');
                 })
             }
         });
     }
 
-    room_edit(req, res, next) {
+    async room_edit(req, res, next) {
         const room_code = req.params.room_code;
         const filter = { room_code: room_code };
 
-        Room.findOne(filter).exec()
+        const room_types = await RoomType.find().exec();
+        const types = room_types.map(room_type => {
+            return {
+                id: room_type._id,
+                name: room_type.name
+            }
+        })
+        
+        await Room.findOne(filter).exec()
             .then(room => {
                 res.render('admin/rooms/room_edit', {
-                    title: 'Edit Room',
+                    title: 'Cập nhật Phòng',
                     layout: 'admin-main',
-                    room: room
+                    room: room,
+                    room_types: types
                 });
             })
     }
@@ -315,12 +344,25 @@ class AdminController {
             }
 
             if (req.file !== undefined) {
-                let oldImage = 'room-' + room_code + '.' + req.file.filename.split('.').pop();
+                const oldImage = 'room-' + room_code + '.' + req.file.filename.split('.').pop();
                 fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '/' + oldImage);
                 
-                let image = 'room-' + req.body.room_code + '.' + req.file.filename.split('.').pop();
+                const image = 'room-' + req.body.room_code + '.' + req.file.filename.split('.').pop();
                 req.body.thumbnail = image;
                 req.body.updated_at = new Date();
+                const types = req.body.room_type;
+                const typesPromises = types.map(async (type) => {
+                    const room_type = await RoomType.findById(type.id);
+                    if (!room_type) {
+                        res.status(404).send({
+                            code: 1,
+                            message: `Không tìm thấy sản phẩm có id ${type.id}!`,
+                        });
+                    }
+                    type.name = room_type.name;
+                    return type;
+                });
+                req.body.room_type = await Promise.all(typesPromises);
 
                 const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + req.file.filename;
                 const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + image;
@@ -359,6 +401,44 @@ class AdminController {
                 res.sendStatus(500);
             })
             
+    }
+
+    // Quản lý thể loại phòng
+    async room_type_manage(req, res, next) {
+        await RoomType.find().exec()
+            .then(roomTypes => {
+                res.render('admin/room_type_manage', {
+                    title: 'Quản lý loại phòng',
+                    layout: 'admin-main',
+                    roomTypes: roomTypes
+                });
+            })
+    }
+
+    async create_room_type(req, res, next) {
+        const roomTypes = RoomType.find().exec();
+        
+        for (let i = 0; i < roomTypes.length; i++) {
+            if (roomTypes[i].name == req.body.name) {
+                req.flash('error', 'Tên loại phòng đã tồn tại!');
+                res.redirect('/admin/room_types');
+            }
+        }
+
+        const newRoomType = new RoomType(req.body);
+        await newRoomType.save().then(() => {
+            req.flash('success', 'Thêm loại phòng mới thành công!');
+            res.redirect('/admin/room_types');
+        });
+    }
+
+    async update_room_type(req, res, next) {
+        const id = req.params.id;
+        await RoomType.findByIdAndUpdate(id, req.body, { new: true }).exec()
+            .then(() => {
+                req.flash('success', 'Cập nhật loại phòng thành công!');
+                res.redirect('/admin/room_types');
+            })
     }
 }
 

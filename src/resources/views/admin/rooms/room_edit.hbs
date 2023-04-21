@@ -18,8 +18,8 @@
     </div>
 
     
-    {{#with room}}
-    <form method="post" action="./{{ room_code }}" enctype="multipart/form-data">
+    {{!-- {{#if room}} --}}
+    <form method="post" action="./{{ room.room_code }}" enctype="multipart/form-data">
         <div class="row gutters table-responsive bg-body shadow rounded pt-2 px-4">          
             <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
@@ -32,16 +32,16 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="room_name">Tên Phòng</label>
                                     <input type="text" class="form-control" id="room_name" name="room_name" 
-                                        value="{{ room_name }}" required>
+                                        value="{{ room.room_name }}" required>
                                 </div>
                             </div>
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
                                 <div class="mb-3">
                                     <label class="form-label" for="room_type">Loại Phòng</label>
                                     <select class="form-select" id="room_type" name="room_type">
-                                        <option value="1" selected> Suite Rooms </option>
-                                        <option value="2"> Standard Rooms  </option>
-                                        <option value="3"> Deluxe Rooms </option>
+                                        {{#each room_types}}
+                                        <option value={{id}}> {{ name }} </option>
+                                        {{/each}}
                                     </select>
                                 </div>
                             </div>
@@ -73,14 +73,14 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="price">Giá Phòng</label>
                                     <input type="number" class="form-control" id="price" name="price" 
-                                        value="{{ price }}">
+                                        value="{{ room.price }}">
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                 <label class="form-label" for="adult">Số Người Lớn</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" id="adult" name="adult" min="0"
-                                        value="{{ adult }}">
+                                        value="{{ room.adult }}">
                                     <span class="input-group-text"><i class="fas fa-child"></i></span>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                 <label class="form-label" for="children">Số Trẻ Em</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" id="children" name="children" min="0"
-                                        value="{{ children }}">
+                                        value="{{ room.children }}">
                                     <span class="input-group-text"><i class="fas fa-child"></i></span>
                                 </div>
                             </div>
@@ -96,7 +96,8 @@
                                 <label class="form-label" for="acreage">Diện Tích Phòng</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" id="acreage" name="acreage" min="0" step="0.1"
-                                        value="{{ acreage }}">
+                                        value="{{ room.acreage }}">
+                                    <span class="input-group-text">m&sup2</span>
                                 </div>
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12 mb-3">
@@ -113,21 +114,21 @@
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12 mb-2 row mt-2">
                                 <label class="col-sm-5 col-form-label">Mã phòng</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" value={{ room_code }} readonly disabled>
+                                    <input type="text" class="form-control" value={{ room.room_code }} readonly disabled>
                                 </div>
                                 
                                 <h6 id="updated_at"></h6>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
                                 <label for="description" class="form-label">Mô tả</label>
-                                <textarea class="form-control" id="description" rows="3" name="description">{{ description }}</textarea>
+                                <textarea class="form-control" id="description" rows="3" name="description">{{ room.description }}</textarea>
                             </div>
                         </div>
                         <div class="row gutters mt-2">
                             <div class="col-12">
                                 <div class="d-flex justify-content-start">
                                     <button class="btn btn-warning text-white" type="submit">
-                                        <i class="fas fa-save me-2"></i><span>Cập nhật</span>
+                                        <i class="fas fa-edit me-2"></i><span>Cập nhật</span>
                                     </button>
                                 </div>
                             </div>
@@ -145,11 +146,11 @@
                         <div class="room-settings">
                             <div class="room-profile">
                                 <div class="room-avatar">
-                                    {{#if thumbnail}}
+                                    {{#if room.thumbnail}}
                                         <div class="image-area rounded" id="image-area"
                                             onclick="document.getElementById('upload').click();">
                                             <input id="upload" type="file" name="file_upload" onchange="readURL(this);" accept="image/*">
-                                            <img id="imageResult" src="uploads/room/{{ thumbnail }}" alt="" 
+                                            <img id="imageResult" src="uploads/room/{{ room.thumbnail }}" alt="" 
                                                 class="img-fluid rounded">
                                         </div>
                                     {{else}}
@@ -179,7 +180,7 @@
             </div>
         </div>
     </form>
-    {{/with}}   
+    {{!-- {{/if}}    --}}
 </div>
 
 <script>
@@ -223,7 +224,6 @@
         {{#each room.tag}}
             tag.push(`{{ this }}`);
         {{/each}}
-        console.log(tag)
         $('#tag').children('option').each(function () {
             if (tag.includes($(this).val())) {
                 $(this).attr('selected', true);
@@ -234,10 +234,9 @@
 
         const time = document.getElementById('updated_at');
         const d =  new Date(`{{ room.updated_at }}`);
-        console.log(d)
-        const datestring = d.getHours() + ":" + d.getMinutes() + " " + 
+        const datestring = d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds() + " " + 
                         d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
-        time.innerHTML = "Thời gian cập nhật lần cuối: " + datestring;
+        time.innerHTML = "Thời gian cập nhật lần cuối: <br>" + datestring;
     });
 
     function readURL(input) {

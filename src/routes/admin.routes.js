@@ -24,6 +24,10 @@ router.get('/rooms/update/:room_code', ensureAuth, adminController.room_edit);
 router.post('/rooms/update/:room_code', ensureAuth, adminController.update_room);
 router.delete('/rooms/delete/:id', ensureAuth, adminController.delete_room);
 
+router.get('/room_types', ensureAuth, adminController.room_type_manage);
+router.post('/room_types', ensureAuth, adminController.create_room_type);
+router.post('/room_types/update/:id', ensureAuth, adminController.update_room_type);
+
 router.get('/orders', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);
 

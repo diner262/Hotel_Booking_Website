@@ -58,7 +58,7 @@
                                 {{ room_name }}
                             </div>
                         </td>
-                        <td>{{ room_type }}</td>
+                        <td class="types">{{ room_type }}</td>
                         <td class="price">{{ price }}</td>
                         <td>
                             {{#ifeq status "avaliable"}} Còn trống {{/ifeq}}
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    <!-- Modal HTML -->
+    <!-- Modal Delete -->
     <div id="confirmModal" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-confirm">
             <div class="modal-content">
@@ -119,10 +119,23 @@
 
 <script>
     $(document).ready(function () {
-        let x = document.querySelectorAll(".price");
+        let x = document.querySelectorAll(".types");
+        let room_types = JSON.parse(`{{{json room_types }}}`);
+
+
         for (let i = 0; i < x.length; i++) {
-            let num = Number(x[i].innerHTML).toLocaleString('en');
-            x[i].innerHTML = num + ' VNĐ';
+            {{!-- console.log(room_types[i].id); --}}
+            for (let j = 0; j < room_types.length; j++) {
+                if (room_types[j].id === x[i].innerHTML) {
+                    x[i].innerHTML = room_types[j].name;
+                }
+            }
+        }
+
+        let y = document.querySelectorAll(".price");
+        for (let i = 0; i < y.length; i++) {
+            let num = Number(y[i].innerHTML).toLocaleString('en');
+            y[i].innerHTML = num + ' VNĐ';
         }
 
         $('.delete').on('click', function () {
@@ -145,5 +158,6 @@
                 }
             })
         });
+
     })
 </script>

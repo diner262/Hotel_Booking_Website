@@ -4,8 +4,6 @@ var User = require('../models/user.model');
 var Room = require('../models/room.model');
 var BookRoom = require('../models/bookroom.model');
 
-var { validationResult, matchedData } = require('express-validator');
-
 class HomeController {
     login(req, res, next) {
         res.render('client/login', {
@@ -18,10 +16,7 @@ class HomeController {
         passport.authenticate('local', {
             failureRedirect: '/login?error',
             failureFlash: true,
-        })(req, res, next => {
-            req.flash('success', 'Đăng nhập tài khoản thành công!');
-            res.redirect('home');
-        });
+        })(req, res, next);
     }
 
     signup(req, res, next) {

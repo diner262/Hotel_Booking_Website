@@ -67,10 +67,7 @@ class AdminController {
         passport.authenticate('local', {
             failureRedirect: '/admin/login?error',
             failureFlash: true,
-        })(req, res, next => {
-            req.flash('success', 'Đăng nhập tài khoản thành công!');
-            res.redirect('/admin/dashboard');
-        });
+        })(req, res, next);
     }
 
     logout(req, res, next) {

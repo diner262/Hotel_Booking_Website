@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var { ensureAuth, forwardAuth } = require('../middlewares/authAdmin');
+var { ensureAuth, forwardAuth, accountAuth} = require('../middlewares/authAdmin');
 var { validateLogin, handleLoginAdmin } = require('../middlewares/validateForm');
 var adminController = require('../controllers/adminController');
 
 // router.get('/profile/:id',adminController.profile);
 
-router.post('/login', validateLogin(), handleLoginAdmin, adminController.authenticateLogin);
+router.post('/login', validateLogin(), handleLoginAdmin, adminController.authenticateLogin, accountAuth);
 
 router.get('/login', forwardAuth, adminController.login);
 router.get('/logout', adminController.logout);

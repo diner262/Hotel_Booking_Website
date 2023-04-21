@@ -13,10 +13,10 @@ module.exports = (passport) => {
 
         await User.findOne({ username }).exec()
             .then(user => {
-                if (!user) return done(null, false, { message: 'Tên đăng nhập hoặc mật khẩu không chính xác.' });
+                if (!user) return done(null, false, { message: 'Sai tên đăng nhập hoặc mật khẩu.' });
                 bcrypt.compare(password, user.password, (err, isMatch) => {
                     if (err) return done(null, false, { message: err.message });
-                    if (!isMatch) return done(null, false, { message: 'Tên đăng nhập hoặc mật khẩu không chính xác.' });
+                    if (!isMatch) return done(null, false, { message: 'Sai tên đăng nhập hoặc mật khẩu.' });
                     
                     return done(null, user);
                 });

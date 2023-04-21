@@ -8,10 +8,13 @@ var {
     handleSignUp
 } = require('../middlewares/validateForm');
 var homeController = require('../controllers/homeController');
-var { ensureAuth,forwardAuth } = require('../middlewares/authClient');
+var { 
+    ensureAuth,
+    forwardAuth,
+    accountAuth } = require('../middlewares/authClient');
 
-router.post('/login', forwardAuth, validateLogin(), handleLoginClient, homeController.authenticateLogin);
-router.post('/signup', forwardAuth, validateSignUp(), handleSignUp, homeController.regiterNewUser);
+router.post('/login', validateLogin(), handleLoginClient, homeController.authenticateLogin, accountAuth);
+router.post('/signup', validateSignUp(), handleSignUp, homeController.regiterNewUser);
 
 router.get('/login', forwardAuth, homeController.login)
 router.get('/logout', homeController.logout)

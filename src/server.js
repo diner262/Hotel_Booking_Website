@@ -126,7 +126,7 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   console.log(err.message);
-  res.render('500');
+  res.render('error/404');
 });
 
 

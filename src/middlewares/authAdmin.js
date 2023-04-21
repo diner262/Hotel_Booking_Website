@@ -17,8 +17,11 @@ const accountAuth = (req, res, next) => {
         req.flash('success', 'Đăng nhập tài khoản thành công!');
         res.redirect('/admin/dashboard');
     }
-    req.flash('error', 'Sai tên đăng nhập hoặc mật khẩu.');
-    res.redirect('/admin/login');
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        req.flash('error', 'Sai tên đăng nhập hoặc mật khẩu.');
+        res.redirect('/admin/login');
+    });
 }
 
 module.exports = {

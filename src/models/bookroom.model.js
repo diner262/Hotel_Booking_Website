@@ -11,8 +11,8 @@ var bookRoomSchema = new mongoose.Schema({
         require: true
     },
     room_type: {
-        type: String,
-        require: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: '_room_type'
     },
     price: {
         type: Number,

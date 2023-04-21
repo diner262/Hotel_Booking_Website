@@ -64,6 +64,14 @@ class HomeController {
 
     }
     async bookroomSucess(req, res, next) {
+        const room_types = await RoomType.find().exec();
+        const types = room_types.map(room_type => {
+            return {
+                id: room_type._id,
+                name: room_type.name
+            }
+        });
+
         try {
             const id = req.params.id;
             const {checkin, checkout, adults, children,fullname,email,phone,note,status,room_type,price} = req.body;
@@ -97,7 +105,8 @@ class HomeController {
                 adults: adults,
                 children: children,
                 note: note,
-                price: price
+                price: price,
+                room_types: types
             });
         } catch (error) {
             console.log("Error:", error);

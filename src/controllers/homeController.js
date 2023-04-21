@@ -57,7 +57,7 @@ class HomeController {
             res.render('client/bookroom', {
                 title: 'Book now',
                 room: room,
-                room_types: types.name
+                room_types: types
             });
         } catch (err) {
             console.log("Error:", err);

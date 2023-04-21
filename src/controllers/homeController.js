@@ -80,8 +80,23 @@ class HomeController {
                 note: note
             });
             await newBooking.save();
-            w
-            res.json({ message: "Đặt phòng thành công!" });
+            
+            res.render('client/bill', {
+                title: 'Bill',
+                nameBill: "Đặt phòng thành công",
+                billId: newBooking.book_id,
+                checkin: checkin,
+                checkout: checkout,
+                name: fullname,
+                email: email,
+                phone: phone,
+                room_type: room_type,
+                roomid : id,
+                adults: adults,
+                children: children,
+                note: note,
+                price: price
+            });
         } catch (error) {
             console.log("Error:", error);
             res.status(500).json({ error: "Server error" });

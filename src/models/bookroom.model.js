@@ -10,6 +10,10 @@ var bookRoomSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    username: {
+        type: String,
+        require: true
+    },
     room_type: {
         type: String,
         require: true

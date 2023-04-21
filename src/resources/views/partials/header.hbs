@@ -44,6 +44,7 @@
                             <a href="/admin/dashboard" class="dropdown-item text-muted"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
                         </li>
                         <li>
+                            <input type="hidden" name="username" id="username" value="{{currentUser.username}}">
                             <a href="/profile/{{currentUser.username}}" id="profile" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
                         </li>
                         <li>
@@ -51,7 +52,7 @@
                         </li>
                         <li class="dropdown-divider"></li>
                         <li>
-                            <a href="/logout" class="dropdown-item text-muted"><i class="fas fa-sign-out-alt me-2"></i> Đăng xuất</a>
+                            <a href="/logout" onclick="deleteCookie()" class="dropdown-item text-muted"><i class="fas fa-sign-out-alt me-2"></i> Đăng xuất</a>
                         </li>
 
                     </ul>
@@ -62,13 +63,19 @@
 </nav>
 
 <script>
-    
+    function deleteCookie(){
+        document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+    }
     $(document).ready(function () {
+        const username = document.getElementById('username').value;
+        document.cookie = `username=${username}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
         {{#if currentUser}}
             {{#ifeq currentUser.role 'admin'}}
                 const dashboard = document.getElementById('dashboard');
                 dashboard.style.display = 'block';
             {{/ifeq}}
+
         {{/if}}
     });
 

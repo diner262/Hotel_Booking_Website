@@ -2,6 +2,7 @@
 <div class="room" id="room">
     <div class=" container d-lg-block d-none position-relative" id="divRoom">
         {{#each rooms as |room index|}}
+        {{#if (equal status "avaliable")}}
         <div class="col-12 room-page-room-{{even index}} rooms position-relative">
             <div id="room{{@index}}-carousel" class="carousel position-relative col-9 slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -16,8 +17,8 @@
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button">
-                    <span class="carousel-control-prev-icon" data-bs-target="#room{{@index}}-carousel" data-bs-slide="prev"
-                        aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon" data-bs-target="#room{{@index}}-carousel"
+                        data-bs-slide="prev" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#room{{@index}}-carousel"
@@ -51,6 +52,7 @@
 
             </div>
         </div>
+        {{/if}}
         {{/each}}
     </div>
 </div>

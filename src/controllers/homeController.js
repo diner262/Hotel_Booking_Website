@@ -4,6 +4,8 @@ var User = require('../models/user.model');
 var Room = require('../models/room.model');
 var BookRoom = require('../models/bookroom.model');
 var RoomType = require('../models/room_type.model');
+const cookieParser = require('cookie-parser');
+
 
 class HomeController {
     login(req, res, next) {
@@ -65,6 +67,7 @@ class HomeController {
     }
     async bookroomSucess(req, res, next) {
         try {
+            const username = req.cookies.username;
             const id = req.params.id;
             const {checkin, checkout, adults, children,fullname,email,phone,note,status,room_type,price} = req.body;
             const newBooking = new BookRoom({
@@ -79,6 +82,7 @@ class HomeController {
                 fullname: fullname,
                 email: email,
                 phone: phone,
+                username: username,
                 note: note
             });
             await newBooking.save();
@@ -86,6 +90,7 @@ class HomeController {
             res.render('client/bill', {
                 title: 'Bill',
                 nameBill: "Đặt phòng thành công",
+                username: username,
                 billId: newBooking.book_id,
                 checkin: checkin,
                 checkout: checkout,

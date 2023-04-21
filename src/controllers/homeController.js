@@ -78,6 +78,12 @@ class HomeController {
         });
     }
 
+    bill(req, res, next) {
+        res.render('client/bill', {
+            title: 'Bill'
+        });
+    }
+
     async regiterNewUser(req, res, next) {
         const username = req.body.username;
         const email = req.body.email;

@@ -22,6 +22,7 @@ router.get('/bookroom/:id',ensureAuth, homeController.bookroom)
 router.post('/bookroom/:id', ensureAuth,homeController.bookroomSucess)
 
 router.get('/detail', homeController.detail)
+router.get('/bill', homeController.bill)
 router.get('/', (req, res) => {
     res.redirect('home')
 });

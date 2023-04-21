@@ -140,9 +140,7 @@
 
     let x = document.querySelectorAll(".types");
     let room_types = JSON.parse(`{{{json room_types }}}`);
-
     for (let i = 0; i < x.length; i++) {
-        { { !--console.log(room_types[i].id); --} }
         for (let j = 0; j < room_types.length; j++) {
             if (room_types[j].id === x[i].innerHTML) {
                 x[i].innerHTML = room_types[j].name;

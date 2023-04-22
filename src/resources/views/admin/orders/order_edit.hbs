@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <form method="post" action="">
+    <form method="post" action="{{book_id}}">
     <div class="row gutters table-responsive bg-body shadow rounded pt-2 px-4">          
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
@@ -93,7 +93,18 @@
                             <strong>{{phone}}</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between">Phương thức thanh toán:
-                            <strong class="text-success">{{status_payment}} Chuyển khoản</strong>
+                            {{#ifeq payment "credit-card"}}
+                            <strong class="text-success">Thẻ tín dụng </strong>
+                            {{/ifeq}}
+                            {{#ifeq payment "face-to-face"}}
+                            <strong class="text-success">Thanh toán trực tiếp </strong>
+                            {{/ifeq}}
+                            {{#ifeq payment "bank-transfer"}}
+                            <strong class="text-success">Chuyển khoản ngân hàng </strong>
+                            {{/ifeq}}
+                            {{#ifeq payment "paypal"}}
+                            <strong class="text-success">Paypal </strong>
+                            {{/ifeq}}
                         </li>
                         <li class="list-group-item d-flex justify-content-between">Tổng tiền:
                             <strong class="text-danger" id="totalPrice">{{price}}</strong>
@@ -111,9 +122,33 @@
                 </div>
             </div>
         </div>
+        
+    {{/with}}
+        <div class="p-3">
+            <h6 class="mb-3 ml-3 text-primary">Thông tin phòng đặt </h6>
+            <table class="table table-striped" id="myTable">
+                <thead>
+                    <tr>
+                        <th>Mã phòng</th>
+                        <th>Tên phòng</th>
+                        <th>Giá</th>
+                        <th>Vị trí phòng</th>
+                    </tr>
+                </thead>
+                {{#with room}}
+                <tbody>
+                    <tr>
+                        <td>{{ room_code }}</td>
+                        <td>{{ room_name }}</td>
+                        <td class="price">{{ price }}</td>
+                        <td>Tầng {{ floor }}</td>
+                    </tr>
+                </tbody>
+                {{/with}}
+            </table>
+        </div>
     </div>
     </form>
-    {{/with}}   
 </div>
 
 <script>

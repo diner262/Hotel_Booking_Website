@@ -1,26 +1,22 @@
-[
-    {
-        "_id": {
-            "$oid": "6443e3935bddbc59612c5ea0"
-        },
-        "name": "Standard Room",
-        "shortcode": "1",
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6443e39e5bddbc59612c5ea6"
-        },
-        "name": "Deluxe Room",
-        "shortcode": "2",
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6443e3a75bddbc59612c5eac"
-        },
-        "name": "Suite Room",
-        "shortcode": "3",
-        "__v": 0
-    }
-]
+[{
+  "_id": {
+    "$oid": "6441fc18a39b1cb43d3eca1a"
+  },
+  "name": "Standard Room",
+  "shortcode": "StR",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6441fc23a39b1cb43d3eca20"
+  },
+  "name": "Deluxe Room",
+  "shortcode": "DR",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6441fc32a39b1cb43d3eca26"
+  },
+  "name": "Suite Room",
+  "shortcode": "SuR",
+  "__v": 0
+}]

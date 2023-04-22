@@ -118,6 +118,7 @@ class HomeController {
 
             await Room.findOneAndUpdate({ room_code: id }, { status: "reserved" }).exec();
             res.render('client/bill', {
+                
                 title: 'Bill',
                 nameBill: "Đặt phòng thành công",
                 username: username,

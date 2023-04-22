@@ -80,28 +80,36 @@ const allUser = asyncHandler(async (req, res) => {
     res.send(users)
 })
 
+async function updatePassword(newPassword, userID) {
+    const saltRounds = 10;
+    const hash = await bcrypt.hash(newPassword, saltRounds);
+
+    await User.findOneAndUpdate({ _id: userID }, { password: hash }).exec();
+}
+
 class userController {
 
     async updateUser(req, res) {
         try {
-            const username = req.params.username;
+            const username = req.cookies.username;
             const { fullname, phone, birthday, gender, address, password } = req.body;
             const user = await User.findOne({ username: username });
-    
+
             if (!user) {
                 return res.status(404).json({ error: "User not found" });
             } else {
                 const passwordMatch = await bcrypt.compare(password, user.password);
                 if (!passwordMatch) {
-                    return res.status(401).json({ error: "Incorrect password" });
+                    req.flash('error', 'Incorrect password!');
+                    res.redirect('/profile/');
                 }
-                else{
+                else {
                     const userUpdate = await User.findOneAndUpdate({ username: username }, { fullname, phone, birthday, gender, address }, { new: true });
                     if (!userUpdate) {
                         return res.status(404).json({ error: "User not found" });
                     } else {
                         req.flash('success', 'Cập nhật thông tin thành công!');
-                        res.redirect('/profile/' + username);
+                        res.redirect('/profile/');
                     }
                 }
             }
@@ -110,7 +118,7 @@ class userController {
             res.status(500).json({ error: "Server error" });
         }
     }
-    
+
 
     //get user by id
     async getUserByID(req, res) {
@@ -173,6 +181,33 @@ class userController {
         }
     }
 
+    //Update password
+    async updatePassword(req, res) {
+        try {
+            const userID = req.cookies.userID;
+            const { oldpass, newpass } = req.body;
+            const user = await User.findOne({ _id: userID });
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            }
+            else {
+                const passwordMatch = await bcrypt.compare(oldpass, user.password);
+                if (!passwordMatch) {
+                    req.flash('error', 'Mật khẩu cũ không đúng!');
+                    res.redirect('/profile/');
+                }
+                else {
+                    updatePassword(newpass, userID);
+                    req.flash('success', 'Cập nhật mật khẩu thành công!');
+                    res.redirect('/profile/');
+                }
+
+            }
+        } catch (error) {
+            console.log("Error:", error);
+            res.status(500).json({ error: "Server error" });
+        }
+    }
 }
 
 module.exports = {

@@ -11,7 +11,7 @@
             position: relative;
         }
 
-        .col-lg-8 button {
+        .col-lg-8 #btnUpdate {
             position: absolute;
             bottom: 0;
             right: 0;
@@ -34,7 +34,21 @@
         </div>
     </div>
     {{/if}}
-    <div class="container py-5">
+    {{#if messageFailure}}
+    <div class="position-absolute top-0 end-0" style="z-index: 1000; margin: 100px 48px" id="success-alert">
+        <div class="col-lg-10 mx-auto mb-3 w-auto">
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:">
+                    <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div> {{ messageFailure }} </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    <div class="container py-5" style="margin: 10px;">
         <div class="row">
             <div class="col">
                 <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
@@ -60,8 +74,8 @@
                             {{/eq}}</p>
                         <p class="text-muted mb-4"> {{address}}</p>
                         <div class="d-flex justify-content-center mb-2">
-                            <a href="/history"> <button type="button" class="btn btn-primary homeBtn"
-                                    >History Booking</button>
+                            <a href="/history"> <button type="button" class="btn btn-primary homeBtn">History
+                                    Booking</button>
                             </a>
                             <button type="button" class="btn btn-outline-primary ms-1">Message</button>
                         </div>
@@ -138,12 +152,47 @@
                     </div>
 
                 </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                        class="fa fa-edit"></i>
+                <button type="button" class="btn btn-primary" id="btnUpdate" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"><i class="fa fa-edit"></i>
                     Update</button>
+                <button type="button" class="btn btn-warning" id="btnChangePass" data-bs-toggle="modal"
+                    data-bs-target="#editPass"><i class="fa fa-edit"></i>
+                    Change Password</button>
 
             </div>
         </div>
+    </div>
+    <div class="modal fade" id="editPass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffc107;">Chỉnh sửa password user:
+                        {{username}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/profile/updatePassword" method="post" id="updatePass-form">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="oldpass" class="form-label">Nhập password cũ</label>
+                            <input type="password" class="form-control" id="oldpass" name="oldpass">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newpass" class="form-label">New password</label>
+                            <input type="password" class="form-control" id="newpass" name="newpass">
+                        </div>
+                        <div class="mb-3">
+                            <label for="repnewpass" class="form-label">Repeat new password</label>
+                            <input type="password" class="form-control" id="repnewpass" name="repnewpass">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning">Save Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -152,7 +201,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin {{username}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="post" id="updateForm" data-username={{username}}>
+                <form action="/profile/update" method="post" id="updateForm">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Full name</label>
@@ -204,9 +253,18 @@
             alert('Please enter your password to verify');
             event.preventDefault();
         }
-        const username = updateForm.getAttribute('data-username');
-        updateForm.setAttribute('action', `/profile/update/${username}`);
     });
 
+    const updatePassForm = document.querySelector('#updatePass-form');
+    updatePassForm.addEventListener('submit', () => {
+        if (!updatePassForm.oldpass.value || !updatePassForm.newpass.value || !updatePassForm.repnewpass.value) {
+            alert('Please enter all fields');
+            event.preventDefault();
+        }
+        if (updatePassForm.newpass.value !== updatePassForm.repnewpass.value) {
+            alert('New password and repeat new password must be the same');
+            event.preventDefault();
+        }
+    });
 
 </script>

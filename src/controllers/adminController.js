@@ -510,6 +510,49 @@ class AdminController {
                 });
             })
     }
+
+    async order_detail(req, res, next) {
+        const filter = { book_id: req.params.book_id };
+        await BookRoom.findOne(filter).exec()
+            .then(bookRoom => {
+                if(!bookRoom) {
+                    throw new Error('Đơn đặt phòng không tồn tại!');
+                }
+                res.render('admin/orders/order_edit', {
+                    title: 'Cập nhật đơn đặt phòng',
+                    layout: 'admin-main',
+                    bookRoom: bookRoom,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                next(err);
+            })
+    }
+
+    async update_order(req, res, next) {
+        const room_id = req.params.book_id;
+        const filter = { book_id: req.params.book_id };
+        const room = await BookRoom.findOne(filter).exec();
+        if (req.body.status_booking === 'checkout') {
+            await Room.findOneAndUpdate(
+                { room_code: room.room_code }, 
+                { status: "avaliable" }
+            ).exec();
+        }
+        await BookRoom.findOneAndUpdate(room_id, req.body, { new: true }).exec()
+            .then(bookRoom => {
+                if (!bookRoom) {
+                    throw new Error('Đơn đặt phòng không tồn tại!');
+                }
+                req.flash('success', 'Cập nhật đơn đặt phòng thành công!');
+                res.redirect('/admin/orders/' + req.params.book_id);
+            })
+            .catch(err => {
+                req.flash('error', 'Cập nhật đơn đặt phòng thất bại! Lỗi:' + err.message);
+                res.redirect('/admin/orders/' + req.params.book_id);
+            })
+    }
 }
 
 module.exports = new AdminController();

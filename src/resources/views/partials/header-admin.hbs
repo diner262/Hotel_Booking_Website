@@ -144,6 +144,7 @@
         const customerPage =  window.location.pathname.split('/').indexOf('customers') > -1;
         const roomPage =  window.location.pathname.split('/').indexOf('rooms') > -1;
         const calendarPage =  window.location.pathname.split('/').indexOf('calendar') > -1;
+        const orderPage =  window.location.pathname.split('/').indexOf('orders') > -1;
 
         const menuItems = document.querySelectorAll('.sidebar a');
 
@@ -155,6 +156,8 @@
             } else if (item.id === 'rooms' && roomPage) {
                 item.classList.add('active');
             } else if (item.id === 'calendar' && calendarPage) {
+                item.classList.add('active');
+            } else if (item.id === 'orders' && orderPage) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');

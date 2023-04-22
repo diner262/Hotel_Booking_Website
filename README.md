@@ -19,7 +19,8 @@ Xin chào thầy và các bạn,
 
 ## Technologies
 
-- Javascript
+- NodeJS
+- ExpressJS
 - Handlebars
 - Upload - Multer
 - passport

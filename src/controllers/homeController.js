@@ -95,9 +95,8 @@ class HomeController {
             }
             const id = req.params.id;
             const { checkin, checkout, adults, children, fullname, email, phone, note, room_type, totalPrice } = req.body;
-            console.log(checkin);
-            console.log(checkout);
             const newBooking = new BookRoom({
+                book_id: 'BR' + Date.now(),
                 room_code: id,
                 room_type: room_type,
                 price: totalPrice,

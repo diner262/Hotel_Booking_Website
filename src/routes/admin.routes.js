@@ -30,12 +30,9 @@ router.get('/room_types', ensureAuth, adminController.room_type_manage);
 router.post('/room_types', ensureAuth, adminController.create_room_type);
 router.post('/room_types/update/:id', ensureAuth, adminController.update_room_type);
 
-<<<<<<< HEAD
 // Order and Dashboard
-=======
 router.get('/rooms/room_codes/:floor', ensureAuth, adminController.getCodeRoom);
 
->>>>>>> 18b4af5d64bb118c12d290f2e1e5f9a75357edb6
 router.get('/orders', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);
 

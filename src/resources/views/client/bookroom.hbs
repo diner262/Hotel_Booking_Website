@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="./css/bookroom.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{#with room}}
 <div class="room-infor px-5 m-5">
     <div class="p-5">
@@ -7,11 +9,11 @@
             <div class="row mb-4">
                 <div class="col-md-4 col-sm-12">
                     <label for="checkin" class="form-label">Ngày check-in:</label>
-                    <input type="date" class="form-control" id="checkin" name="checkin" required>
+                    <input id="myID" placeholder="Check-in-Date" class="form-control" id="checkin" name="checkin" required>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <label for="checkout" class="form-label">Ngày check-out:</label>
-                    <input type="date" class="form-control" id="checkout" name="checkout" required>
+                    <input id="myID" placeholder="Check-out-Date" class="form-control" id="checkout" name="checkout" required>
                 </div>
                 <div class="col-md-2 col-sm-12">
                     <label for="adults" class="form-label">Người lớn:</label>
@@ -106,6 +108,8 @@
 
 {{/with}}
 
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     const roomFrom = document.getElementById('roomForm');
     const yourselfForm = document.getElementById('yourselfForm');
@@ -165,6 +169,8 @@
             }
         }
     }
-
+    flatpickr("#myID", {  
+    dateFormat: "d-m-Y"
+    })
 
 </script>

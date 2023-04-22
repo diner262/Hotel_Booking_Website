@@ -91,6 +91,8 @@ app.use('/history', express.static('public'));
 app.use('/profile', express.static('public'));
 app.use('/bookroom', express.static('public'));
 app.use('/history/:username', express.static('public'));
+app.use('/detail', express.static('public'));
+
 
 app.use('/error', express.static('public'));
 

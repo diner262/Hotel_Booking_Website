@@ -6,7 +6,11 @@ var BookRoom = require('../models/bookroom.model');
 var RoomType = require('../models/room_type.model');
 const cookieParser = require('cookie-parser');
 
-
+async function getRoomType(room_type_id) {
+    const room_type = await RoomType.findOne({ _id: room_type_id }).exec();
+    return room_type;
+  }
+  
 class HomeController {
     login(req, res, next) {
         res.render('client/login', {
@@ -79,11 +83,11 @@ class HomeController {
         try {
             const username = req.cookies.username;
             const id = req.params.id;
-            const { checkin, checkout, adults, children, fullname, email, phone, note, room_type, price } = req.body;
+            const { checkin, checkout, adults, children, fullname, email, phone, note, room_type, totalPrice } = req.body;
             const newBooking = new BookRoom({
                 room_code: id,
                 room_type: room_type,
-                price: price,
+                price: totalPrice,
                 adult: adults,
                 children: children,
                 checkin: new Date(checkin),
@@ -95,8 +99,8 @@ class HomeController {
                 note: note
             });
             await newBooking.save();
-            
-            Room.findOneAndUpdate({room_code: id}, {status: "unavaliable"}).exec();
+
+            Room.findOneAndUpdate({ room_code: id }, { status: "unavaliable" }).exec();
             res.render('client/bill', {
                 title: 'Bill',
                 nameBill: "Đặt phòng thành công",
@@ -112,7 +116,7 @@ class HomeController {
                 adults: adults,
                 children: children,
                 note: note,
-                price: price,
+                price: totalPrice,
                 room_types: types
             });
         } catch (error) {
@@ -121,11 +125,32 @@ class HomeController {
         }
 
     }
-    detail(req, res, next) {
-        res.render('client/detailroom', {
-            title: 'Detail'
-        });
+    async detail(req, res, next) {
+        try {
+
+            const roomID = req.params.id;
+            const room = await Room.findOne({ room_code: roomID }).exec();
+            if (!room) {
+                return res.status(404).render('error', {
+                    title: 'Not Found',
+                    message: `Room with ID ${roomID} not found`,
+                });
+            }
+            const room_types = await getRoomType(room.room_type);
+            res.render('client/detailroom', {
+                title: 'Detail Room ' + roomID,
+                description: room.description,
+                room_type: room_types.name,
+            });
+        } catch (error) {
+            console.log("Error:", error);
+            res.status(500).render('error', {
+                title: 'Server Error',
+                message: 'An error occurred while processing your request',
+            });
+        }
     }
+
 
     bill(req, res, next) {
         res.render('client/bill', {
@@ -152,7 +177,9 @@ class HomeController {
         const username = req.params.username;
         const book_id = req.params.id;
         BookRoom.findOne({ book_id: book_id })
-            .then((bookrooms) => {
+            .then( async (bookrooms) => {
+                const room_types = await getRoomType(bookrooms.room_type);
+
                 res.render('client/bill', {
                     title: 'Bill',
                     nameBill: "Xem hóa đơn",
@@ -163,13 +190,14 @@ class HomeController {
                     name: bookrooms.fullname,
                     email: bookrooms.email,
                     phone: bookrooms.phone,
-                    room_type: bookrooms.room_type,
+                    room_type: room_types.name,
                     roomid: bookrooms.room_code,
                     adults: bookrooms.adult,
                     children: bookrooms.children,
                     note: bookrooms.note,
                     price: bookrooms.price,
                 });
+
             })
             .catch((err) => {
                 console.log("Error:", err);

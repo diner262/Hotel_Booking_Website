@@ -51,7 +51,8 @@
                 <div class="col-md-4">
                     <label for="{{room_code}}" class="form-label">Mã số phòng: </label>
                     <label id="{{room_code}}">{{room_code}}</label>
-                    <label class="form-label">Tổng tiền phòng: <p id="totalPrice" name="totalPrice">$</p> </label>
+                    {{!-- <label class="form-label">Tổng tiền phòng: <p id="totalPrice" name="totalPrice"></p> </label>
+                    --}}
 
 
 
@@ -124,6 +125,25 @@
             event.preventDefault();
         }
         else {
+            var totalPrice = document.getElementById('totalPrice');
+            var price = document.getElementById('price').value;
+
+            var checkin_date = new Date(checkin);
+            var checkout_date = new Date(checkout);
+            var delta = checkout_date - checkin_date;
+            var total_days = parseInt(delta / (1000 * 60 * 60 * 24));
+            if (total_days < 0) {
+                alert('Ngày trả phòng phải sau ngày nhận phòng');
+                event.preventDefault();
+            }
+            else if (total_days == 0) {
+                totalPrice.value = price;
+
+            }
+            else {
+                totalPrice.value = total_days * price;
+            }
+
             roomFrom.submit();
             yourselfForm.submit();
         }

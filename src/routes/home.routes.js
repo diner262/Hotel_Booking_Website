@@ -24,7 +24,7 @@ router.get('/room', ensureAuth, homeController.room);
 router.get('/bookroom/:id', ensureAuth, homeController.bookroom);
 router.post('/bookroom/:id', ensureAuth,homeController.bookroomSucess);
 
-router.get('/detail', ensureAuth, homeController.detail);
+router.get('/detail/:id', ensureAuth, homeController.detail);
 router.get('/bill', ensureAuth, homeController.bill);
 router.get('/history/:username', ensureAuth, homeController.history);
 router.get('/history/:username/:id', ensureAuth, homeController.historyDetail);

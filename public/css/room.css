@@ -149,3 +149,27 @@ img {
   left: 0;
   bottom: -66.5px;
   border-radius: 20px; }
+
+.room-category img {
+  width: 400px;
+  height: 350px; }
+
+.owl-carousel .owl-next,
+.owl-carousel .owl-prev {
+  height: 50px;
+  position: absolute;
+  width: 50px;
+  cursor: pointer;
+  top: 35%;
+  background: white !important;
+  transition: 0.5s; }
+
+.owl-carousel .owl-prev {
+  left: 15px; }
+
+.owl-carousel .owl-next {
+  right: 15px; }
+
+.owl-carousel .owl-next:hover,
+.owl-carousel .owl-prev:hover {
+  background: #C1B086 !important; }

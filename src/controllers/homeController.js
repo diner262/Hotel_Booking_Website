@@ -81,26 +81,36 @@ class HomeController {
         });
 
         try {
-            const username = req.cookies.username;
+            let username = '';
+            if (req.user !== undefined) {
+                username = req.user.username;
+            } else {
+                username = 'user_' + Date.now();
+            }
             const id = req.params.id;
             const { checkin, checkout, adults, children, fullname, email, phone, note, room_type, totalPrice } = req.body;
+            console.log(checkin);
+            console.log(checkout);
             const newBooking = new BookRoom({
                 room_code: id,
                 room_type: room_type,
                 price: totalPrice,
                 adult: adults,
                 children: children,
+                transaction_date: Date.now(),
                 checkin: new Date(checkin),
                 checkout: new Date(checkout),
                 fullname: fullname,
                 email: email,
                 phone: phone,
                 username: username,
-                note: note
+                note: note,
+                status_booking: 'pending',
+                status_payment: 'pending'
             });
             await newBooking.save();
 
-            Room.findOneAndUpdate({ room_code: id }, { status: "unavaliable" }).exec();
+            await Room.findOneAndUpdate({ room_code: id }, { status: "reserved" }).exec();
             res.render('client/bill', {
                 title: 'Bill',
                 nameBill: "Đặt phòng thành công",
@@ -121,7 +131,7 @@ class HomeController {
             });
         } catch (error) {
             console.log("Error:", error);
-            res.status(500).json({ error: "Server error" });
+            res.status(500).json({ error: error.message });
         }
 
     }

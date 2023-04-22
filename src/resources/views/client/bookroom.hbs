@@ -9,11 +9,11 @@
             <div class="row mb-4">
                 <div class="col-md-4 col-sm-12">
                     <label for="checkin" class="form-label">Ngày check-in:</label>
-                    <input id="myID" placeholder="Check-in-Date" class="form-control" id="checkin" name="checkin" required>
+                    <input type="text" placeholder="Check-in-Date" class="form-control dateCheck" id="checkin" name="checkin" required>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <label for="checkout" class="form-label">Ngày check-out:</label>
-                    <input id="myID" placeholder="Check-out-Date" class="form-control" id="checkout" name="checkout" required>
+                    <input type="text" placeholder="Check-out-Date" class="form-control dateCheck" id="checkout" name="checkout" required>
                 </div>
                 <div class="col-md-2 col-sm-12">
                     <label for="adults" class="form-label">Người lớn:</label>
@@ -28,60 +28,63 @@
             </div>
             <div class="row mb-4">
                 <div class="col-md-4">
-                    <label for="room-number" class="form-label">Trạng thái phòng:</label>
+                    <label for="room-number" class="form-label">Diện tích phòng:</label>
                     <br>
-                    <label id="{{status}}">
-                        {{#if (equal status "unavailable")}}
-                        Phòng đã hết
-                        {{else if (equal status "reserved")}}
-                        Phòng đang sửa
-                        {{else}}
-                        Phòng trống
-                        {{/if}}</label>
-                    <input type="hidden" id="status" name="status" value="{{status}}">
+                    <label class="fw-bolder" id="{{acreage}}"> {{acreage}} m&sup2</label>
+                    {{!-- <input type="hidden" id="acreage" name="acreage" value="{{acreage}}"> --}}
 
 
                 </div>
                 <div class="col-md-4">
                     <label for="roomtype" class="form-label">Hạng phòng:</label>
                     <br>
-                    <label class="types" id="{{room_type}}">{{room_type}}</label>
+                    <label class="types fw-bolder" id="{{room_type}}">{{room_type}}</label>
                     <input type="hidden" id="room_type" name="room_type" value="{{room_type}}">
                     <input type="hidden" id="price" name="price" value="{{price}}">
                     <input type="hidden" id="totalPrice" name="totalPrice">
                 </div>
                 <div class="col-md-4">
-                    <label for="{{room_code}}" class="form-label">Mã số phòng: </label>
-                    <label id="{{room_code}}">{{room_code}}</label>
-                    {{!-- <label class="form-label">Tổng tiền phòng: <p id="totalPrice" name="totalPrice"></p> </label>
-                    --}}
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <label for="{{room_code}}" class="form-label">Mã số phòng: </label>
+                            <label class="fw-bolder" id="{{room_code}}">{{room_code}}</label>
+                        </div>
+                        <div class="col-xl-6">
+                            <label for="{{floor}}" class="form-label">Vị trí phòng: </label>
+                            <label class="fw-bolder" id="{{floor}}">Tầng {{floor}}</label>
 
-
-
+                        </div>
+                    </div>
+                    {{!-- <label class="form-label">Tổng tiền phòng: <p id="totalPrice" name="totalPrice"></p> </label> --}}
+                   
                 </div>
             </div>
     </div>
 </div>
+{{/with}}
 
 <div class="user-infor px-5 m-5">
     <div class="p-5">
         <h3 class="text-center mb-3">Thông tin cá nhân</h3>
-        <form action="" method="post" id="yourselfForm" data-room_code="{{room_code}}">
+        <form action="" method="post" id="yourselfForm" data-room_code="{{room.room_code}}">
 
             <div class="row form-row">
                 <div class="col-md-6 mb-3">
                     <label for="fullname">Họ và tên:</label>
-                    <input type="text" class="form-control" id="fullname" name="fullname" required>
+                    <input type="text" class="form-control" id="fullname" name="fullname"
+                        value="{{currentUser.fullname}}"  required>
                 </div>
             </div>
             <div class=" row form-row">
                 <div class="col-md-6 mb-3">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" 
+                        value="{{currentUser.email}}" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="phone">Số điện thoại:</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                    <input type="tel" class="form-control" id="phone" name="phone"
+                        value="{{currentUser.phone}}"  required>
                 </div>
             </div>
             <div class="form-row">
@@ -105,8 +108,6 @@
         </form>
     </div>
 </div>
-
-{{/with}}
 
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -169,8 +170,8 @@
             }
         }
     }
-    flatpickr("#myID", {  
-    dateFormat: "d-m-Y"
+    flatpickr(".dateCheck", {  
+        dateFormat: "Y-m-d"
     })
 
 </script>

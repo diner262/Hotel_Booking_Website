@@ -46,23 +46,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each rooms}}
+                    {{#each bookRooms}}
                     <tr>
                         <td>{{no1 @index }}</td>
-                        <td>{{room_code}}</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="uploads/room/{{ thumbnail }}" alt="Avatar" class="avatar-sm rounded- me-3">
-                                {{ room_name }}
-                            </div>
-                        </td>
-                        <td class="types">{{ room_type }}</td>
-                        <td class="price">{{ price }}</td>
-                        <td>
-                            {{#ifeq status "avaliable"}} Còn trống {{/ifeq}}
-                            {{#ifeq status "unavaliable"}} Đang sửa chữa {{/ifeq}}
-                            {{#ifeq status "reserved"}} Đã được sử dụng {{/ifeq}}
-                        </td>
+                        <td>{{book_id}}</td>
+                        <td>{{fullname}}</td>
+                        <td class="check-in">{{ checkin }}</td>
+                        <td class="check-out">{{checkout}}</td>
+                        <td>status</td>
+                        <td class="price">{{price}}</td>
                         <td>
                             <a href="rooms/update/{{ room_code }}" class="settings" title="Settings"
                                 data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
@@ -117,17 +109,6 @@
 
 <script>
     $(document).ready(function () {
-        let x = document.querySelectorAll(".types");
-        let room_types = JSON.parse(`{{{json room_types }}}`);
-
-        for (let i = 0; i < x.length; i++) {
-            for (let j = 0; j < room_types.length; j++) {
-                if (room_types[j].id === x[i].innerHTML) {
-                    x[i].innerHTML = room_types[j].name;
-                }
-            }
-        }
-
         let USDollar =new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -160,5 +141,19 @@
             })
         });
 
+        const checkIn = document.querySelectorAll('.check-in');
+        const checkOut = document.querySelectorAll('.check-out');
+
+        for (let i = 0; i < checkIn.length; i++) {
+            const d = new Date(checkIn[i].innerHTML);
+            const datestring = d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+            checkIn[i].innerHTML = datestring;
+        }
+
+        for (let i = 0; i < checkOut.length; i++) {
+            const d = new Date(checkOut[i].innerHTML);
+            const datestring = d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+            checkOut[i].innerHTML = datestring;
+        }
     })
 </script>

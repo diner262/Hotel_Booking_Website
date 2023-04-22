@@ -500,13 +500,13 @@ class AdminController {
     
 
     // Trang quản lý đơn hàng
-    order_manage(req, res, next) {
-        BookRoom.find().exec()
+    async order_manage(req, res, next) {
+        await BookRoom.find().exec()
             .then(bookRooms => {
                 res.render('admin/order_manage', {
                     title: 'Quản lý đơn đặt phòng',
                     layout: 'admin-main',
-                    bookRooms: bookRooms
+                    bookRooms: bookRooms,
                 });
             })
     }

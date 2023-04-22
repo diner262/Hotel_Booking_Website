@@ -14,10 +14,6 @@ var bookRoomSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    room_type: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: '_room_type'
-    },
     price: {
         type: Number,
         require: true
@@ -29,6 +25,10 @@ var bookRoomSchema = new mongoose.Schema({
     children:{
         type: Number,
         require: true
+    },
+    transaction_date: {
+        type: Date,
+        default: Date.now
     },
     checkin:{
         type: Date,
@@ -53,6 +53,16 @@ var bookRoomSchema = new mongoose.Schema({
     note:{
         type: String,
         require: false
+    },
+    status_booking: {
+        type: String,
+        enum: ['pending', 'confirmed', 'canceled', 'checkin', 'checkout'],
+        require: 'pending'
+    },
+    status_payment: {
+        type: String,
+        enum: ['pending', 'paid', 'unpaid', 'refund'],
+        default: 'pending'
     },
     created_at: {
         type: Date,

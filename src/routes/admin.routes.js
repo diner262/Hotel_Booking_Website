@@ -11,12 +11,14 @@ router.post('/login', validateLogin(), handleLoginAdmin, adminController.authent
 router.get('/login', forwardAuth, adminController.login);
 router.get('/logout', adminController.logout);
 
+// CRUD customers
 router.get('/customers', ensureAuth, adminController.customer_manage);
 router.get('/customers/:username', ensureAuth, adminController.customer_detail);
 router.get('/customers/update/:username', ensureAuth, adminController.customer_edit);
 router.post('/customers/update/:username', ensureAuth, adminController.update_customer);
 router.delete('/customers/delete/:id', ensureAuth, adminController.delete_customer);
 
+// CRUD room hotel
 router.get('/rooms', ensureAuth, adminController.room_manage);
 router.get('/rooms/create', ensureAuth, adminController.room_create);
 router.post('/rooms/create', ensureAuth, adminController.create_room);
@@ -28,6 +30,7 @@ router.get('/room_types', ensureAuth, adminController.room_type_manage);
 router.post('/room_types', ensureAuth, adminController.create_room_type);
 router.post('/room_types/update/:id', ensureAuth, adminController.update_room_type);
 
+// Order and Dashboard
 router.get('/orders', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);
 

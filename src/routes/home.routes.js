@@ -16,21 +16,21 @@ var {
 router.post('/login', validateLogin(), handleLoginClient, homeController.authenticateLogin, accountAuth);
 router.post('/signup', validateSignUp(), handleSignUp, homeController.regiterNewUser);
 
-router.get('/login', forwardAuth, homeController.login)
-router.get('/logout', homeController.logout)
-router.get('/signup', forwardAuth, homeController.signup)
-router.get('/home', ensureAuth, homeController.home)
-router.get('/room', ensureAuth, homeController.room)
-router.get('/bookroom/:id', ensureAuth, homeController.bookroom)
-router.post('/bookroom/:id', ensureAuth,homeController.bookroomSucess)
+router.get('/login', forwardAuth, homeController.login);
+router.get('/logout', homeController.logout);
+router.get('/signup', forwardAuth, homeController.signup);
+router.get('/home', ensureAuth, homeController.home);
+router.get('/room', ensureAuth, homeController.room);
+router.get('/bookroom/:id', ensureAuth, homeController.bookroom);
+router.post('/bookroom/:id', ensureAuth,homeController.bookroomSucess);
 
-router.get('/detail', ensureAuth, homeController.detail)
-router.get('/bill', ensureAuth, homeController.bill)
-router.get('/history/:username', ensureAuth, homeController.history)
-router.get('/history/:username/:id', ensureAuth, homeController.historyDetail)
+router.get('/detail', ensureAuth, homeController.detail);
+router.get('/bill', ensureAuth, homeController.bill);
+router.get('/history/:username', ensureAuth, homeController.history);
+router.get('/history/:username/:id', ensureAuth, homeController.historyDetail);
 
 router.get('/', (req, res) => {
-    res.redirect('home')
+    res.redirect('home');
 });
 
 

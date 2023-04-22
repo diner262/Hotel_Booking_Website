@@ -29,7 +29,7 @@ let validateLogin = () => {
 
 let handleLoginAdmin = (req, res, next) => {
     const data = matchedData(req);
-    let error = validationResult(req)
+    let error = validationResult(req);
     if (!error.isEmpty()) {
         req.flash('error', error.array()[0].msg);
 
@@ -46,7 +46,7 @@ let handleLoginAdmin = (req, res, next) => {
 
 let handleLoginClient = (req, res, next) => {
     const data = matchedData(req);
-    let error = validationResult(req)
+    let error = validationResult(req);
     if (!error.isEmpty()) {
         req.flash('error', error.array()[0].msg);
 
@@ -63,7 +63,7 @@ let handleLoginClient = (req, res, next) => {
 
 let handleSignUp = (req, res, next) => {
     const data = matchedData(req);
-    let error = validationResult(req)
+    let error = validationResult(req);
     if (!error.isEmpty()) {
         req.flash('error', error.array()[0].msg);
 

@@ -208,6 +208,31 @@ class AdminController {
             })
     }
 
+    async getCodeRoom(req, res, next) {
+        const roomFloor = req.params.floor;
+        const roomCodeExists = new Array();
+        const roomCode = new Array();
+        const rooms = await Room.find().exec();
+
+        for (let i = 0; i < rooms.length; i++) {
+            if (rooms[i].floor == roomFloor) {
+                roomCodeExists.push(rooms[i].room_code);
+            }
+        }
+
+        const room_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        for (let i = 0; i < roomCodeExists.length; i++) {  
+            if (room_numbers.includes(Number(roomCodeExists[i] % 10))) {
+                room_numbers.splice(room_numbers.indexOf(Number(roomCodeExists[i] % 10)), 1);
+            }
+        }
+        for (let j = 0; j < room_numbers.length; j++) {
+            roomCode.push(roomFloor + 0 + room_numbers[j]);
+        }
+
+        res.send(roomCode);
+    }
+
     async room_create(req, res, next) {
         const room_types = await RoomType.find().exec();
         const types = room_types.map(room_type => {
@@ -234,23 +259,6 @@ class AdminController {
                     req.flash('error', 'File upload không đúng định dạng!');
                     res.redirect('/admin/rooms/create');
                 }
-            }
-
-            const roomFloor = req.body.floor;
-            const roomCodeExists = new Array();
-            const rooms = await Room.find().exec();
-
-            for (let i = 0; i < rooms.length; i++) {
-                if (rooms[i].floor == roomFloor) {
-                    roomCodeExists.push(rooms[i].room_code);
-                }
-            }
-            
-            const len = roomCodeExists.length;
-            if (roomCodeExists.length > 0) {
-                req.body.room_code = Number(roomCodeExists[len - 1]) + 1;
-            } else {
-                req.body.room_code = roomFloor + 0 + 1;
             }
             
             if (req.file !== undefined) {
@@ -316,27 +324,6 @@ class AdminController {
                     req.flash('error', 'File upload không đúng định dạng!');
                     res.redirect('/admin/rooms/update/' + room_code);
                 }
-            }
-
-            const roomFloor = req.body.floor;
-            if (roomFloor != String(room_code)[0]) {
-                const roomCodeExists = new Array();
-                const rooms = await Room.find().exec();
-
-                for (let i = 0; i < rooms.length; i++) {
-                    if (rooms[i].floor == roomFloor) {
-                        roomCodeExists.push(rooms[i].room_code);
-                    }
-                }
-                
-                const len = roomCodeExists.length;
-                if (roomCodeExists.length > 0) {
-                    req.body.room_code = Number(roomCodeExists[len - 1]) + 1;
-                } else {
-                    req.body.room_code = roomFloor + 0 + 1;
-                } 
-            } else {
-                req.body.room_code = room_code;
             }
 
             if (req.file !== undefined) {

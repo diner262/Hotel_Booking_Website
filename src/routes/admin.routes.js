@@ -28,6 +28,8 @@ router.get('/room_types', ensureAuth, adminController.room_type_manage);
 router.post('/room_types', ensureAuth, adminController.create_room_type);
 router.post('/room_types/update/:id', ensureAuth, adminController.update_room_type);
 
+router.get('/rooms/room_codes/:floor', ensureAuth, adminController.getCodeRoom);
+
 router.get('/orders', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);
 

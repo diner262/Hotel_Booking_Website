@@ -957,10 +957,6 @@ table.table td i {
     margin: 0 auto;
   }
 
-  /* .event {
-    font-size: 12px;
-    color: #fff;
-    background-color: #007bff;
-    padding: 2px;
-    border-radius: 3px;
-  } */
+  .ck-editor__editable {
+    min-height: 200px !important;
+  }

@@ -92,6 +92,7 @@ app.use('/profile', express.static('public'));
 app.use('/bookroom', express.static('public'));
 app.use('/history/:username', express.static('public'));
 
+app.use('/error', express.static('public'));
 
 // session middleware
 app.use(session({
@@ -114,6 +115,9 @@ app.use(flashMessage);
 
 indexRouter(app)
 
+app.get('/error/404', function (req, res) {
+  res.render('error/404', { layout: false });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

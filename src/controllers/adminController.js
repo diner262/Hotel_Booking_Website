@@ -5,6 +5,7 @@ var path = require('path');
 var User = require('../models/user.model');
 var Room = require('../models/room.model');
 var RoomType = require('../models/room_type.model');
+const { error } = require('console');
 
 
 //Configuration for Multer
@@ -121,12 +122,19 @@ class AdminController {
         
         await User.findOne(filter).exec()
             .then(customer => {
+                if (!customer) {
+                    throw new Error('Khách hàng không tồn tại!');
+                }
                 res.render('admin/customers/customer_detail', {
                     title: 'Thông tin chi tiết khách hàng',
                     layout: 'admin-main',
                     customer: customer
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                next(err);
             });
-        });
     }
 
     async customer_edit(req, res, next) {
@@ -135,12 +143,19 @@ class AdminController {
         
         await User.findOne(filter).exec()
             .then(customer => {
+                if (!customer) {
+                    throw new Error('Khách hàng không tồn tại!');
+                }
                 res.render('admin/customers/customer_edit', {
                     title: 'Cập nhật thông tin khách hàng',
                     layout: 'admin-main',
                     customer: customer
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                next(err);
             });
-        });
     }
 
     async update_customer(req, res, next) {
@@ -167,23 +182,29 @@ class AdminController {
     
             await User.findOneAndUpdate(filter, req.body, { new: true }).exec()
                 .then(customer => {
+                    if (!customer) {
+                        throw new Error('Khách hàng không tồn tại!');
+                    }
                     req.flash('success', 'Cập nhật thông tin khách hàng thành công!');
                     res.redirect('/admin/customers');
                 })
                 .catch(err => {
-                    req.flash('error', 'Cập nhật thông tin khách hàng thất bại!');
+                    req.flash('error', 'Cập nhật thông tin khách hàng thất bại! Lỗi' + err.message);
                     res.redirect('/admin/customers');
                 });
-        })
+        });
     }
 
     async delete_customer(req, res, next) {
         const id = req.params.id;
 
         await User.findByIdAndDelete(id).exec()
-            .then((user) => {
-                if (user.avatar !== undefined) {
-                    fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/avatar/') + '/' + user.avatar);
+            .then((customer) => {
+                if (!customer) {
+                    throw new Error('Khách hàng không tồn tại!');
+                }
+                if (customer.avatar !== undefined) {
+                    fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/avatar/') + '/' + customer.avatar);
                 }
                 req.flash('success', 'Xóa thông tin khách hàng thành công!');
                 res.sendStatus(200);
@@ -191,7 +212,7 @@ class AdminController {
             .catch(err => {
                 req.flash('error', 'Xóa thông tin khách hàng thất bại!');
                 res.sendStatus(500);
-            })
+            });
     }
 
 
@@ -213,7 +234,7 @@ class AdminController {
                     rooms: rooms,
                     room_types: types
                 });
-            })
+            });
     }
 
     async getCodeRoom(req, res, next) {
@@ -310,6 +331,9 @@ class AdminController {
         
         await Room.findOne(filter).exec()
             .then(room => {
+                if(!room) {
+                    throw new Error('Phòng không tồn tại!');
+                }
                 res.render('admin/rooms/room_edit', {
                     title: 'Cập nhật Phòng',
                     layout: 'admin-main',
@@ -317,6 +341,10 @@ class AdminController {
                     room_types: types
                 });
             })
+            .catch(err => {
+                console.log(err);
+                next(err);
+            });
     }
 
     update_room(req, res, next) {
@@ -345,10 +373,7 @@ class AdminController {
                 const typesPromises = types.map(async (type) => {
                     const room_type = await RoomType.findById(type.id);
                     if (!room_type) {
-                        res.status(404).send({
-                            code: 1,
-                            message: `Không tìm thấy sản phẩm có id ${type.id}!`,
-                        });
+                        throw new Error('Mã phòng không tồn tại!');
                     }
                     type.name = room_type.name;
                     return type;
@@ -361,18 +386,32 @@ class AdminController {
                     if (err) throw err
                     
                     await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
-                        .then(() => {
+                        .then((room) => {
+                            if (!room) {
+                                throw new Error('Phòng không tồn tại!');
+                            }
                             req.flash('success', 'Cập nhật thông tin phòng thành công!');
                             res.redirect('/admin/rooms');
                         })
+                        .catch(err => {
+                            req.flash('error', 'Cập nhật thông tin phòng thất bại! Lỗi:' + err.message);
+                            res.redirect('/admin/rooms');
+                        });
                 });
             } else {
                 req.body.created_at = new Date();
                 await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
-                    .then(() => {
-                        req.flash('success', 'Cập nhật thông tin phòng thành công!');
-                        res.redirect('/admin/rooms');
-                    })
+                .then((room) => {
+                    if (!room) {
+                        throw new Error('Phòng không tồn tại!');
+                    }
+                    req.flash('success', 'Cập nhật thông tin phòng thành công!');
+                    res.redirect('/admin/rooms');
+                })
+                .catch(err => {
+                    req.flash('error', 'Cập nhật thông tin phòng thất bại! Lỗi:' + err.message);
+                    res.redirect('/admin/rooms');
+                });
             }
         })
     }
@@ -381,6 +420,9 @@ class AdminController {
         const id = req.params.id;
         await Room.findByIdAndDelete(id).exec()
             .then((room) => {
+                if (!room) {
+                    throw new Error('Phòng không tồn tại!');
+                }
                 if (room.thumbnail !== undefined) {
                     fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '/' + room.thumbnail);
                 }
@@ -388,21 +430,28 @@ class AdminController {
                 res.sendStatus(200);
             })
             .catch(err => {
-                req.flash('error', 'Xóa thông tin phòng thất bại!');
+                req.flash('error', 'Xóa thông tin phòng thất bại! Lỗi:' + err.message);
                 res.sendStatus(500);
             })
             
     }
 
-    // Quản lý thể loại phòng
+    // Quản lý loại phòng
     async room_type_manage(req, res, next) {
         await RoomType.find().exec()
             .then(roomTypes => {
+                if (!roomTypes) {
+                    throw new Error('Loại phòng không tồn tại!');
+                }
                 res.render('admin/room_type_manage', {
                     title: 'Quản lý loại phòng',
                     layout: 'admin-main',
                     roomTypes: roomTypes
                 });
+            })
+            .catch(err => {
+                console.log(err);
+                next(err);
             })
     }
 
@@ -426,10 +475,17 @@ class AdminController {
     async update_room_type(req, res, next) {
         const id = req.params.id;
         await RoomType.findByIdAndUpdate(id, req.body, { new: true }).exec()
-            .then(() => {
+            .then((room_type) => {
+                if (!room_type) {
+                    throw new Error('Loại phòng không tồn tại!');
+                }
                 req.flash('success', 'Cập nhật loại phòng thành công!');
                 res.redirect('/admin/room_types');
             })
+            .catch(err => {
+                req.flash('error', 'Cập nhật loại phòng thất bại! Lỗi:' + err.message);
+                res.redirect('/admin/room_types');
+            });
     }
 }
 

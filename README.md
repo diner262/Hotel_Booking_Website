@@ -1,12 +1,12 @@
-#Introduction
+# Introduction
 Xin chào thầy và các bạn,
 
-#Getting Started
+# Getting Started
 
-##Feature
+## Feature
 
-- CRUD
-- Validation
-- Security
-- Responsive
-- User module + Admin module
+* CRUD
+* Validation
+* Security
+* Responsive
+* User module + Admin module

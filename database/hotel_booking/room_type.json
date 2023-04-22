@@ -1,49 +1,26 @@
-{
-    "_id" : NumberInt(1),
-    "name" : "Deluxe Family",
-    "description" : "NULL",
-    "created_at" : null,
-    "update_at" : null
-}
-{
-    "_id" : NumberInt(2),
-    "name" : "Deluxe Twin",
-    "description" : "NULL",
-    "created_at" : null,
-    "update_at" : null
-}
-{
-    "_id" : NumberInt(3),
-    "name" : "Deluxe Triple",
-    "description" : "NULL",
-    "created_at" : null,
-    "update_at" : null
-}
-{
-    "_id" : NumberInt(4),
-    "name" : "Deluxe King",
-    "description" : "NULL",
-    "created_at" : null,
-    "update_at" : null
-}
-{
-    "_id" : NumberInt(5),
-    "name" : "Executive Suite",
-    "description" : "NULL",
-    "created_at" : null,
-    "update_at" : null
-}
-{
-    "_id" : NumberInt(6),
-    "name" : "Superior Twin",
-    "description" : "NULL",
-    "created_at" : null,
-    "update_at" : null
-}
-{
-    "_id" : NumberInt(7),
-    "name" : "Superior Triple",
-    "description" : "NULL",
-    "created_at" : null,
-    "update_at" : null
-}
+[
+    {
+        "_id": {
+            "$oid": "6443e3935bddbc59612c5ea0"
+        },
+        "name": "Standard Room",
+        "shortcode": "1",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "6443e39e5bddbc59612c5ea6"
+        },
+        "name": "Deluxe Room",
+        "shortcode": "2",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "6443e3a75bddbc59612c5eac"
+        },
+        "name": "Suite Room",
+        "shortcode": "3",
+        "__v": 0
+    }
+]

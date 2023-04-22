@@ -1,435 +1,254 @@
-{
-    "_id" : NumberInt(1),
-    "type" : NumberInt(2),
-    "hotel_id" : NumberInt(1),
-    "name" : "Single Room",
-    "number" : NumberInt(101),
-    "acreage" : 40.0,
-    "price" : 399000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Tiện nghi, thoải mái, có giường và tủ",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(2),
-        "name" : "Deluxe Twin",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+[
+    {
+        "_id": {
+            "$oid": "6443e40f5bddbc59612c5ebb"
+        },
+        "room_name": "P4nthers 1 Room",
+        "room_code": "201",
+        "room_type": {
+            "$oid": "6443e3935bddbc59612c5ea0"
+        },
+        "floor": 2,
+        "price": 1500000,
+        "adult": 2,
+        "children": 0,
+        "acreage": 35,
+        "thumbnail": "",
+        "tag": [
+            "1"
+        ],
+        "status": "avaliable",
+        "description": "<p>Standard Room là một loại phòng tiêu chuẩn và phổ biến trong khách sạn, được thiết kế để đáp ứng nhu cầu cơ bản của du khách. Phòng thường có diện tích từ 20 đến 30 mét vuông và được trang bị đầy đủ các tiện nghi cơ bản.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:41:35.675Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:41:35.676Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(1),
-        "province_id" : NumberInt(48),
-        "name" : "Happy Hotel in the sea",
-        "address" : "33 Đường Thi Sách, , TP Vũng tàu, Việt Nam",
-        "description" : "Có hồ bơi, wifi miễn phí, ban công, điều hòa không khí, phòng tắm riêng, phòng không hút thuốc"
-    }
-}
-{
-    "_id" : NumberInt(2),
-    "type" : NumberInt(1),
-    "hotel_id" : NumberInt(2),
-    "name" : "Double Room",
-    "number" : NumberInt(102),
-    "acreage" : 50.0,
-    "price" : 499000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "có 2 giường, phòng tắm riêng",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(1),
-        "name" : "Deluxe Family",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+    {
+        "_id": {
+            "$oid": "6443e4425bddbc59612c5ec8"
+        },
+        "room_name": "P4nthers 2 Room",
+        "room_code": "601",
+        "room_type": {
+            "$oid": "6443e39e5bddbc59612c5ea6"
+        },
+        "floor": 6,
+        "price": 2500000,
+        "adult": 2,
+        "children": 2,
+        "acreage": 60,
+        "thumbnail": "",
+        "tag": [
+            "2"
+        ],
+        "status": "avaliable",
+        "description": "<p>Delexu Room là một loại phòng cao cấp trong khách sạn, thường có diện tích rộng hơn so với các loại phòng khác. Nó được thiết kế với nội thất sang trọng và tiện nghi đầy đủ nhằm mang đến trải nghiệm nghỉ dưỡng đẳng cấp cho khách hàng.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:42:26.913Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:42:26.914Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(2),
-        "province_id" : NumberInt(32),
-        "name" : "Apus hotel",
-        "address" : "90/2 Đường Hùng Vương, tỉnh Lộc Thọ, TP Nha Trang, Việt Nam",
-        "description" : "Gần biến, có hồ bơi riêng, có wifi cung cấp, quầy lễ tân hoạt động 24/24, Có TV truyền hình cáp, két an toàn trong phòng, máy lạnh trong phòng, đồ vệ sinh cá nhân miễn phí"
-    }
-}
-{
-    "_id" : NumberInt(3),
-    "type" : NumberInt(1),
-    "hotel_id" : NumberInt(3),
-    "name" : "Master Room",
-    "number" : NumberInt(202),
-    "acreage" : 55.0,
-    "price" : 529000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "có nhiều giường, phòng tắm và bàn tiếp khách",
-    "status" : true,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(1),
-        "name" : "Deluxe Family",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+    {
+        "_id": {
+            "$oid": "6443e4885bddbc59612c5edf"
+        },
+        "room_name": "P4nthers 3 Room",
+        "room_code": "501",
+        "room_type": {
+            "$oid": "6443e3a75bddbc59612c5eac"
+        },
+        "floor": 5,
+        "price": 7300000,
+        "adult": 4,
+        "children": 4,
+        "acreage": 120,
+        "thumbnail": "",
+        "tag": [
+            "5"
+        ],
+        "status": "avaliable",
+        "description": "<p>Phòng Suite là một phòng sang trọng và rộng rãi trong một khách sạn hoặc khu nghỉ dưỡng, thường được thiết kế để ở trong thời gian dài hoặc các dịp đặc biệt. Những phòng này thường có một khu vực phòng khách riêng biệt, phòng ngủ và phòng tắm, cung cấp đủ không gian và sự riêng tư cho khách.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:43:36.243Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:43:36.244Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(3),
-        "province_id" : NumberInt(47),
-        "name" : "ZELDA hotel",
-        "address" : "61 Phó Đức Chính, Xã Tháng Tám, TP Vũng Tàu, Việt Nam",
-        "description" : "Có dịch vụ đưa đón sân bay, dịch vụ phòng và ăn miễn phí, phòng ngủ trang bị máy lạnh, TV, tủ lạnh, voi sen và dép để đi lại"
-    }
-}
-{
-    "_id" : NumberInt(4),
-    "type" : NumberInt(3),
-    "hotel_id" : NumberInt(4),
-    "name" : "Family Room",
-    "number" : NumberInt(204),
-    "acreage" : 35.0,
-    "price" : 109000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Những thú vui giải trí cho gia đình, có chỗ chơi cho trẻ em, có bếp",
-    "status" : true,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(3),
-        "name" : "Deluxe Triple",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+    {
+        "_id": {
+            "$oid": "6443e4b35bddbc59612c5ef7"
+        },
+        "room_name": "Standard Kijjoy",
+        "room_code": "202",
+        "room_type": {
+            "$oid": "6443e3935bddbc59612c5ea0"
+        },
+        "floor": 2,
+        "price": 900000,
+        "adult": 0,
+        "children": 0,
+        "acreage": 27,
+        "thumbnail": "",
+        "tag": [
+            "1"
+        ],
+        "status": "avaliable",
+        "description": "<p>Standard Room là một loại phòng tiêu chuẩn và phổ biến trong khách sạn, được thiết kế để đáp ứng nhu cầu cơ bản của du khách. Phòng thường có diện tích từ 20 đến 30 mét vuông và được trang bị đầy đủ các tiện nghi cơ bản.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:44:19.087Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:44:19.088Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(4),
-        "province_id" : NumberInt(38),
-        "name" : "Hoàng Yến Villa",
-        "address" : "20 Nguyễn Hữu Cảnh, Ấp Đa Thiên, Đà lạt, Việt Nam",
-        "description" : "Có dịch vụ đỗ xe cho khách, lễ tân 24/24, có máy sấy tóc, vòi sen, tủ quần áo, máy lạnh và tivi được trang bị trong phòng, có wifi và đồ vệ sinh cá nhân miễn phí"
-    }
-}
-{
-    "_id" : NumberInt(5),
-    "type" : NumberInt(4),
-    "hotel_id" : NumberInt(5),
-    "name" : "Superior Room",
-    "number" : NumberInt(305),
-    "acreage" : 75.0,
-    "price" : 1239000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Có view nhìn và bày trí gọn ràng bắt mắt",
-    "status" : true,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(4),
-        "name" : "Deluxe King",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+    {
+        "_id": {
+            "$oid": "6443e4d95bddbc59612c5f04"
+        },
+        "room_name": "Standard Mind",
+        "room_code": "203",
+        "room_type": {
+            "$oid": "6443e3935bddbc59612c5ea0"
+        },
+        "floor": 2,
+        "price": 1290000,
+        "adult": 2,
+        "children": 0,
+        "acreage": 34,
+        "thumbnail": "",
+        "tag": [
+            "2"
+        ],
+        "status": "avaliable",
+        "description": "<p>Standard Room là một loại phòng tiêu chuẩn và phổ biến trong khách sạn, được thiết kế để đáp ứng nhu cầu cơ bản của du khách. Phòng thường có diện tích từ 20 đến 30 mét vuông và được trang bị đầy đủ các tiện nghi cơ bản.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:44:57.290Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:44:57.291Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(5),
-        "province_id" : NumberInt(56),
-        "name" : "Hoàng Nam Hotel",
-        "address" : "52 đường Tân Hiệp, Tổ 5, khu phố Tân Hội, Phường Tân Hiệp, Thị xã Tân Uyên, Tân Hội, Việt Nam",
-        "description" : "Các phòng sẽ được chuẩn bị TV, máy lạnh, máy xấy tóc, phòng tắm riêng và đồ dùng cá nhân miễn phí"
-    }
-}
-{
-    "_id" : NumberInt(6),
-    "type" : NumberInt(4),
-    "hotel_id" : NumberInt(6),
-    "name" : "Deluxe Room",
-    "number" : NumberInt(306),
-    "acreage" : 75.0,
-    "price" : 876000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Hiện đại, view hướng ra biển hoặc núi",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(4),
-        "name" : "Deluxe King",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+    {
+        "_id": {
+            "$oid": "6443e5055bddbc59612c5f1c"
+        },
+        "room_name": "Deluxe Mind",
+        "room_code": "602",
+        "room_type": {
+            "$oid": "6443e39e5bddbc59612c5ea6"
+        },
+        "floor": 6,
+        "price": 3800000,
+        "adult": 2,
+        "children": 2,
+        "acreage": 72,
+        "thumbnail": "",
+        "tag": [
+            "2"
+        ],
+        "status": "avaliable",
+        "description": "<p>Delexu Room là một loại phòng cao cấp trong khách sạn, thường có diện tích rộng hơn so với các loại phòng khác. Nó được thiết kế với nội thất sang trọng và tiện nghi đầy đủ nhằm mang đến trải nghiệm nghỉ dưỡng đẳng cấp cho khách hàng.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:45:41.820Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:45:41.820Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(6),
-        "province_id" : NumberInt(37),
-        "name" : "Diamond Hotel",
-        "address" : "358 Nguyễn Huệ, Lào Cai, Việt Nam",
-        "description" : "Có quẩy bar, lễ tân 24h, phòng giữ hành lý và wifi miễn phí, trong phòng có bàn làm việc, TV, phòng tắm riêng, tủ quần áo, có ban công nhìn ra thành phố"
-    }
-}
-{
-    "_id" : NumberInt(7),
-    "type" : NumberInt(5),
-    "hotel_id" : NumberInt(7),
-    "name" : "Suite Room",
-    "number" : NumberInt(406),
-    "acreage" : 55.0,
-    "price" : 206000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "1 phòng ngủ, 1 phòng khách, hiện đại",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(5),
-        "name" : "Executive Suite",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+    {
+        "_id": {
+            "$oid": "6443e52d5bddbc59612c5f29"
+        },
+        "room_name": "Deluxe Thers",
+        "room_code": "603",
+        "room_type": {
+            "$oid": "6443e39e5bddbc59612c5ea6"
+        },
+        "floor": 6,
+        "price": 4299000,
+        "adult": 0,
+        "children": 0,
+        "acreage": 89,
+        "thumbnail": "",
+        "tag": [
+            "3"
+        ],
+        "status": "avaliable",
+        "description": "<p>Delexu Room là một loại phòng cao cấp trong khách sạn, thường có diện tích rộng hơn so với các loại phòng khác. Nó được thiết kế với nội thất sang trọng và tiện nghi đầy đủ nhằm mang đến trải nghiệm nghỉ dưỡng đẳng cấp cho khách hàng.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:46:21.803Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:46:21.803Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(7),
-        "province_id" : NumberInt(15),
-        "name" : "Le House Boutique Hotel",
-        "address" : "85- 87 Ha Bong, TP Đã Nẵng, Việt Nam",
-        "description" : "Cung cấp điều hòa, wifi miễn phí, khách sạn kiểu Pháp có quầy bar và bãi đỗ xe riêng, có truyền hình cáp, khu vực ghế thư giản, kèm phòng tắm riêng, ban công nhìn ra biển hoặc thành phố"
-    }
-}
-{
-    "_id" : NumberInt(8),
-    "type" : NumberInt(5),
-    "hotel_id" : NumberInt(8),
-    "name" : "Executive Suite Room",
-    "number" : NumberInt(501),
-    "acreage" : 40.0,
-    "price" : 2555000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Hiện đại, cao cấp, hồ bơi vô cực",
-    "status" : true,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(5),
-        "name" : "Executive Suite",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
+    {
+        "_id": {
+            "$oid": "6443e55b5bddbc59612c5f41"
+        },
+        "room_name": "Suite Mind",
+        "room_code": "401",
+        "room_type": {
+            "$oid": "6443e3a75bddbc59612c5eac"
+        },
+        "floor": 4,
+        "price": 12999000,
+        "adult": 8,
+        "children": 4,
+        "acreage": 190,
+        "thumbnail": "",
+        "tag": [
+            "5"
+        ],
+        "status": "avaliable",
+        "description": "<p>Phòng Suite là một phòng sang trọng và rộng rãi trong một khách sạn hoặc khu nghỉ dưỡng, thường được thiết kế để ở trong thời gian dài hoặc các dịp đặc biệt. Những phòng này thường có một khu vực phòng khách riêng biệt, phòng ngủ và phòng tắm, cung cấp đủ không gian và sự riêng tư cho khách</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:47:07.789Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:47:07.789Z"
+        },
+        "__v": 0
     },
-    "hotel" : {
-        "id" : NumberInt(8),
-        "province_id" : NumberInt(24),
-        "name" : "Ha Noi Lotus Boutique Hotel",
-        "address" : "02 Đường Hội Vũ, Quận Hoàn Kiếm, TP Hà Nội, Việt Nam",
-        "description" : "Gần trung tâm thành phố và các địa điểm nổi tiếng, trong phòng thì có máy lạnh, TV 32 inch, điện thoại quốc tế, phòng tắm riêng đi kèm máy xấy tóc, có ban công nhìn ra thành phố, có dịch vụ bửa sáng v"
+    {
+        "_id": {
+            "$oid": "6443e5d25bddbc59612c5f5e"
+        },
+        "room_name": "Suite President",
+        "room_code": "301",
+        "room_type": {
+            "$oid": "6443e3a75bddbc59612c5eac"
+        },
+        "floor": 3,
+        "price": 17999000,
+        "adult": 8,
+        "children": 4,
+        "acreage": 250,
+        "thumbnail": "",
+        "tag": [
+            "6"
+        ],
+        "status": "avaliable",
+        "description": "<p>Phòng Tổng thống là loại phòng cao cấp và sang trọng nhất trong khách sạn hoặc resort. Nó được thiết kế với diện tích rộng rãi, bố trí nội thất đẳng cấp và tiện nghi đầy đủ như hồ bơi riêng, phòng tập gym, phòng họp, sảnh riêng.</p>",
+        "created_at": {
+            "$date": "2023-04-22T13:49:06.626Z"
+        },
+        "updated_at": {
+            "$date": "2023-04-22T13:49:06.626Z"
+        },
+        "__v": 0
     }
-}
-{
-    "_id" : NumberInt(9),
-    "type" : NumberInt(5),
-    "hotel_id" : NumberInt(9),
-    "name" : "Junior Suite Room",
-    "number" : NumberInt(505),
-    "acreage" : 45.0,
-    "price" : 399000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Nhiều phòng nhỏ, hiện đại, club riêng biệt",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(5),
-        "name" : "Executive Suite",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
-    },
-    "hotel" : {
-        "id" : NumberInt(9),
-        "province_id" : NumberInt(42),
-        "name" : "Valentine Hotel Saigon",
-        "address" : "27-29 Bùi Viện, Q.1, TP Hồ Chí Minh, Việt Nam",
-        "description" : "Gần những địa điểm nổi tiếng, phòng có TV và trang bị máy lạnh, có phòng tắm riêng và máy xấy tóc cùng đồ vệ sinh cá nhân miễn phí, sẽ được cung cấp 2 chai nước miễn phí mỗi ngày"
-    }
-}
-{
-    "_id" : NumberInt(10),
-    "type" : NumberInt(3),
-    "hotel_id" : NumberInt(10),
-    "name" : "VIP Room",
-    "number" : NumberInt(204),
-    "acreage" : 35.0,
-    "price" : 779000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Có đầy đủ những tiện nghi cung cấp",
-    "status" : true,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(3),
-        "name" : "Deluxe Triple",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
-    },
-    "hotel" : {
-        "id" : NumberInt(10),
-        "province_id" : NumberInt(61),
-        "name" : "PalmHaGiang",
-        "address" : "Khuổi My - Lùng Vài Cổng chào thôn Khuổi My, Làng Sương, Việt Nam",
-        "description" : "Nhân viên lễ tân 24h, quầy bar, khu vườn và sân để cho con nít chơi, bãi đỗ xe riêng, ở đây được ngắm nhìn khung cảnh thiên nhiên hùng vĩ"
-    }
-}
-{
-    "_id" : NumberInt(11),
-    "type" : NumberInt(4),
-    "hotel_id" : NumberInt(11),
-    "name" : "Single Room ",
-    "number" : NumberInt(305),
-    "acreage" : 75.0,
-    "price" : 239000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "1 giường ngủ, có tủ và phòng tắm riêng",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(4),
-        "name" : "Deluxe King",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
-    },
-    "hotel" : {
-        "id" : NumberInt(11),
-        "province_id" : NumberInt(2),
-        "name" : "Orchard Point Serviced Apartments ",
-        "address" : " 160 Orchard Road #06-01 OG Orchard Point, Orchard, 238842 Singapore, Singapore",
-        "description" : " Gần khu trung tâm thành phố, chỗ nghĩ cung cấp rộng rãi hồ bơi ngoài trời, khu vực BBQ, trung tâm thể dục và wifi miễn phí, phòng có khu vực bếp,phòng ăn, TV, máy xấy tóc  "
-    }
-}
-{
-    "_id" : NumberInt(12),
-    "type" : NumberInt(4),
-    "hotel_id" : NumberInt(12),
-    "name" : "Couple Room ",
-    "number" : NumberInt(306),
-    "acreage" : 75.0,
-    "price" : 1129000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Có giường đôi cho couple",
-    "status" : true,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(4),
-        "name" : "Deluxe King",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
-    },
-    "hotel" : {
-        "id" : NumberInt(12),
-        "province_id" : NumberInt(13),
-        "name" : "New Cape Inn ",
-        "address" : "3 Seng Poh Road, Tiong Bahru, 168891 Singapore, Singapore ",
-        "description" : "Điều hòa,TV, phòng tắm riêng, có tủ lạnh và két sắt an toàn "
-    }
-}
-{
-    "_id" : NumberInt(13),
-    "type" : NumberInt(5),
-    "hotel_id" : NumberInt(13),
-    "name" : "Queen Room ",
-    "number" : NumberInt(406),
-    "acreage" : 55.0,
-    "price" : 399000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "Phòng dành cho nữ quý tộc, tiện nghi đầy đủ và chất lượng",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(5),
-        "name" : "Executive Suite",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
-    },
-    "hotel" : {
-        "id" : NumberInt(13),
-        "province_id" : NumberInt(22),
-        "name" : "Manjimup Kingsley Motel ",
-        "address" : "74 Chopping Street, 6258 Manjimup, Austraylia ",
-        "description" : "Each room at this renovated property includes air conditioning, a private en suite bathroom, a flat-screen TV with cable channels. Some rooms include free Netflix. Tea and coffee making facilities are"
-    }
-}
-{
-    "_id" : NumberInt(14),
-    "type" : NumberInt(5),
-    "hotel_id" : NumberInt(14),
-    "name" : "King Room ",
-    "number" : NumberInt(501),
-    "acreage" : 40.0,
-    "price" : 399000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(5),
-        "name" : "Executive Suite",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
-    },
-    "hotel" : {
-        "id" : NumberInt(14),
-        "province_id" : NumberInt(34),
-        "name" : "Value Suites Green Square ",
-        "address" : "16 O`Riordan Street, 2015 Sydney, Austraylia ",
-        "description" : "Cung cấp bửa ăn sáng, cafe, trong phòng trang bị TV và một số bếp nhỏ có thiết bị thép không gỉ, có ban công nhìn ra thành phố và bầu trời "
-    }
-}
-{
-    "_id" : NumberInt(15),
-    "type" : NumberInt(5),
-    "hotel_id" : NumberInt(15),
-    "name" : "Suite Room ",
-    "number" : NumberInt(505),
-    "acreage" : 45.0,
-    "price" : 399000.0,
-    "number_adult" : NumberInt(2),
-    "number_kid" : NumberInt(1),
-    "description" : "1 phòng ngủ, 1 phòng khách, hiện đại",
-    "status" : false,
-    "created_at" : null,
-    "updated_at" : null,
-    "room_type" : {
-        "id" : NumberInt(5),
-        "name" : "Executive Suite",
-        "description" : "NULL",
-        "created_at" : null,
-        "update_at" : null
-    },
-    "hotel" : {
-        "id" : NumberInt(15),
-        "province_id" : NumberInt(11),
-        "name" : "The Slaak Rotterdam, a Tribute Portfolio Hotel ",
-        "address" : "Slaak 34, Kralingen-Crooswijk, 3061 CS Rotterdam, Hà Lan ",
-        "description" : "Phòng nghỉ của khách sạn được trang bị máy điều hòa, truyền hình cáp màn hình phẳng, tủ lạnh, ấm đun nước, vòi sen, máy sấy tóc và bàn làm việc. Các phòng còn có tủ để quần áo và phòng tắm riêng"
-    }
-}
+]

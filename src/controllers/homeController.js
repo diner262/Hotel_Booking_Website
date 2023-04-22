@@ -11,6 +11,10 @@ async function getRoomType(room_type_id) {
     return room_type;
 }
 
+async function getRoomCode(room_code_id) {
+    const room_code = await Room.findOne({ room_code: room_code_id }).exec();
+    return room_code;
+}
 class HomeController {
     login(req, res, next) {
         res.render('client/login', {
@@ -183,12 +187,14 @@ class HomeController {
             });
     }
 
+    //Xem chi tiết đơn hàng
     historyDetail(req, res, next) {
         const username = req.params.username;
         const book_id = req.params.id;
         BookRoom.findOne({ book_id: book_id })
             .then(async (bookrooms) => {
-                const room_types = await getRoomType(bookrooms.room_type);
+                const room_code = await getRoomCode(bookrooms.room_code);
+                const room_types = await getRoomType(room_code.room_type);
 
                 res.render('client/bill', {
                     title: 'Bill',

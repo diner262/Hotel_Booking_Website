@@ -35,6 +35,12 @@ Xin chào thầy và các bạn,
 ```
 $ git clone https://gitlab.duthu.net/S52000895/website-hotel-booking-online-n3.git
 $ cd website-hotel-booking-online-n3
+
+```
+Tải thư viện và chạy
+```
+$ npm install
+$ npm start
 ```
 
 ## Endpoints

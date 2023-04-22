@@ -1,29 +1,33 @@
 # Introduction
+
 Xin chào thầy và các bạn,
 
 # Getting Started
 
 ## Feature
 
-* CRUD
-* Validation
-* Security
-* Responsive
-* User module + Admin module
+- CRUD
+- Validation
+- Security
+- Responsive
+- User module + Admin module
 
 ## Requirement
 
-* Nodejs >= 18.11
-* MongoDBCompass >= 1.36
+- Nodejs >= 18.11
+- MongoDBCompass >= 1.36
 
 ## Technologies
 
-* Javascript
-* Handlebars
-* Upload - Multer
-* CSS
-* Boostrap 5
-* MongoDB
+- Javascript
+- Handlebars
+- Upload - Multer
+- passport
+- cookie/session
+- flash
+- CSS
+- Boostrap 5
+- MongoDB
 
 ## Installation
 
@@ -32,3 +36,53 @@ $ git clone https://gitlab.duthu.net/S52000895/website-hotel-booking-online-n3.g
 $ cd website-hotel-booking-online-n3
 ```
 
+## Endpoints
+
+### HTML
+
+#### Client Module
+
+| HTTP Method | URL                            | Description       | Note             |
+| ----------- | ------------------------------ | ----------------- | ---------------- |
+| `GET`       | http://localhost:3030/home     | Home Page         |                  |
+| `GET`       | http://localhost:3030/login    | Login Page        |                  |
+| `GET`       | http://localhost:3030/register | Register Page     |                  |
+| `GET`       | http://localhost:3030/room     | Booking Room Page | Require to login |
+| `GET`       | http://localhost:3030/profile  | Profile Page      | Require to login |
+
+#### Admin Module
+
+| HTTP Method | URL                                    | Description       |
+| ----------- | -------------------------------------- | ----------------- |
+| `GET`       | http://localhost:3030/admin/dashboard  | Dashboard         |
+| `GET`       | http://localhost:3030/admin/customers  | Manage Customers  |
+| `GET`       | http://localhost:3030/admin/orders     | Manage Orders     |
+| `GET`       | http://localhost:3030/admin/room_types | Manage Room Types |
+| `GET`       | http://localhost:3030/admin/rooms      | Manage Room hotel |
+
+### CRUD
+
+#### Product Service
+
+| HTTP Method | URL                                                     | Description |
+| ----------- | ------------------------------------------------------- | ----------- |
+| `GET`       | http://localhost:3030/admin/products/add                |             |
+| `POST`      | http://localhost:3030/admin/products/add                |             |
+| `GET`       | http://localhost:3030/admin/products/detail/{productId} |             |
+| `GET`       | http://localhost:3030/admin/products/edit/{productId}   |             |
+| `POST`      | http://localhost:3030/admin/products/edit/{productId}   |             |
+| `GET`       | http://localhost:3030/products/delete/{productId}       |             |
+
+#### Order Service
+
+| HTTP Method | URL                                                 | Description |
+| ----------- | --------------------------------------------------- | ----------- |
+| `GET`       | http://localhost:3030/admin/orders/update/{orderId} |             |
+| `GET`       | http://localhost:3030/orders/delete/{orderId}       |             |
+
+#### Order Service
+
+| HTTP Method | URL                                                       | Description |
+| ----------- | --------------------------------------------------------- | ----------- |
+| `GET`       | http://localhost:3030/admin/customers/update/{customerId} |             |
+| `GET`       | http://localhost:3030/customers/delete/{customerId}       |             |

@@ -269,8 +269,8 @@
 
         const time = document.getElementById('updated_at');
         const d =  new Date(`{{ room.updated_at }}`);
-        const datestring = d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds() + " " + 
-                        d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+        const datestring = d.getHours() + ":" + d.getMinutes() + " | " + 
+                        d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
         time.setAttribute('style', 'line-height: 1.6;');
         time.innerHTML = "Thời gian cập nhật lần cuối: <br>" + datestring;
     });

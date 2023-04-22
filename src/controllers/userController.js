@@ -2,7 +2,6 @@ const asyncHandler = require('express-async-handler')
 const User = require('../models/user.model')
 //const generateToken = require("../config/generateToken")
 var bcrypt = require('bcrypt');
-const Bookroom = require('../models/bookroom.model');
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, avatar } = req.body
@@ -113,6 +112,37 @@ class userController {
     }
     
 
+    //get user by id
+    async getUserByID(req, res) {
+        try {
+            const userID = req.cookies.userID;
+            const user = await User.findOne({ _id: userID });
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            }
+            // console.log("Thong tin user: "+user);
+            else {
+                res.render('client/profile', {
+                    title: 'Profile User',
+                    layout: 'main',
+                    username: user.username,
+                    fullname: user.fullname,
+                    birthday: user.birthday,
+                    address: user.address,
+                    gender: user.gender,
+                    email: user.email,
+                    phone: user.phone,
+                    role: user.role,
+                    password: user.password,
+                });
+            }
+            // res.json(user); 
+        } catch (error) {
+            console.log("Error:", error);
+            res.status(500).json({ error: "Server error" });
+        }
+    }
+    //Get user by username
     async getUserByUN(req, res) {
         try {
             const username = req.params.username;

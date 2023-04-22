@@ -45,7 +45,8 @@
                         </li>
                         <li>
                             <input type="hidden" name="username" id="username" value="{{currentUser.username}}">
-                            <a href="/profile/{{currentUser.username}}" id="profile" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
+                            <input type="hidden" name="userID" id="userID" value="{{currentUser._id}}">
+                            <a href="/profile" id="profile" class="dropdown-item text-muted"><i class="fas fa-user-alt me-2"></i> Thông tin cá nhân</a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item text-muted"><i class="fas fa-sliders-h me-2"></i> Cài đặt</a>
@@ -65,10 +66,14 @@
 <script>
     function deleteCookie(){
         document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-
+        document.cookie = 'userID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
     $(document).ready(function () {
+        const userID = document.getElementById('userID').value;
+
         const username = document.getElementById('username').value;
+        document.cookie = `userID=${userID}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
+
         document.cookie = `username=${username}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
         {{#if currentUser}}
             {{#ifeq currentUser.role 'admin'}}

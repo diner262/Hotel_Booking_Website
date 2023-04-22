@@ -36,6 +36,7 @@ class HomeController {
             layout: false,
         });
     }
+
     async room(req, res, next) {
         try {
             const room = await Room.find();
@@ -49,6 +50,7 @@ class HomeController {
         }
 
     }
+    // Form book room
     async bookroom(req, res, next) {
         const roomid = req.params.id;
 
@@ -74,7 +76,7 @@ class HomeController {
 
     }
 
-
+    // Thong bao dat phong thanh cong
     async bookroomSucess(req, res, next) {
         const room_types = await RoomType.find().exec();
         const types = room_types.map(room_type => {
@@ -139,6 +141,7 @@ class HomeController {
         }
 
     }
+    // chi tiet phong
     async detail(req, res, next) {
         try {
 
@@ -171,8 +174,9 @@ class HomeController {
             title: 'Bill'
         });
     }
+    // Xem lich su don hang da dat
     history(req, res, next) {
-        const username = req.params.username;
+        const username = req.cookies.username;
         BookRoom.find({ username: username })
             .then((bookrooms) => {
 

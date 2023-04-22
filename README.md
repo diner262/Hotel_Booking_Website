@@ -47,7 +47,7 @@ $ cd website-hotel-booking-online-n3
 | `GET`       | http://localhost:3030/home     | Home Page         |                  |
 | `GET`       | http://localhost:3030/login    | Login Page        |                  |
 | `GET`       | http://localhost:3030/register | Register Page     |                  |
-| `GET`       | http://localhost:3030/room     | Booking Room Page | Require to login |
+| `GET`       | http://localhost:3030/room     | Booking Room Page |                  |
 | `GET`       | http://localhost:3030/profile  | Profile Page      | Require to login |
 
 #### Admin Module
@@ -62,16 +62,15 @@ $ cd website-hotel-booking-online-n3
 
 ### CRUD
 
-#### Product Service
+#### Customer Service
 
-| HTTP Method | URL                                                     | Description |
-| ----------- | ------------------------------------------------------- | ----------- |
-| `GET`       | http://localhost:3030/admin/products/add                |             |
-| `POST`      | http://localhost:3030/admin/products/add                |             |
-| `GET`       | http://localhost:3030/admin/products/detail/{productId} |             |
-| `GET`       | http://localhost:3030/admin/products/edit/{productId}   |             |
-| `POST`      | http://localhost:3030/admin/products/edit/{productId}   |             |
-| `GET`       | http://localhost:3030/products/delete/{productId}       |             |
+| HTTP Method | URL                                                    | Description      |
+| ----------- | ------------------------------------------------------ | ---------------- |
+| `GET`       | http://localhost:3030/admin/customers                  | Customer Manager |
+| `GET`       | http://localhost:3030/admin/customers/:username        | Customer Detail  |
+| `GET`       | http://localhost:3030/admin/customers/update/:username | Customer Edit    |
+| `POST`      | http://localhost:3030/admin/customers/update/:username | Customer Update  |
+| `DELETE`    | http://localhost:3030/customers/delete/:username       | Customer Delele  |
 
 #### Order Service
 

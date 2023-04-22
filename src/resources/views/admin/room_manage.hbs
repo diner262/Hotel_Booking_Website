@@ -13,7 +13,7 @@
             <a href="#" class="btn btn-primary d-flex align-items-center rounded mx-1">
                 <i class="material-icons me-2">&#xE24D;</i><span>Xuất file Excel</span>
             </a>
-            <a href="rooms/create" class="btn btn-primary d-flex align-items-center rounded mx-1">
+            <a href="create" class="btn btn-primary d-flex align-items-center rounded mx-1">
                 <i class="material-icons me-2">&#xE147;</i><span>Thêm mới</span>
             </a>
         </div>
@@ -66,7 +66,7 @@
                             {{#ifeq status "reserved"}} Đã được sử dụng {{/ifeq}}
                         </td>
                         <td>
-                            <a href="rooms/update/{{ room_code }}" class="settings" title="Settings"
+                            <a href="/admin/rooms/{{ room_code }}" class="settings" title="Settings"
                                 data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
                             <a href="#" class="delete" title="Delete" data-toggle="tooltip" data-bs-toggle="modal"
                                 data-bs-target="#confirmModal" data-id="{{ id }}"><i
@@ -130,15 +130,12 @@
             }
         }
 
-        let USDollar =new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        });
+        let VND =new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'});
 
         let y = document.querySelectorAll(".price");
         for (let i = 0; i < y.length; i++) {
             let price = Number(y[i].innerHTML);
-            y[i].innerHTML = USDollar.format(price);
+            y[i].innerHTML = VND.format(price);
         }
 
         $('.delete').on('click', function () {

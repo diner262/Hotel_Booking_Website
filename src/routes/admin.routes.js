@@ -27,14 +27,16 @@ router.post('/room_types/update/:id', ensureAuth, adminController.update_room_ty
 router.get('/rooms', ensureAuth, adminController.room_manage);
 router.get('/rooms/create', ensureAuth, adminController.room_create);
 router.post('/rooms/create', ensureAuth, adminController.create_room);
-router.get('/rooms/update/:room_code', ensureAuth, adminController.room_edit);
-router.post('/rooms/update/:room_code', ensureAuth, adminController.update_room);
+router.get('/rooms/:room_code', ensureAuth, adminController.room_edit);
+router.post('/rooms/:room_code', ensureAuth, adminController.update_room);
 router.delete('/rooms/delete/:id', ensureAuth, adminController.delete_room);
 
 router.get('/rooms/room_codes/:floor', ensureAuth, adminController.getCodeRoom);
 
 // Trang quản lý đơn đặt phòng
 router.get('/orders', ensureAuth, adminController.order_manage);
+router.get('/orders/:book_id', ensureAuth, adminController.order_detail);
+router.post('/orders/:book_id', ensureAuth, adminController.update_order);
 
 router.get('/dashboard', ensureAuth, adminController.dashboard);
 router.get('/calendar', ensureAuth, adminController.calendar);

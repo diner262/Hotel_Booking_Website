@@ -1,3 +1,9 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+    integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="./css/room.css">
 <div class="room" id="room">
     <div class=" container d-lg-block d-none position-relative" id="divRoom">
@@ -37,25 +43,212 @@
                         tuổi</span></p>
                 <p class="fw-500 d-flex fs-14"><span>Giường:</span> <span class="position-absolute ps-5 ms-4">1
                         giường lớn + 1 giường đôi</span></p>
-                {{!-- <p class="m-0 fs-14 descript lh-20">{{description}}
-                </p> --}}
-
-                <div class="text-center">
-                    <a href="/detail/{{room_code}}"><button
-                            class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span class="pt-2px">Xem
-                                chi tiết</span></button></a>
-
-                    <a href="/bookroom/{{room_code}}"><button
-                            class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span class="pt-2px">Đặt
-                                ngay</span></button></a>
-                </div>
-
+                <p class="m-0 fs-14 descript lh-20">{{description}}
+                </p>
             </div>
         </div>
+        <section class="room-category mb-5" id="room-category">
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room2.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room2.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room1.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room2.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room1.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room2.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room1.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="room-card">
+                        <img src="/img/rooms/room2.jpg" class="img-fluid">
+                        <div class="text-center">
+                            <div>Tên phòng</div>
+                            <div class="row">
+                                <div class="col-lg-6">Giá</div>
+                                <div class="col-lg-6">300</div>
+                            </div>
+                            <a href="/detail/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Xem
+                                        chi tiết</span></button></a>
+
+                            <a href="/bookroom/{{room_code}}"><button
+                                    class="btn btn-primary mt-3 view-more fs-14 bg-blue border-0"><span
+                                        class="pt-2px">Đặt
+                                        ngay</span></button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
         {{/if}}
         {{/each}}
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"
+    integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
 
 </script>

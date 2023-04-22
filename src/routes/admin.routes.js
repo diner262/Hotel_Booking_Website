@@ -35,6 +35,7 @@ router.get('/rooms/room_codes/:floor', ensureAuth, adminController.getCodeRoom);
 
 router.get('/orders', ensureAuth, adminController.order_manage);
 router.get('/dashboard', ensureAuth, adminController.dashboard);
+router.get('/calendar', ensureAuth, adminController.calendar);
 
 router.get('/', (req, res) => {
     res.redirect('dashboard');

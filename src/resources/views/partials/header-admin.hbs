@@ -131,7 +131,7 @@
             <a class="list-group-item list-group-item-action py-2 ripple" id="password" href="#">
                 <i class="fas fa-lock fa-fw me-3"></i><span>Mật khẩu</span></a>
 
-            <a class="list-group-item list-group-item-action py-2 ripple" id="cal" href="#">
+            <a class="list-group-item list-group-item-action py-2 ripple" id="calendar" href="/admin/calendar">
                 <i class="fas fa-calendar fa-fw me-3"></i><span>Lịch</span></a>
         </div>
     </div>
@@ -143,6 +143,7 @@
         const currentPage = window.location.pathname.split('/').pop().split('.')[0];
         const customerPage =  window.location.pathname.split('/').indexOf('customers') > -1;
         const roomPage =  window.location.pathname.split('/').indexOf('rooms') > -1;
+        const calendarPage =  window.location.pathname.split('/').indexOf('calendar') > -1;
 
         const menuItems = document.querySelectorAll('.sidebar a');
 
@@ -152,6 +153,8 @@
             } else if (item.id === 'customers' && customerPage) {
                 item.classList.add('active');
             } else if (item.id === 'rooms' && roomPage) {
+                item.classList.add('active');
+            } else if (item.id === 'calendar' && calendarPage) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');

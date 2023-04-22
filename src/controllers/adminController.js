@@ -87,6 +87,14 @@ class AdminController {
         });
     }
 
+    // Trang xem lịch
+    calendar(req, res, next) {
+        res.render('admin/calendar', {
+            title: 'Xem lịch',
+            layout: 'admin-main'
+        });
+    }
+
     // Trang quản lý đơn hàng
     order_manage(req, res, next) {
         res.render('admin/order_manage', {

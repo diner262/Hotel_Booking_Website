@@ -133,52 +133,52 @@ function drawLineChart() {
 //   }
 // }
 
-// function drawPieChart() {
-//   if ($("#pieChart").length) {
-//     var chartHeight = 300;
+function drawPieChart() {
+  if ($("#pieChart").length) {
+    var chartHeight = 300;
 
-//     $("#pieChartContainer").css("height", chartHeight + "px");
+    $("#pieChartContainer").css("height", chartHeight + "px");
 
-//     ctxPie = document.getElementById("pieChart").getContext("2d");
+    ctxPie = document.getElementById("pieChart").getContext("2d");
 
-//     optionsPie = {
-//       responsive: true,
-//       maintainAspectRatio: false,
-//       layout: {
-//         padding: {
-//           left: 10,
-//           right: 10,
-//           top: 10,
-//           bottom: 10
-//         }
-//       },
-//       legend: {
-//         position: "top"
-//       }
-//     };
+    optionsPie = {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 10,
+          top: 10,
+          bottom: 10
+        }
+      },
+      legend: {
+        position: "top"
+      }
+    };
 
-//     configPie = {
-//       type: "pie",
-//       data: {
-//         datasets: [
-//           {
-//             data: [18.24, 6.5, 9.15],
-//             backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582"],
-//             label: "Storage"
-//           }
-//         ],
-//         labels: [
-//           "Used Storage (18.240GB)",
-//           "System Storage (6.500GB)",
-//           "Available Storage (9.150GB)"
-//         ]
-//       },
-//       options: optionsPie
-//     };
+    configPie = {
+      type: "pie",
+      data: {
+        datasets: [
+          {
+            data: [18.24, 6.5, 9.15],
+            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582"],
+            label: "Storage"
+          }
+        ],
+        labels: [
+          "Used Storage (18.240GB)",
+          "System Storage (6.500GB)",
+          "Available Storage (9.150GB)"
+        ]
+      },
+      options: optionsPie
+    };
 
-//     pieChart = new Chart(ctxPie, configPie);
-//   }
-// }
+    pieChart = new Chart(ctxPie, configPie);
+  }
+}
 
 function updateLineChart() {
   if (lineChart) {
@@ -187,9 +187,9 @@ function updateLineChart() {
   }
 }
 
-// function updateBarChart() {
-//   if (barChart) {
-//     barChart.options = optionsBar;
-//     barChart.update();
-//   }
-// }
+function updateBarChart() {
+  if (barChart) {
+    barChart.options = optionsBar;
+    barChart.update();
+  }
+}

@@ -11,14 +11,19 @@ router.post('/login', validateLogin(), handleLoginAdmin, adminController.authent
 router.get('/login', forwardAuth, adminController.login);
 router.get('/logout', adminController.logout);
 
-// CRUD customers
+// Trang quản lý khách hàng
 router.get('/customers', ensureAuth, adminController.customer_manage);
 router.get('/customers/:username', ensureAuth, adminController.customer_detail);
 router.get('/customers/update/:username', ensureAuth, adminController.customer_edit);
 router.post('/customers/update/:username', ensureAuth, adminController.update_customer);
 router.delete('/customers/delete/:id', ensureAuth, adminController.delete_customer);
 
-// CRUD room hotel
+// Trang quản lý loại phòng
+router.get('/room_types', ensureAuth, adminController.room_type_manage);
+router.post('/room_types', ensureAuth, adminController.create_room_type);
+router.post('/room_types/update/:id', ensureAuth, adminController.update_room_type);
+
+// Trang quản lý phòng
 router.get('/rooms', ensureAuth, adminController.room_manage);
 router.get('/rooms/create', ensureAuth, adminController.room_create);
 router.post('/rooms/create', ensureAuth, adminController.create_room);
@@ -26,14 +31,11 @@ router.get('/rooms/update/:room_code', ensureAuth, adminController.room_edit);
 router.post('/rooms/update/:room_code', ensureAuth, adminController.update_room);
 router.delete('/rooms/delete/:id', ensureAuth, adminController.delete_room);
 
-router.get('/room_types', ensureAuth, adminController.room_type_manage);
-router.post('/room_types', ensureAuth, adminController.create_room_type);
-router.post('/room_types/update/:id', ensureAuth, adminController.update_room_type);
-
-// Order and Dashboard
 router.get('/rooms/room_codes/:floor', ensureAuth, adminController.getCodeRoom);
 
+// Trang quản lý đơn đặt phòng
 router.get('/orders', ensureAuth, adminController.order_manage);
+
 router.get('/dashboard', ensureAuth, adminController.dashboard);
 router.get('/calendar', ensureAuth, adminController.calendar);
 

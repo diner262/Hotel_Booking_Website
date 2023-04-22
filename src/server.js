@@ -56,7 +56,10 @@ app.engine('hbs', hbs.engine({
       return role;
     },
     ifeq: function(arg1, arg2, options) {
-      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+      return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
+    },
+    noteq: function(arg1, arg2, options) {
+      return (arg1 !== arg2) ? options.fn(this) : options.inverse(this);
     },
     no1: function (val) {
         return val + 1;

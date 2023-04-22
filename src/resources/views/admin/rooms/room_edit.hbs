@@ -90,8 +90,8 @@
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                 <div class="mb-3">
                                     <label class="form-label" for="floor">Vị trí</label>
-                                    <select class="form-select" id="floor" name="floor">
-                                        <option value=0 selected>Chọn vị trí</option>
+                                    <select class="form-select" id="floor" name="floor"> required
+                                        <option selected>Chọn vị trí</option>
                                         <option value=1> Tầng 1 </option>
                                         <option value=2> Tầng 2 </option>
                                         <option value=3> Tầng 3 </option>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                 <label class="form-label" for="room_code">Mã phòng</label>
-                                    <select class="form-select" id="room_code" name="room_code" disabled>
+                                    <select class="form-select" id="room_code" name="room_code">
                                         <option value={{ room.room_code }} selected>{{ room.room_code }}</option>
                                     </select>
                             </div>
@@ -152,8 +152,11 @@
                                         <div class="image-area rounded" id="image-area"
                                             onclick="document.getElementById('upload').click();">
                                             <input id="upload" type="file" name="file_upload" onchange="readURL(this);" accept="image/*">
+                                            {{#noteq room.thumbnail ''}}
                                             <img id="imageResult" src="uploads/room/{{ room.thumbnail }}" alt="" 
                                                 class="img-fluid rounded">
+                                            <input type="hidden" name="thumbnail" value="{{ room.thumbnail }}">
+                                            {{/noteq}}
                                         </div>
                                     {{else}}
                                         <div class="image-area rounded" id="image-area" style="display: none;"

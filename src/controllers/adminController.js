@@ -5,7 +5,7 @@ var path = require('path');
 var User = require('../models/user.model');
 var Room = require('../models/room.model');
 var RoomType = require('../models/room_type.model');
-const { error } = require('console');
+var BookRoom = require('../models/bookroom.model');
 
 
 //Configuration for Multer
@@ -92,14 +92,6 @@ class AdminController {
     calendar(req, res, next) {
         res.render('admin/calendar', {
             title: 'Xem lịch',
-            layout: 'admin-main'
-        });
-    }
-
-    // Trang quản lý đơn hàng
-    order_manage(req, res, next) {
-        res.render('admin/order_manage', {
-            title: 'Quản lý đơn đặt phòng',
             layout: 'admin-main'
         });
     }
@@ -308,6 +300,7 @@ class AdminController {
                 });
             } else {
                 req.body.created_at = new Date();
+                req.body.thumbnail = '';
                 const newRoom = new Room(req.body);
                 await newRoom.save().then(() => {
                     req.flash('success', 'Thêm mới phòng thành công!');
@@ -362,26 +355,17 @@ class AdminController {
                 }
             }
 
+            req.body.updated_at = new Date();
             if (req.file !== undefined) {
-                const oldImage = 'room-' + room_code + '.' + req.file.filename.split('.').pop();
-                fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '/' + oldImage);
-                
-                const image = 'room-' + req.body.room_code + '.' + req.file.filename.split('.').pop();
+                if (req.body.thumbnail !== undefined) {
+                    const oldImage = 'room-' + room_code + '.' + req.file.filename.split('.').pop();
+                    fs.unlinkSync(path.resolve(__dirname, '../../public/uploads/room/') + '\\' + oldImage);
+                }
+                const image = 'room-' + room_code + '.' + req.file.filename.split('.').pop();
                 req.body.thumbnail = image;
-                req.body.updated_at = new Date();
-                const types = req.body.room_type;
-                const typesPromises = types.map(async (type) => {
-                    const room_type = await RoomType.findById(type.id);
-                    if (!room_type) {
-                        throw new Error('Mã phòng không tồn tại!');
-                    }
-                    type.name = room_type.name;
-                    return type;
-                });
-                req.body.room_type = await Promise.all(typesPromises);
-
-                const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + req.file.filename;
-                const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '/' + image;
+                
+                const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '\\' + req.file.filename;
+                const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '\\' + image;
                 fs.rename(oldPath, newPath, async(err) => {
                     if (err) throw err
                     
@@ -399,19 +383,44 @@ class AdminController {
                         });
                 });
             } else {
-                req.body.created_at = new Date();
-                await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
-                .then((room) => {
-                    if (!room) {
-                        throw new Error('Phòng không tồn tại!');
-                    }
-                    req.flash('success', 'Cập nhật thông tin phòng thành công!');
-                    res.redirect('/admin/rooms');
-                })
-                .catch(err => {
-                    req.flash('error', 'Cập nhật thông tin phòng thất bại! Lỗi:' + err.message);
-                    res.redirect('/admin/rooms');
-                });
+                if (req.body.room_code !== room_code && req.body.thumbnail !== undefined) {
+                    const thumbnail_old = req.body.thumbnail;
+                    const image = 'room-' + req.body.room_code + '.' + thumbnail_old.split('.').pop();
+                    req.body.thumbnail = image;
+                    console.log(image);
+
+                    const oldPath = path.resolve(__dirname, '../../public/uploads/room/') + '\\' + thumbnail_old;
+                    const newPath = path.resolve(__dirname, '../../public/uploads/room/') + '\\' + image;
+                    fs.rename(oldPath, newPath, async(err) => {
+                        if (err) throw err
+                        
+                        await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
+                            .then((room) => {
+                                if (!room) {
+                                    throw new Error('Phòng không tồn tại!');
+                                }
+                                req.flash('success', 'Cập nhật thông tin phòng thành công!');
+                                res.redirect('/admin/rooms');
+                            })
+                            .catch(err => {
+                                req.flash('error', 'Cập nhật thông tin phòng thất bại! Lỗi:' + err.message);
+                                res.redirect('/admin/rooms');
+                            });
+                    });
+                } else {
+                    await Room.findOneAndUpdate(filter, req.body, { new: true }).exec()
+                    .then((room) => {
+                        if (!room) {
+                            throw new Error('Phòng không tồn tại!');
+                        }
+                        req.flash('success', 'Cập nhật thông tin phòng thành công!');
+                        res.redirect('/admin/rooms');
+                    })
+                    .catch(err => {
+                        req.flash('error', 'Cập nhật thông tin phòng thất bại! Lỗi:' + err.message);
+                        res.redirect('/admin/rooms');
+                    });
+                }
             }
         })
     }
@@ -486,6 +495,20 @@ class AdminController {
                 req.flash('error', 'Cập nhật loại phòng thất bại! Lỗi:' + err.message);
                 res.redirect('/admin/room_types');
             });
+    }
+
+    
+
+    // Trang quản lý đơn hàng
+    order_manage(req, res, next) {
+        BookRoom.find().exec()
+            .then(bookRooms => {
+                res.render('admin/order_manage', {
+                    title: 'Quản lý đơn đặt phòng',
+                    layout: 'admin-main',
+                    bookRooms: bookRooms
+                });
+            })
     }
 }
 

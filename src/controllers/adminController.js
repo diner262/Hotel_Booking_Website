@@ -497,6 +497,21 @@ class AdminController {
             });
     }
 
+    async delete_room_type(req, res, next) {
+        const id = req.params.id;
+        await RoomType.findByIdAndDelete(id).exec()
+            .then((room_type) => {
+                if (!room_type) {
+                    throw new Error('Loại phòng không tồn tại!');
+                }
+                req.flash('success', 'Xóa loại phòng thành công!');
+                res.send(200);
+            })
+            .catch(err => {
+                req.flash('error', 'Xóa loại phòng thất bại! Lỗi:' + err.message);
+                res.send(500);
+            });
+    }
     
 
     // Trang quản lý đơn hàng
@@ -512,16 +527,21 @@ class AdminController {
     }
 
     async order_detail(req, res, next) {
-        const filter = { book_id: req.params.book_id };
+        const book_id = req.params.book_id;
+        const filter = { book_id: book_id };
+
         await BookRoom.findOne(filter).exec()
-            .then(bookRoom => {
+            .then(async bookRoom => {
                 if(!bookRoom) {
                     throw new Error('Đơn đặt phòng không tồn tại!');
                 }
+                const room = await Room.findOne({room_code: bookRoom.room_code}).exec();
+                console.log(room);
                 res.render('admin/orders/order_edit', {
                     title: 'Cập nhật đơn đặt phòng',
                     layout: 'admin-main',
                     bookRoom: bookRoom,
+                    room: room
                 });
             })
             .catch(err => {
@@ -531,26 +551,27 @@ class AdminController {
     }
 
     async update_order(req, res, next) {
-        const room_id = req.params.book_id;
-        const filter = { book_id: req.params.book_id };
-        const room = await BookRoom.findOne(filter).exec();
+        const book_id = req.params.book_id;
+        const filter = { book_id: book_id };
+        const book = await BookRoom.findOne(filter).exec();
+        console.log(book_id);
         if (req.body.status_booking === 'checkout') {
             await Room.findOneAndUpdate(
-                { room_code: room.room_code }, 
+                { room_code: book.room_code }, 
                 { status: "avaliable" }
             ).exec();
         }
-        await BookRoom.findOneAndUpdate(room_id, req.body, { new: true }).exec()
+        await BookRoom.findOneAndUpdate(filter, req.body, { new: true }).exec()
             .then(bookRoom => {
                 if (!bookRoom) {
                     throw new Error('Đơn đặt phòng không tồn tại!');
                 }
                 req.flash('success', 'Cập nhật đơn đặt phòng thành công!');
-                res.redirect('/admin/orders/' + req.params.book_id);
+                res.redirect('/admin/orders/' + book_id);
             })
             .catch(err => {
                 req.flash('error', 'Cập nhật đơn đặt phòng thất bại! Lỗi:' + err.message);
-                res.redirect('/admin/orders/' + req.params.book_id);
+                res.redirect('/admin/orders/' + book_id);
             })
     }
 }

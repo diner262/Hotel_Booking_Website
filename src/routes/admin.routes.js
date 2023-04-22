@@ -22,6 +22,7 @@ router.delete('/customers/delete/:id', ensureAuth, adminController.delete_custom
 router.get('/room_types', ensureAuth, adminController.room_type_manage);
 router.post('/room_types', ensureAuth, adminController.create_room_type);
 router.post('/room_types/update/:id', ensureAuth, adminController.update_room_type);
+router.delete('/room_types/delete/:id', ensureAuth, adminController.delete_room_type);
 
 // Trang quản lý phòng
 router.get('/rooms', ensureAuth, adminController.room_manage);

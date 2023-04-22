@@ -54,6 +54,10 @@ var bookRoomSchema = new mongoose.Schema({
         type: String,
         require: false
     },
+    payment:{
+        type: String,
+        require: false        
+    },
     status_booking: {
         type: String,
         enum: ['pending', 'confirmed', 'canceled', 'checkin', 'checkout'],

@@ -66,12 +66,9 @@
                             {{#ifeq status_payment "unpaid"}}<span class="badge bg-danger">Chưa thanh toán</span>{{/ifeq}}
                             {{#ifeq status_payment "refund"}}<span class="badge bg-primary">Đã hoàn trả</span>{{/ifeq}}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a href="/admin/orders/{{ book_id }}" class="settings" title="Settings"
                                 data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip" data-bs-toggle="modal"
-                                data-bs-target="#confirmModal" data-id="{{ id }}"><i
-                                    class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
                     {{/each}}
@@ -92,30 +89,7 @@
         </div>
     </div>
 
-    <!-- Modal Delete -->
-    <div id="confirmModal" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-confirm">
-            <div class="modal-content">
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-header">
-                    <div class="icon-box">
-                        <i class="material-icons">&#xE5CD;</i>
-                    </div>
-                    <h4 class="modal-title">Bạn chắc chứ?</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Bạn có chắn chắn rằng muốn xóa thông tin phòng này? Hành động này không thể khôi phục lại.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger btn-delete" id="delete">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <script>
@@ -127,27 +101,6 @@
             let price = Number(y[i].innerHTML);
             y[i].innerHTML = VND.format(price);
         }
-
-        $('.delete').on('click', function () {
-            let id_val = $(this).data('id');
-            $('.btn-delete').attr('data-id', id_val);
-        })
-
-
-        $('.btn-delete').on('click', function () {
-            let id_delete = $('.btn-delete').attr('data-id');
-
-            $.ajax({
-                type: 'DELETE',
-                url: 'rooms/delete/' + id_delete,
-                success: function (data) {
-                    window.location.reload();
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            })
-        });
 
         const checkIn = document.querySelectorAll('.check-in');
         const checkOut = document.querySelectorAll('.check-out');

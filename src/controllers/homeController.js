@@ -94,7 +94,7 @@ class HomeController {
                 username = 'user_' + Date.now();
             }
             const id = req.params.id;
-            const { checkin, checkout, adults, children, fullname, email, phone, note, room_type, totalPrice } = req.body;
+            const { checkin, checkout, adults, children, fullname, email, phone, note, room_type, totalPrice, payment } = req.body;
             const newBooking = new BookRoom({
                 book_id: 'BR' + Date.now(),
                 room_code: id,
@@ -110,6 +110,7 @@ class HomeController {
                 phone: phone,
                 username: username,
                 note: note,
+                payment: payment,
                 status_booking: 'pending',
                 status_payment: 'pending'
             });

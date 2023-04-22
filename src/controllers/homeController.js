@@ -156,6 +156,7 @@ class HomeController {
             const room_types = await getRoomType(room.room_type);
             res.render('client/detailroom', {
                 title: 'Detail Room ' + roomID,
+                roomID: roomID,
                 description: room.description,
                 room_type: room_types.name,
             });

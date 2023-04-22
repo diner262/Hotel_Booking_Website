@@ -9,8 +9,8 @@ const cookieParser = require('cookie-parser');
 async function getRoomType(room_type_id) {
     const room_type = await RoomType.findOne({ _id: room_type_id }).exec();
     return room_type;
-  }
-  
+}
+
 class HomeController {
     login(req, res, next) {
         res.render('client/login', {
@@ -177,7 +177,7 @@ class HomeController {
         const username = req.params.username;
         const book_id = req.params.id;
         BookRoom.findOne({ book_id: book_id })
-            .then( async (bookrooms) => {
+            .then(async (bookrooms) => {
                 const room_types = await getRoomType(bookrooms.room_type);
 
                 res.render('client/bill', {

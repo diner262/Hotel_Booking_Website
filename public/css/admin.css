@@ -109,7 +109,7 @@ button:focus {
     font-size: 1.1rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .tm-content-row {
@@ -297,6 +297,7 @@ button:focus {
 
 .tm-bg-primary-dark {
     background-color: #435c70;
+    max-height: 400px;
 }
 
 .tm-bg-gray {
